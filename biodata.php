@@ -116,7 +116,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					if (result == 'Yes') {
 						sweetAlert("Oops...", "Fill all textbox fields they are required", "error");
 					} else if (result == 'Yes2') {
-						sweetAlert("Oops...", "This user already exist in the system", "error");
+						sweetAlert("Oops...", "Biodata Updated Successfully", "success");
 					} else {
 						//                                          
 						swal({

@@ -67,7 +67,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
 
+<style>
+  .modal{
+	padding-top: 10rem !important;
+}
 
+#Biodata{
+	padding-top: 20rem !important;
+
+}
+
+#Olevel{
+  padding-top: 20rem !important;
+}
+
+center, .close{
+  color: #999999;
+}
+</style>
 </head>
 
 <body>
@@ -168,6 +185,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       <!-- Modal content-->
       <div class="modal-content" style="font-size: 14px; font-family: Times New Roman;color:black;width:140%">
         <div class="modal-header" style="background:#222d32">
+        <center>
+Documents
+</center>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title" style="font-weight: bold;color: #F0F0F0">
             <center>
@@ -178,15 +198,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
         <div class="modal-body">
           <?php
+          function capitalizeAroundSeparator($str) {
+            return ucwords(str_replace('-', ' ', $str));
+            }
+            
           $qued = "SELECT * FROM Profilepictures WHERE Serial='$serial'&& Pin='$pin' ";
           $resul = mysqli_query($db, $qued);
           $checks1 = mysqli_num_rows($resul);
           if ($checks1 != 0) {
+            echo '<div class="table-responsive">';
+            echo '<table class="table table-bordered table-hover">';
+            echo '<thead class=""><tr><th>Label</th><th>Image</th></tr></thead><tbody>';
             while ($foundl = mysqli_fetch_array($resul)) {
-              $names = $foundl['name'];
+              $path = $foundl['name'];
+              $label = explode($serial . "_", $path);
+              $label = explode(".", implode($label));
+              $labelName = capitalizeAroundSeparator($label[0]);
+      
+              echo '<tr>';
+              echo '<td>' . $labelName . '</td>';
+              echo '<td><img src="images/applicants/' . $path . '" class="img-thumbnail img-responsive" style="max-width: 100px; cursor: pointer;" data-toggle="modal" data-target="#imageModal" data-src="images/applicants/' . $path . '" data-label="' . $labelName . '"></td>';
+              echo '</tr>';
             }
-
-            echo "<img src='images/applicants/$names' width='100%'>";
+            echo '</tbody></table>';
+            echo '</div>';
           }
           ?>
         </div>
@@ -196,14 +231,47 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       </div>
 
     </div>
+
+      <!-- Modal -->
+  <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="imageModalLabel">Image Preview</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center">
+          <img id="imagePreview" src="" alt="Image Preview" class="img-fluid">
+        </div>
+      </div>
+    </div>
   </div>
+
+  <script>
+    $('#imageModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget); // Button that triggered the modal
+      var src = button.data('src'); // Extract info from data-* attributes
+      var label = button.data('label'); // Extract label from data-* attributes
+      var modal = $(this);
+      modal.find('#imagePreview').attr('src', src);
+      modal.find('.modal-title').text(label); // Set the modal title to the image label
+    });
+  </script>
+  </div>
+
 
   <div id="School" class="modal fade" role="dialog" style="background-color:#222d32;">
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content" style="font-size: 14px; font-family: Times New Roman;color:black;">
         <div class="modal-header" style="background:#222d32">
+                      <center>
+
+            </center>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
 
         </div>
 
@@ -262,42 +330,51 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       <!-- Modal content-->
       <div class="modal-content" style="font-size: 14px; font-family: Times New Roman;color:black;">
         <div class="modal-header" style="background:#222d32">
+        <center>
+Referee
+</center>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
         </div>
 
         <div class="modal-body">
 
-          <table class='table table-striped'>
+          <table class='table table-striped table-responsive'>
             <thead>
               <tr class="success">
-                <th>Employer</th>
-                <th>Position Held</th>
-                <th>From</th>
-                <th>To</th>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Date</th>
+                <th>Address</th>
+                <th>Class</th>
+                <th>Signature</th>
 
               </tr>
             </thead>
             <tbody>
               <?php
-              $sql = "SELECT * FROM Employment  WHERE Serial='$serial'&& Pin='$pin' ";
+              $sql = "SELECT * FROM referees  WHERE Serial='$serial'&& Pin='$pin' ";
               $rget = mysqli_query($db, $sql);
               $nume = mysqli_num_rows($rget);
+
               if ($nume != 0) {
 
 
                 while ($foundk = mysqli_fetch_array($rget)) {
-                  $employer = $foundk['Employer'];
-                  $froms = $foundk['Froms'];
-                  $tos = $foundk['Tos'];
-                  $pos = $foundk['Position'];
-                  $id = $foundk['id'];
+                  $name = $foundk['name'];
+                  $contact = $foundk['contact'];
+                  $date = $foundk['date'];
+                  $address = $foundk['address'];
+                  $ref = $foundk['ref'];
+                  $signature = $foundk['ref'];
 
                   echo "<tr>
-                                                                              <td>$employer</td> 
-                                                                              <td>$pos</td>                                                                             
-                                                                               <td>$froms</td>
-                                                                              <td>$tos</td>                                                                                 
+                                                                              <td>$name</td> 
+                                                                              <td>$contact</td>                                                                             
+                                                                               <td>$date</td>
+                                                                              <td>$address</td>                                                                                 
+                                                                              <td>$ref</td>                                                                                 
+                                                                              <td>$signature</td>                                                                                 
                                                                            
                                                                               </tr>";
                 }
@@ -322,13 +399,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       <!-- Modal content-->
       <div class="modal-content" style="font-size: 14px; font-family: Times New Roman;color:black;">
         <div class="modal-header" style="background:#222d32">
+        <center>
+Educational Background
+</center>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
         </div>
 
         <div class="modal-body">
 
-          <table class='table table-striped'>
+          <table class='table table-striped table-responsive'>
             <thead>
               <tr class="success">
                 <th>Exam Type</th>
@@ -447,6 +527,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       <!-- Modal content-->
       <div class="modal-content" style="font-size: 14px; font-family: Times New Roman;color:black;">
         <div class="modal-header" style="background:#222d32">
+        <center>
+Program Choices
+</center>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
         </div>
@@ -456,9 +539,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
           <table class='table table-striped'>
             <thead>
               <tr class="success">
-                <th>Application Number</th>
-                <th>Applicant Name</th>
-                <th>Course Applied</th>
+                <th>Serial Number</th>
+                <!-- <th>Applicant Name</th> -->
+                <th>First Choice</th>
+                <th>Second Choice</th>
               </tr>
             </thead>
             <tbody>
@@ -469,12 +553,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
               $checks2 = mysqli_num_rows($resulk);
               if ($checks2 != 0) {
                 while ($foundl = mysqli_fetch_array($resulk)) {
-                  $names = $foundl['Name'];
+                  $serial = $foundl['Serial'];
+                  $firstChoice = $foundl['Choice1'];
+                  $secondChoice = $foundl['Choice2'];
 
                   echo "<tr>
-                                 <td>$idS</td>
-                                 <td>$firstname $sirname</td>
-                                 <td>$names</td>
+                                 <td>$serial</td>
+                                 <td>$firstChoice</td>
+                                 <td>$secondChoice</td>
                                 </tr>";
                 }
               }
@@ -500,19 +586,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <div id="Biodata" class="modal fade" role="dialog" style="background-color:#222d32;">
     <div class="modal-dialog">
       <!-- Modal content-->
-      <div class="modal-content" style="font-size: 14px; font-family: Times New Roman;color:black;width:140%">
+      <div class="modal-content" style="font-size: 14px; font-family: Times New Roman;color:black;">
         <div class="modal-header" style="background:#222d32">
+        <center>
+              BIODATA INFORMATION
+            </center>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title" style="font-weight: bold;color: #F0F0F0">
-            <center>
-              SYSTEM INFORMATION INITIALISATION
-            </center>
+
           </h4>
         </div>
 
         <div class="modal-body">
 
-          <table class='table table-striped'>
+          <table class='table table-striped table-responsive'>
             <thead>
               <tr>
                 <th>Biodata</th>
@@ -540,18 +627,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td>Hometown</td>
                 <td class="success"><span id="hometown"></span></td>
               </tr>
+
               <tr>
-                <td>Country</td>
-                <td class="success"><span id="country"></span></td>
-                <td>State</td>
-                <td class="success"><span id="state"></span></td>
-                <td>Local Govt</td>
-                <td class="success"><span id="local"></span></td>
-              </tr>
-              <tr>
-                <td>Correspondance Address</td>
+                <td>House Number</td>
                 <td class="success"><span id="corr"></span></td>
-                <td>Residential Address</td>
+                <td>Digital Address of House Number</td>
                 <td class="success"><span id="address"></span></td>
                 <td>Guardian Name</td>
                 <td class="success"><span id="gname"></span></td>
@@ -565,20 +645,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td class="success"><span id="gcountry"></span></td>
               </tr>
               <tr>
-                <td>Guardian State</td>
-                <td class="success"><span id="gstate"></span></td>
-                <td>Guardian Local gvt</td>
-                <td class="success"><span id="myglocal"></span></td>
-                <td>Guardian Correspondence Address</td>
-                <td class="success"><span id="Gaddress"></span></td>
-              </tr>
-              <tr>
                 <td>Guardian Phone</td>
                 <td class="success"><span id="Gmobile"></span></td>
                 <td>Applicant Phone</td>
                 <td class="success"><span id="appphone"></span></td>
                 <td>Appliant Email</td>
                 <td class="success"><span id="appemail"></span></td>
+              </tr>
+              <tr>
+                <td>Country</td>
+                <td class="success"><span id="country"></span></td>
+                <td>Guardian Correspondence Address</td>
+                <td class="success"><span id="Gaddress"></span></td>
               </tr>
             </tbody>
           </table>
@@ -652,18 +730,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <!-- gallery -->
   <div class="agileits-services text-center py-5">
     <div class="container py-md-4 mt-md-3">
-      <h3 class="heading-agileinfo">Stage 8 (Finished)<span>You have fill all relevant information click decleration button to finish</span></h3>
+      <h3 class="heading-agileinfo">Stage 8 (Summary)<span>You have fill all relevant information click decleration button to finish</span></h3>
       <div class="w3ls_gallery_grids mt-md-5 pt-5">
         <div class="container">
           <h2></h2>
 
-          <div class="form-login" style="width:1000px">
+          <div class="form-login">
 
-            <table class='table table-striped'>
+            <table class='table table-striped table-responsive'>
               <thead>
                 <tr>
                   <th>SN</th>
-                  <th>Type of Information</th>
+                  <th>Information Type</th>
                   <th>Status</th>
                   <th>Preview</th>
                   <th>Edit</th>
@@ -729,29 +807,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                   <td>1</td>
                   <td>Biodata</td>
                   <td><?php if ($numb != 0) {
-                        echo "Done";
+                        echo "Complete";
                       } else {
                         echo "Incomplete";
                       } ?></td>
                   <td><a data-toggle='modal' data-if='<?php echo $othername ?>' data-ir='<?php echo $sname ?>' data-ib='<?php echo $pbirth ?>' data-it='<?php echo $appphone ?>' data-iz='<?php echo $email ?>' data-iw='<?php echo $hometown ?>' data-io='<?php echo $glocal ?>' data-is='<?php echo $gaddres ?>' data-im='<?php echo $gmobile ?>' data-ik='<?php echo $gplace ?>' data-in='<?php echo $gname ?>' data-ih='<?php echo $ghome ?>' data-iy='<?php echo $gcountry ?>' data-ie='<?php echo $gstate ?>' data-ip='<?php echo $appre ?>' data-id='<?php echo $dob ?>' data-ig='<?php echo $gender ?>' data-ic='<?php echo $country ?>' data-il='<?php echo $lgvt ?>' data-is='<?php echo $state ?>' data-ia='<?php echo $crapp ?>' href='#Biodata' class='open-Biodata btn  btn-success' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><span class='glyphicon glyphicon-eye-open' style='color: #FFFFFF;'></span></a></td>
-                  <td><a href='biodata.php' class='open-Pic btn  btn-primary' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><i class='fa fa-edit' style='color: #FFFFFF;'></i></a></td>
+                  <td><a href='biodata.php' class='open-Pic btn  btn-primary' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to edit'><i class='fa fa-edit' style='color: #FFFFFF;'></i></a></td>
                 </tr>
                 <tr class="danger">
                   <td>2</td>
-                  <td>Passport</td>
+                  <td>Documents</td>
                   <td><?php if ($checks1 != 0) {
-                        echo "Done";
+                        echo "Complete";
                       } else {
                         echo "Incomplete";
                       } ?></td>
                   <td><a data-toggle='modal' data-id='1' href='#Pic' class='open-Pic btn  btn-success' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><span class='glyphicon glyphicon-eye-open' style='color: #FFFFFF;'></span></a></td>
-                  <td><a href='passport.php' class='btn  btn-primary' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to edit picture'><i class='fa fa-edit' style='color: #FFFFFF;'></i></a></td>
+                  <td><a href='passport.php' class='btn  btn-primary' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to edit documents'><i class='fa fa-edit' style='color: #FFFFFF;'></i></a></td>
                 </tr>
                 <tr class="info">
                   <td>3</td>
-                  <td>Course</td>
+                  <td>Program Choices</td>
                   <td><?php if ($checks2 != 0) {
-                        echo "Done";
+                        echo "Complete";
                       } else {
                         echo "Incomplete";
                       } ?></td>
@@ -759,23 +837,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                   <td><a href='school.php' class='btn  btn-primary' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to edit'><i class='fa fa-edit' style='color: #FFFFFF;'></i></a></td>
 
                 </tr>
-                <tr class="warning">
+                <!-- <tr class="warning">
                   <td>4</td>
                   <td>School Attended</td>
                   <td><?php if ($num12 != 0) {
-                        echo "Done";
+                        echo "Complete";
                       } else {
                         echo "Incomplete";
                       } ?></td>
                   <td><a data-toggle='modal' data-id='1' href='#School' class='btn btn-success' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><span class='glyphicon glyphicon-eye-open' style='color: #FFFFFF;'></span></a></td>
                   <td><a href='previousschool.php?ids=1' class='btn  btn-primary' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><i class='fa fa-edit' style='color: #FFFFFF;'></i></a></td>
 
-                </tr>
-                <tr class="info">
+                </tr> -->
+                <tr class="success">
                   <td>5</td>
                   <td>O'Level</td>
                   <td><?php if ($num3 != 0) {
-                        echo "Done";
+                        echo "Complete";
                       } else {
                         echo "Incomplete";
                       } ?></td>
@@ -783,23 +861,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                   <td><a href='olevel.php?ids=1' class='btn  btn-primary' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><i class='fa fa-edit' style='color: #FFFFFF;'></i></a></td>
 
                 </tr>
-                <tr class="success">
+                <!-- <tr class="success">
                   <td>6</td>
                   <td>A'Level</td>
                   <td><?php if ($num5 != 0) {
-                        echo "Done";
+                        echo "Complete";
                       } else {
                         echo "Incomplete";
                       } ?></td>
                   <td><a data-toggle='modal' data-id='1' href='#Alevel' class='btn  btn-success' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><span class='glyphicon glyphicon-eye-open' style='color: #FFFFFF;'></span></a></td>
                   <td><a href='alevel.php?ids=1' class='btn  btn-primary' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><i class='fa fa-edit' style='color: #FFFFFF;'></i></a></td>
 
-                </tr>
+                </tr> -->
                 <tr class="danger">
                   <td>6</td>
-                  <td>Employment</td>
+                  <td>Referee</td>
                   <td><?php if ($nume != 0) {
-                        echo "Done";
+                        echo "Complete";
                       } else {
                         echo "Incomplete";
                       } ?></td>

@@ -6,8 +6,6 @@ try {
     $serial = $_COOKIE['serial'];
 
     if (isset($_POST['Value4'])) {
-        // echo(json_encode($_POST));
-        // exit;
 
         // $username = mysql_real_escape_string( $_POST[ 'Value1' ] );
         //Email variable
@@ -70,22 +68,34 @@ try {
             $rowcount = mysqli_num_rows($resultn);
 
             if ($rowcount == 0) {
-
-                $enter = "INSERT INTO Applicants2 (Othername,Surname,DOB,Gender,PlaceOfbirth,Hometown,Country,State,Localgvt,Appresaddress,Appcoraddress,Gname,Gplace,Ghometown,Gcountry,Gstate,Glocalgvt,Gaddress,Applicantphone,Email,Gmobile,religion,Serial,Pin) 
-                               	 VALUES('$othernames','$surname','$dob','$gender','$placebirth','$hometown','$country','$state','$localgvt','$apresaddress','$apcaddress','$guardianname','$guardianplace','$guardianhometown','$gcountry','$gstate','$glocalgovt','$gaddress','$applicantphone','$email','$gmobile','$religion','$serial','$pin')";
-                $db->query($enter);
-
-                echo 'Yesss';
+                // Insert new record if no record exists
+                $enter = "INSERT INTO Applicants2 (Othername, Surname, DOB, Gender, PlaceOfbirth, Hometown, Country, State, Localgvt, Appresaddress, Appcoraddress,
+                            Gname, Gplace, Ghometown, Gcountry, Gstate, Glocalgvt, Gaddress, Applicantphone, Email, Gmobile, religion, Serial, Pin)
+                            VALUES ('$othernames', '$surname', '$dob', '$gender', '$placebirth', '$hometown', '$country', '$state', '$localgvt', '$apresaddress', '$apcaddress',
+                            '$guardianname', '$guardianplace', '$guardianhometown', '$gcountry', '$gstate', '$glocalgovt', '$gaddress', '$applicantphone', '$email',
+                            '$gmobile', '$religion', '$serial', '$pin')";
+                if ($db->query($enter) === TRUE) {
+                    echo 'Yesss'; // Echoed initially when record was successfully inserted
+                } else {
+                    echo 'Error inserting record: ' . $db->error;
+                }
             } else {
-                echo 'Yes2';
+                // Update the existing record if it already exists
+                $update = "UPDATE Applicants2 SET Othername='$othernames', Surname='$surname', DOB='$dob', Gender='$gender', PlaceOfbirth='$placebirth',
+                            Hometown='$hometown', Country='$country', State='$state', Localgvt='$localgvt', Appresaddress='$apresaddress', Appcoraddress='$apcaddress',
+                            Gname='$guardianname', Gplace='$guardianplace', Ghometown='$guardianhometown', Gcountry='$gcountry', Gstate='$gstate', Glocalgvt='$glocalgovt',
+                            Gaddress='$gaddress', Applicantphone='$applicantphone', Email='$email', Gmobile='$gmobile', religion='$religion'
+                            WHERE Serial='$serial' AND Pin='$pin'";
+                if ($db->query($update) === TRUE) {
+                    echo 'Yes2'; // Echoed initially when a record was updated
+                } else {
+                    echo 'Error updating record: ' . $db->error;
+                }
             }
         } else {
             echo 'Yes';
         }
-    } else {
-        //echo'pamzey';
-
-    }
+    } 
     if (isset($_FILES['file2']['name']) && $_POST['Change']) {
         $serial = $_POST['serial'];
         $pin = $_POST['pin'];
@@ -186,6 +196,14 @@ try {
         $courseapplied1 = $_POST['courseapplied1'];
         $courseapplied2 = $_POST['courseapplied2'];
 
+        // die($courseapplied1 == "Select Choice" || $courseapplied2 == "Select Choice" );
+
+        if($courseapplied1 == "Select Choice" || $courseapplied2 == "Select Choice" ){
+            $_SESSION['uploaded'] = 'no';
+            header('Location:school.php');
+            exit;
+        }
+
         $qued = "SELECT * FROM Courseapplied WHERE Serial='$serial'&& Pin='$pin' ";
         $resul = mysqli_query($db, $qued);
         $checks = mysqli_num_rows($resul);
@@ -200,7 +218,7 @@ try {
         } else {
             $queryz = "UPDATE Courseapplied SET Choice1='$courseapplied1',Choice2='$courseapplied2' WHERE Pin='$pin' ";
 
-            $db->query($queryz) or die('Errorr, query failed to upload');
+            $db->query($queryz) or die('Error, query failed to upload');
 
             $_SESSION['upload'] = 'yes';
             header('Location:school.php');
@@ -515,8 +533,6 @@ try {
             }
         }
         $db->close();
-    } else {
-        die("400");
     }
 
 
@@ -809,71 +825,116 @@ try {
         echo 'ok';
     }
 
-    if (isset($_POST['examdate']) && $_POST['exam']) {
+    if (isset($_POST['result'])) {
+        // die(500);
+        // // echo "Keeeeeabiru";
+        // // exit;
+        // $exam = $_POST['exam'];
+        // $examdate = $_POST['examdate'];
+        // $examtype = $_POST['examtype'];
+        // // $grade = $_POST['grade'];
+        // $sitting = $_POST['sitting'];
+        // $subjects = $_POST['subjects'];
+        // $grades = $_POST['grades'];
 
-        $exam = $_POST['exam'];
-        $examdate = $_POST['examdate'];
-        $examtype = $_POST['examtype'];
-        $grade = $_POST['grade'];
-        $sitting = $_POST['sitting'];
-        $subjects = $_POST['subjects'];
+        // var_dump($_POST);
+        // // echo($grades);
+        // exit;
 
-        $qued = "SELECT * FROM Olevel WHERE Serial='$serial'&& Pin='$pin' && Subjects='$subjects' ";
-        $resul = mysqli_query($db, $qued);
-        $checks = mysqli_num_rows($resul);
-        if ($checks == 0) {
-            $queryz = 'INSERT INTO Olevel (Exam,Examdate,Examtype,Grade,Sitting,Subjects,Serial,Pin) ' .
-                "VALUES ('$exam','$examdate','$examtype','$grade','$sitting','$subjects','$serial','$pin')";
-
-            $db->query($queryz) or die('Errorr, query failed to upload');
-
-            $sql = "SELECT * FROM Olevel WHERE Serial='$serial'&& Pin='$pin' ";
-            $rget = mysqli_query($db, $sql);
-            $num = mysqli_num_rows($rget);
-            if ($num != 0) {
-                echo "<table  class='table table-striped'>
-                                                                      <thead>
-                                                                         <tr>
-                                                                           <th>Exam Type</th>
-                                                                           <th>Exam Date</th>
-                                                                             <th>Center & Exam No</th>
-                                                                             <th>Subject</th>
-                                                                            <th>Grade</th>
-                                                                              <th>Remove</th>
-                                                                          </tr>
-                                                                            </thead>
-                                                                        <tbody>";
-
-                while ($foundk = mysqli_fetch_array($rget)) {
-                    $type = $foundk['Examtype'];
-                    $date = $foundk['Examdate'];
-                    $examno = $foundk['Exam'];
-                    $subj = $foundk['Subjects'];
-                    $grade = $foundk['Grade'];
-                    $id = $foundk['id'];
-
-                    echo "<tr>
-                                                                              <td>$type</td>
-                                                                              <td>$date</td>
-                                                                               <td>$examno</td>
-                                                                              <td>$subj</td>
-                                                                                 <td>$grade</td>
-                                                                             <td><a data-id='$id' class='open-Delete btn  btn-danger' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to remove'><span class='glyphicon glyphicon-trash' style='color: #FFFFFF;'></span></a></td>
-                                                                              </tr>";
-                }
-                echo "</tbody>
-                                                                           </table>";
-            }
-        } else {
-            // if ( move_uploaded_file ( $receipttmpName, 'images/applicants/'.$receiptName ) ) {
-            //image is a folder in which you will save documents
-            // $queryz = "UPDATE Profilepictures SET name='$receiptName',size='$receiptSize',type='$receiptType',content='$receiptName' WHERE Pin='$pin' ";
-            // $db->query( $queryz ) or die( 'Errorr, query failed to upload' );
-
-            // }
-            // }
+        // Assuming these variables are already populated from your form or previous processing
+        $exam = isset($_POST['exam']) ? mysqli_real_escape_string($db, $_POST['exam']) : '';
+        $examdate = isset($_POST['examdate']) ? mysqli_real_escape_string($db, $_POST['examdate']) : '';
+        $examtype = isset($_POST['examtype']) ? mysqli_real_escape_string($db, $_POST['examtype']) : '';
+        $sitting = isset($_POST['sitting']) ? mysqli_real_escape_string($db, $_POST['sitting']) : '';
+        // $serial = isset($_POST['serial']) ? mysqli_real_escape_string($db, $_POST['serial']) : '';
+        // $pin = isset($_POST['pin']) ? mysqli_real_escape_string($db, $_POST['pin']) : '';
+        $subjects = isset($_POST['subjects']) ? $_POST['subjects'] : [];
+        $grades = isset($_POST['grades']) ? $_POST['grades'] : [];
+        
+        // Check if any of the required items are empty
+        $required_fields = [];
+        if (empty($exam)) {
+            $required_fields[] = 'Exam Number';
         }
-    }
+        if (empty($examdate)) {
+            $required_fields[] = 'Exam Date';
+        }
+        if (empty($examtype)) {
+            $required_fields[] = 'Exam Type';
+        }
+        if (empty($sitting)) {
+            $required_fields[] = 'Sitting';
+        }
+        if (empty($subjects)) {
+            $required_fields[] = 'Subjects';
+        }
+        if (empty($grades)) {
+            $required_fields[] = 'Grades';
+        }
+        
+        // If any required field is empty, terminate with an error message
+        if (!empty($required_fields)) {
+            // Append "and" if more than one field is required
+            if (count($required_fields) > 1) {
+                $last_field = array_pop($required_fields); // Remove the last element
+                $required_fields[] = "and $last_field"; // Append with "and"
+            }
+            
+            $fields_message = implode(', ', $required_fields);
+            // $_SESSION["error"] = True;
+            die("The following field(s) are required - $fields_message.");
+        }
+        
+        
+        // Check if the combination of Serial and Pin already exists
+        $check_query = "SELECT * FROM Olevel WHERE Serial='$serial' AND Pin='$pin'";
+        $check_result = mysqli_query($db, $check_query);
+        
+        if (mysqli_num_rows($check_result) > 0) {
+            // Delete existing records for the given Serial and Pin
+            $delete_query = "DELETE FROM Olevel WHERE Serial='$serial' AND Pin='$pin'";
+            $delete_result = mysqli_query($db, $delete_query);
+        
+            if (!$delete_result) {
+                die('Error deleting existing records: ' . mysqli_error($db));
+            }
+        
+            // Insert new records
+            for ($i = 0; $i < count($subjects); $i++) {
+                $subject = mysqli_real_escape_string($db, $subjects[$i]);
+                $grade = mysqli_real_escape_string($db, $grades[$i]);
+        
+                $insert_query = "INSERT INTO Olevel (Exam, Examdate, Examtype, Grade, Sitting, Subjects, Serial, Pin) " .
+                                "VALUES ('$exam', '$examdate', '$examtype', '$grade', '$sitting', '$subject', '$serial', '$pin')";
+                $insert_result = mysqli_query($db, $insert_query);
+        
+                if (!$insert_result) {
+                    die('Error inserting new records: ' . mysqli_error($db));
+                }
+            }
+        
+            echo 'Existing records updated successfully.';
+        } else {
+            // Insert new records
+            for ($i = 0; $i < count($subjects); $i++) {
+                $subject = mysqli_real_escape_string($db, $subjects[$i]);
+                $grade = mysqli_real_escape_string($db, $grades[$i]);
+        
+                $insert_query = "INSERT INTO Olevel (Exam, Examdate, Examtype, Grade, Sitting, Subjects, Serial, Pin) " .
+                                "VALUES ('$exam', '$examdate', '$examtype', '$grade', '$sitting', '$subject', '$serial', '$pin')";
+                $insert_result = mysqli_query($db, $insert_query);
+        
+                if (!$insert_result) {
+                    die('Error inserting new records: ' . mysqli_error($db));
+                }
+            }
+        
+            echo 'New records inserted successfully.';
+        }
+        
+        
+
+}
 
     if (isset($_POST['Deleteolevel'])) {
 
@@ -1025,6 +1086,7 @@ try {
         $db->query($enter);
         echo 'ok';
     }
+
 
     if (isset($_POST['examtype'])) {
 

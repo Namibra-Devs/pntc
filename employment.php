@@ -317,7 +317,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- gallery -->
 	<div class="agileits-services text-center py-5">
 		<div class="container py-md-4 mt-md-3">
-			<h3 class="heading-agileinfo">Stage 7 (Reference)<span>Complete form below</span></h3>
+			<h3 class="heading-agileinfo">Stage 7 (Referee)<span>Complete form below</span></h3>
 			<div class="w3ls_gallery_grids mt-md-5 pt-5">
 				<div class="container">
 					<h2></h2>
@@ -325,7 +325,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="form-login" style="width:1000px">
 						<hr />
 						<div class="alert alert-warning">
-							<i class="fa fa-info-circle"></i>&nbsp;This stage you Enter your Employment history in the space provided
+							<i class="fa fa-info-circle"></i>&nbsp;This stage you Enter your Referee Details in the spaces provided
 							<ol>
 								<li>Enter your Reference details in spaces provided below</li>
 								<li>Add, Delete and Save Reference history using buttons below</li>
