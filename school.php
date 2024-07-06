@@ -54,33 +54,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 
 <body>
- <?php if(isset($_SESSION['uploaded'])) {?>
+ <?php if(isset($_SESSION['uploaded']) && $_SESSION['uploaded'] == 'no') {?>
 <script type="text/javascript"> 
 
 $(document).ready(function(){ 
-                           var myValue = "Load";
-                                        swal({
-                                         title: "Successfull",
-                                         text: "Programme Choices Submitted",
-                                         type: "success",
-                                         showCancelButton: false,
-                                        confirmButtonColor: "green",
-                                        confirmButtonText: "OK!",
-                                        closeOnConfirm: true,
-                                        closeOnCancel: true,
-                                          buttonsStyling: false
-                                        },
-                     function(isConfirm){
-                                      if (isConfirm) {                                      	
-                                                         window.location ="previousschool.php";
-                                                     } 
-                                          
-                                         });
-                                         
-                                                    });
-       
-                    </script>
-      <?php  session_destroy(); }?>
+	console.log(99);
+	sweetAlert("Oops...", "Select both Choices", "error");
+                   
+});
+</script>
+<?php  session_destroy(); }?>
+
+
 <?php if(isset($_SESSION['upload'])) {?>
 <script type="text/javascript"> 
 

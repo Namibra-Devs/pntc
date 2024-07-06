@@ -49,7 +49,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="text/javascript" src="js/validation.min.js"></script>
 <script type="text/javascript" src="js/login.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
+<style>
+	input{
+		color: #990000;
+	}
+</style>
 
 
 </head>
