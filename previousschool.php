@@ -298,13 +298,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<span class="glyphicon glyphicon-trash"></span> &nbsp;Clear
 			</button>
 		<?php if (isset($_GET['ids'])) {
-      $direction = 'declaration.php';
+      $direction = 'summary.php';
   } else {
       $direction = 'olevel.php';
   } ?>		
 		</div>
 		<div class="form-group">			
-			<a type="button" class="Del btn btn-default" href="school.php">
+			<a type="button" class="Del btn btn-default" href="program-choice.php">
 			<i class="fa fa-arrow-left"></i> &nbsp; Previous
 			</a> 
 				

@@ -121,7 +121,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 														$("#errors2").html("");
 													} else {
 														$("#errors1").html(result);
-														$("#errors2").html("<a  class='btn btn-default' href='declaration.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Employer</a>");
+														$("#errors2").html("<a  class='btn btn-default' href='summary.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Employer</a>");
 
 													}
 												}
@@ -184,7 +184,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							},
 							function(isConfirm) {
 								if (isConfirm) {
-									window.location = "declaration.php";
+									window.location = "summary.php";
 								}
 							});
 					} else {
@@ -203,7 +203,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							},
 							function(isConfirm) {
 								if (isConfirm) {
-									window.location = "declaration.php";
+									window.location = "summary.php";
 								}
 							});
 					}
@@ -232,7 +232,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 		// 			} else {
 		// 				$("#errors1").html(result);
-		// 				$("#errors2").html("<a  class='btn btn-default' href='declaration.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Employment</a>");
+		// 				$("#errors2").html("<a  class='btn btn-default' href='summary.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Employment</a>");
 
 		// 			}
 		// 		}
@@ -399,11 +399,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 					</div>
 					<div class="form-group">
-						<a type="button" class="Del btn btn-default" href="alevel.php">
+						<a type="button" class="Del btn btn-default" href="document.php">
 							<i class="fa fa-arrow-left"></i> &nbsp; Previous
 						</a>
 
-						<a type="button" class="Del btn btn-default" href="declaration.php">
+						<a type="button" class="Del btn btn-default" href="summary.php">
 							<i class="fa fa-arrow-right"></i> &nbsp; Next
 						</a>
 					</div>

@@ -84,7 +84,7 @@ $(document).ready(function(){
                                         },
                      function(isConfirm){
                                       if (isConfirm) {                                      	
-                                                         window.location ="declaration.php";
+                                                         window.location ="summary.php";
                                                      } 
                                           
                                          });
@@ -209,11 +209,11 @@ $(document).ready(function(){
 			
 		</div> 	  
   <div class="form-group">			
-			<a type="button" class="Del btn btn-default" href="passport.php">
+			<a type="button" class="Del btn btn-default" href="olevel.php">
 			<i class="fa fa-arrow-left"></i> &nbsp; Previous
 			</a> 
 				
-			<a type="button" class="Del btn btn-default" href="previousschool.php">
+			<a type="button" class="Del btn btn-default" href="document.php">
 			<i class="fa fa-arrow-right"></i> &nbsp; Next
 			</a> 
 		</div> 

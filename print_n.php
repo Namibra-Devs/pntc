@@ -119,7 +119,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                                                 	                        	           } 
                                                                                                              else {
                                                                                                                       $("#errors1").html(result);
-                                                                                                                       $("#errors2").html("<a  class='btn btn-default' href='declaration.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Employer</a>");
+                                                                                                                       $("#errors2").html("<a  class='btn btn-default' href='summary.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Employer</a>");
 
                                                                                                                    }
                                                                                                            }
@@ -155,7 +155,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
           success: function(result) {
                          
           	                         $("#errors1").html(result);
-          	                         $("#errors2").html("<a  class='btn btn-default' href='declaration.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Employer</a>");
+          	                         $("#errors2").html("<a  class='btn btn-default' href='summary.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Employer</a>");
                                      swal({title: "Successful!", text: "Employer Information Saved!!.", type: "success"});
   
                                         }
@@ -179,7 +179,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                      } 
                                            else {
                                                        $("#errors1").html(result);
-                                                       $("#errors2").html("<a  class='btn btn-default' href='declaration.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Employment</a>");
+                                                       $("#errors2").html("<a  class='btn btn-default' href='summary.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Employment</a>");
 
                                                  }
                                           }

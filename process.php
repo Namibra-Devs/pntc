@@ -125,7 +125,7 @@ try {
             }
         }
         if ($_SESSION['error']) {
-            header('Location: passport.php');
+            header('Location: document.php');
             exit;
         }
 
@@ -155,7 +155,7 @@ try {
                 }
             }
             $_SESSION['uploaded'] = 'yes';
-            header('Location: passport.php');
+            header('Location: document.php');
         } else {
             // Delete existing records
             $deleteQuery = "DELETE FROM Profilepictures WHERE Serial='$serial' AND Pin='$pin'";
@@ -181,7 +181,7 @@ try {
                 }
             }
             $_SESSION['upload'] = 'yes';
-            header('Location: passport.php');
+            header('Location: document.php');
         }
     }
 
@@ -200,7 +200,7 @@ try {
 
         if($courseapplied1 == "Select Choice" || $courseapplied2 == "Select Choice" ){
             $_SESSION['uploaded'] = 'no';
-            header('Location:school.php');
+            header('Location:program-choice.php');
             exit;
         }
 
@@ -214,14 +214,14 @@ try {
             $db->query($queryz) or die('Errorr, query failed to upload');
 
             $_SESSION['uploaded'] = 'yes';
-            header('Location:school.php');
+            header('Location:program-choice.php');
         } else {
             $queryz = "UPDATE Courseapplied SET Choice1='$courseapplied1',Choice2='$courseapplied2' WHERE Pin='$pin' ";
 
             $db->query($queryz) or die('Error, query failed to upload');
 
             $_SESSION['upload'] = 'yes';
-            header('Location:school.php');
+            header('Location:program-choice.php');
         }
     }
 

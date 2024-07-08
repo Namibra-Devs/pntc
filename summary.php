@@ -92,6 +92,15 @@ center, .close{
 
   <script type="text/javascript">
     $(document).on("click", ".Decla", function() {
+      if (!$('#declarationCheckbox').is(':checked')) {
+            swal({
+						title: "Error!",
+						text: "Please agree to the declaration before submitting the form.",
+						type: "error",
+            confirmButtonColor: "green",
+					});
+          return;
+        }
       var decstatus = "Nice";
       var pin = document.getElementById('pin').value;
       var serial = document.getElementById('serial').value;
@@ -108,19 +117,19 @@ center, .close{
         success: function(result) {
 
           swal({
-              title: "Saved",
-              text: "Declaration Information Confirmed",
+            title: 'Application Completed!',
+            text: 'Your application has been submitted successfully. Check your email for further details.',
               type: "success",
-              showCancelButton: true,
+              showCancelButton: false,
               confirmButtonColor: "green",
-              confirmButtonText: "OK!",
+              confirmButtonText: "OK",
               closeOnConfirm: true,
               closeOnCancel: true,
               buttonsStyling: false
             },
             function(isConfirm) {
               if (isConfirm) {
-                window.location = "print.php";
+                window.location = "index.php";
               }
             });
         }
@@ -823,7 +832,7 @@ Program Choices
                         echo "Incomplete";
                       } ?></td>
                   <td><a data-toggle='modal' data-id='1' href='#Pic' class='open-Pic btn  btn-success' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><span class='glyphicon glyphicon-eye-open' style='color: #FFFFFF;'></span></a></td>
-                  <td><a href='passport.php' class='btn  btn-primary' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to edit documents'><i class='fa fa-edit' style='color: #FFFFFF;'></i></a></td>
+                  <td><a href='document.php' class='btn  btn-primary' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to edit documents'><i class='fa fa-edit' style='color: #FFFFFF;'></i></a></td>
                 </tr>
                 <tr class="info">
                   <td>3</td>
@@ -834,7 +843,7 @@ Program Choices
                         echo "Incomplete";
                       } ?></td>
                   <td><a data-toggle='modal' data-id='1' href='#Course' class='btn  btn-success' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><span class='glyphicon glyphicon-eye-open' style='color: #FFFFFF;'></span></a></td>
-                  <td><a href='school.php' class='btn  btn-primary' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to edit'><i class='fa fa-edit' style='color: #FFFFFF;'></i></a></td>
+                  <td><a href='program-choice.php' class='btn  btn-primary' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to edit'><i class='fa fa-edit' style='color: #FFFFFF;'></i></a></td>
 
                 </tr>
                 <!-- <tr class="warning">
@@ -882,7 +891,7 @@ Program Choices
                         echo "Incomplete";
                       } ?></td>
                   <td><a data-toggle='modal' data-id='1' href='#Employment' class='btn  btn-success' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><span class='glyphicon glyphicon-eye-open' style='color: #FFFFFF;'></span></a></td>
-                  <td><a href='employment.php?ids=1' class='btn btn-primary' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><i class='fa fa-edit' style='color: #FFFFFF;'></i></a></td>
+                  <td><a href='referee.php?ids=1' class='btn btn-primary' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><i class='fa fa-edit' style='color: #FFFFFF;'></i></a></td>
 
                 </tr>
               </tbody>
@@ -900,23 +909,32 @@ Program Choices
 
             <hr />
             <?php
-            if ($numb != 0 && $nume != 0 && $num5 != 0 && $num3 != 0 && $num12 != 0 && $checks2 != 0 && $checks1 != 0) { ?>
+            // if ($numb != 0 && $nume != 0 && $num5 != 0 && $num3 != 0 && $num12 != 0 && $checks2 != 0 && $checks1 != 0) { ?>
               <div class="alert alert-warning">
                 I&nbsp;<?php if (isset($firstname)) {
                           echo $firstname . ' ' . $sirname;
                         } ?>&nbsp; declare that the particulars submited on this form are to the best of my knowledge and correct and if admited i shall regard myself bound to the rules and regulations of the school of Health Sciences and Technology and at any time the school is reasonably conviced that the information given is false or incorrect i will be required to withdrawal from the course or be liable to or both
               </div>
+
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="declarationCheckbox" required style="margin-top: 0.3em; margin-left: 0.1em;">
+                <label class="form-check-label" for="declarationCheckbox" style="margin-left: 1.5em; font-weight: 500;">
+                    I agree to the above declaration
+                </label>
+            </div>
+
+            <hr />
               <div class="form-group">
                 <button type="submit" class="Decla btn btn-default" name="Change" value="changes">
-                  <span class="glyphicon glyphicon-check"></span> &nbsp;Declaration Confirmation
+                  <span class="glyphicon glyphicon-check"></span> &nbsp;Submit Application
                 </button>
               </div>
             <?php
-            } else {
-              echo "<div class='alert alert-warning'>
-          Please complete other required sections above for you to submit this application             
-        </div>";
-            }
+        //     } else {
+        //       echo "<div class='alert alert-warning'>
+        //   Please complete other required sections above for you to submit this application             
+        // </div>";
+        //     }
             ?>
 
 
