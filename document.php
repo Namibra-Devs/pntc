@@ -88,7 +88,7 @@ $(document).ready(function(){
                                         },
                      function(isConfirm){
                                       if (isConfirm) {                                      	
-                                                         window.location ="school.php";
+                                                         window.location ="program-choice.php";
                                                      } 
                                           
                                          });
@@ -116,7 +116,7 @@ $(document).ready(function(){
                                         },
                      function(isConfirm){
                                       if (isConfirm) {                                      	
-                                                         window.location ="declaration.php";
+                                                         window.location ="summary.php";
                                                      } 
                                           
                                          });
@@ -242,11 +242,11 @@ $(document).ready(function(){
 			</button>			
 		</div> 
 		<div class="form-group">			
-			<a type="button" class="Del btn btn-default" href="biodata.php">
+			<a type="button" class="Del btn btn-default" href="program-choice.php">
 			<i class="fa fa-arrow-left"></i> &nbsp; Previous
 			</a> 
 				
-			<a type="button" class="Del btn btn-default" href="school.php">
+			<a type="button" class="Del btn btn-default" href="referee.php">
 			<i class="fa fa-arrow-right"></i> &nbsp; Next
 			</a> 
 		</div> 

@@ -106,7 +106,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 														$("#errors2").html("");
 													} else {
 														$("#errors1").html(result);
-														$("#errors2").html("<a  class='btn btn-default' href='employment.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Courses</a>");
+														$("#errors2").html("<a  class='btn btn-default' href='referee.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Courses</a>");
 
 													}
 												}
@@ -176,7 +176,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				if(result.includes("required")){
 
 					$("#errors1").html(result);
-					$("#errors2").html("<a  class='btn btn-default' href='employment.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Courses</a>");
+					$("#errors2").html("<a  class='btn btn-default' href='referee.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Courses</a>");
 					swal({
 						title: "Error!",
 						text: result,
@@ -185,7 +185,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				}else{
 					
 					$("#errors1").html(result);
-					$("#errors2").html("<a  class='btn btn-default' href='employment.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Courses</a>");
+					$("#errors2").html("<a  class='btn btn-default' href='referee.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Courses</a>");
 					swal({
 						title: "Successful!",
 						text: result,
@@ -218,7 +218,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 		// 			} else {
 		// 				$("#errors1").html(result);
-		// 				$("#errors2").html("<a  class='btn btn-default' href='employment.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Courses</a>");
+		// 				$("#errors2").html("<a  class='btn btn-default' href='referee.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Courses</a>");
 
 		// 			}
 		// 		}
@@ -414,13 +414,13 @@ $numSubjects = count($subjects);
 						</div>
 						<?php if (isset($_GET['ids'])) {
 
-							$direction = "declaration.php";
+							$direction = "summary.php";
 						} else {
-							$direction = "alevel.php";
+							$direction = "program-choice.php";
 						}
 						?>
 						<div class="form-group">
-							<a type="button" class="Del btn btn-default" href="previousschool.php">
+							<a type="button" class="Del btn btn-default" href="biodata.php">
 								<i class="fa fa-arrow-left"></i> &nbsp; Previous
 							</a>
 

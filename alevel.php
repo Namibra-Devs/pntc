@@ -99,7 +99,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                                                 	                        	           } 
                                                                                                              else {
                                                                                                                       $("#errors1").html(result);
-                                                                                                                       $("#errors2").html("<a  class='btn btn-default' href='employment.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Courses</a>");
+                                                                                                                       $("#errors2").html("<a  class='btn btn-default' href='referee.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Courses</a>");
 
                                                                                                                    }
                                                                                                            }
@@ -136,7 +136,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
           success: function(result) {
                          
           	                         $("#errors1").html(result);
-          	                         $("#errors2").html("<a  class='btn btn-default' href='employment.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Courses</a>");
+          	                         $("#errors2").html("<a  class='btn btn-default' href='referee.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Courses</a>");
                                      swal({title: "Successful!", text: "Course Information Saved!!.", type: "success"});
   
                                         }
@@ -160,7 +160,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                      } 
                                            else {
                                                        $("#errors1").html(result);
-                                                       $("#errors2").html("<a  class='btn btn-default' href='employment.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Courses</a>");
+                                                       $("#errors2").html("<a  class='btn btn-default' href='referee.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Courses</a>");
 
                                                  }
                                           }
@@ -313,10 +313,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div> 
 		<?php if(isset($_GET['ids'])){
 	
-                   $direction="declaration.php";                 
+                   $direction="summary.php";                 
 
            }
-       else{$direction="employment.php";  }
+       else{$direction="referee.php";  }
 ?>	
 	<div class="form-group">			
 			<a type="button" class="Del btn btn-default" href="previousschool.php">

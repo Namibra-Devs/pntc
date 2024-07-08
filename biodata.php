@@ -132,7 +132,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							},
 							function(isConfirm) {
 								if (isConfirm) {
-									window.location = "passport.php";
+									window.location = "olevel.php";
 								}
 							});
 					}
@@ -281,7 +281,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 					<div class="form-login">
 
-						<div class="input-group" style="margin-bottom:10px">
+						<!-- <div class="input-group" style="margin-bottom:10px">
 							<span class="input-group-addon">Username/Serial</span>
 							<input type="text" class="form-control" name="username" value="<?php echo $serial; ?>" id='username' disabled=''>
 
@@ -289,7 +289,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="input-group" style="margin-bottom:10px">
 							<span class="input-group-addon">Password/Pin</span>
 							<input type="text" class="form-control" name="password" id="password" value="<?php echo $pin; ?>" disabled=''>
-						</div>
+						</div> -->
 
 						<div class="input-group" style="margin-bottom:10px">
 							<span class="input-group-addon">Surname</span>
@@ -942,11 +942,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</button>
 						</div>
 						<div class="form-group">
-							<a type="button" class="btn btn-default" href="onlineform.php">
+							<!-- <a type="button" class="btn btn-default" href="onlineform.php">
 								<i class="fa fa-arrow-left"></i> &nbsp; Previous
-							</a>
+							</a> -->
 
-							<a type="button" class="btn btn-default" href="passport.php">
+							<a type="button" class="btn btn-default" href="olevel.php">
 								<i class="fa fa-arrow-right"></i> &nbsp; Next
 							</a>
 						</div>
