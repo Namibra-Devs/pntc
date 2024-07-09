@@ -67,24 +67,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
 
-<style>
-  .modal{
-	padding-top: 10rem !important;
-}
+  <style>
+    .modal {
+      padding-top: 10rem !important;
+    }
 
-#Biodata{
-	padding-top: 20rem !important;
+    #Biodata {
+      padding-top: 20rem !important;
 
-}
+    }
 
-#Olevel{
-  padding-top: 20rem !important;
-}
+    #Olevel {
+      padding-top: 55rem !important;
+    }
 
-center, .close{
-  color: #999999;
-}
-</style>
+    center,
+    .close {
+      color: #999999;
+    }
+  </style>
 </head>
 
 <body>
@@ -93,14 +94,14 @@ center, .close{
   <script type="text/javascript">
     $(document).on("click", ".Decla", function() {
       if (!$('#declarationCheckbox').is(':checked')) {
-            swal({
-						title: "Error!",
-						text: "Please agree to the declaration before submitting the form.",
-						type: "error",
-            confirmButtonColor: "green",
-					});
-          return;
-        }
+        swal({
+          title: "Error!",
+          text: "Please agree to the declaration before submitting the form.",
+          type: "error",
+          confirmButtonColor: "green",
+        });
+        return;
+      }
       var decstatus = "Nice";
       var pin = document.getElementById('pin').value;
       var serial = document.getElementById('serial').value;
@@ -117,8 +118,8 @@ center, .close{
         success: function(result) {
 
           swal({
-            title: 'Application Completed!',
-            text: 'Your application has been submitted successfully. Check your email for further details.',
+              title: 'Application Completed!',
+              text: 'Your application has been submitted successfully. Check your email for further details.',
               type: "success",
               showCancelButton: false,
               confirmButtonColor: "green",
@@ -194,9 +195,9 @@ center, .close{
       <!-- Modal content-->
       <div class="modal-content" style="font-size: 14px; font-family: Times New Roman;color:black;width:140%">
         <div class="modal-header" style="background:#222d32">
-        <center>
-Documents
-</center>
+          <center>
+            Documents
+          </center>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title" style="font-weight: bold;color: #F0F0F0">
             <center>
@@ -207,10 +208,11 @@ Documents
 
         <div class="modal-body">
           <?php
-          function capitalizeAroundSeparator($str) {
+          function capitalizeAroundSeparator($str)
+          {
             return ucwords(str_replace('-', ' ', $str));
-            }
-            
+          }
+
           $qued = "SELECT * FROM Profilepictures WHERE Serial='$serial'&& Pin='$pin' ";
           $resul = mysqli_query($db, $qued);
           $checks1 = mysqli_num_rows($resul);
@@ -223,7 +225,7 @@ Documents
               $label = explode($serial . "_", $path);
               $label = explode(".", implode($label));
               $labelName = capitalizeAroundSeparator($label[0]);
-      
+
               echo '<tr>';
               echo '<td>' . $labelName . '</td>';
               echo '<td><img src="images/applicants/' . $path . '" class="img-thumbnail img-responsive" style="max-width: 100px; cursor: pointer;" data-toggle="modal" data-target="#imageModal" data-src="images/applicants/' . $path . '" data-label="' . $labelName . '"></td>';
@@ -241,33 +243,33 @@ Documents
 
     </div>
 
-      <!-- Modal -->
-  <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="imageModalLabel">Image Preview</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body text-center">
-          <img id="imagePreview" src="" alt="Image Preview" class="img-fluid">
+    <!-- Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="imageModalLabel">Image Preview</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body text-center">
+            <img id="imagePreview" src="" alt="Image Preview" class="img-fluid">
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script>
-    $('#imageModal').on('show.bs.modal', function (event) {
-      var button = $(event.relatedTarget); // Button that triggered the modal
-      var src = button.data('src'); // Extract info from data-* attributes
-      var label = button.data('label'); // Extract label from data-* attributes
-      var modal = $(this);
-      modal.find('#imagePreview').attr('src', src);
-      modal.find('.modal-title').text(label); // Set the modal title to the image label
-    });
-  </script>
+    <script>
+      $('#imageModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var src = button.data('src'); // Extract info from data-* attributes
+        var label = button.data('label'); // Extract label from data-* attributes
+        var modal = $(this);
+        modal.find('#imagePreview').attr('src', src);
+        modal.find('.modal-title').text(label); // Set the modal title to the image label
+      });
+    </script>
   </div>
 
 
@@ -276,11 +278,11 @@ Documents
       <!-- Modal content-->
       <div class="modal-content" style="font-size: 14px; font-family: Times New Roman;color:black;">
         <div class="modal-header" style="background:#222d32">
-                      <center>
+          <center>
 
-            </center>
+          </center>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          
+
 
         </div>
 
@@ -339,9 +341,9 @@ Documents
       <!-- Modal content-->
       <div class="modal-content" style="font-size: 14px; font-family: Times New Roman;color:black;">
         <div class="modal-header" style="background:#222d32">
-        <center>
-Referee
-</center>
+          <center>
+            Referee
+          </center>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
         </div>
@@ -408,9 +410,9 @@ Referee
       <!-- Modal content-->
       <div class="modal-content" style="font-size: 14px; font-family: Times New Roman;color:black;">
         <div class="modal-header" style="background:#222d32">
-        <center>
-Educational Background
-</center>
+          <center>
+            Educational Background
+          </center>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
         </div>
@@ -436,12 +438,12 @@ Educational Background
               if ($num3 != 0) {
 
                 while ($foundk = mysqli_fetch_array($rget)) {
-                  $type = $foundk['Examtype'];
                   $exam = $foundk['Exam'];
-                  $date = $foundk['Examdate'];
-                  $subjects = $foundk['Subjects'];
+                  $type = $foundk['Exam'] == 'NA' ? 'NA' : $foundk['Examtype'];
+                  $date = $foundk['Exam'] == 'NA' ? 'NA' : $foundk['Examdate'];
+                  $subjects = $foundk['Exam'] == 'NA' ? 'NA' : $foundk['Subjects'];
                   $sitting = $foundk['Sitting'];
-                  $grade = $foundk['Grade'];
+                  $grade = $foundk['Exam'] == 'NA' ? 'NA' : $foundk['Grade'];
                   echo "<tr>
                                                                               <td>$type</td>
                                                                               <td>$exam</td>
@@ -536,9 +538,9 @@ Educational Background
       <!-- Modal content-->
       <div class="modal-content" style="font-size: 14px; font-family: Times New Roman;color:black;">
         <div class="modal-header" style="background:#222d32">
-        <center>
-Program Choices
-</center>
+          <center>
+            Program Choices
+          </center>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 
         </div>
@@ -597,9 +599,9 @@ Program Choices
       <!-- Modal content-->
       <div class="modal-content" style="font-size: 14px; font-family: Times New Roman;color:black;">
         <div class="modal-header" style="background:#222d32">
-        <center>
-              BIODATA INFORMATION
-            </center>
+          <center>
+            BIODATA INFORMATION
+          </center>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title" style="font-weight: bold;color: #F0F0F0">
 
@@ -778,7 +780,6 @@ Program Choices
                     $gcountry = $foundl['Gcountry'];
                     $gstate = $foundl['Gstate'];
                     $appre = $foundl['Appresaddress'];
-
                     $glocal = $foundl['Glocalgvt'];
                     $gaddres = $foundl['Gaddress'];
                     $gmobile = $foundl['Gmobile'];
@@ -821,7 +822,7 @@ Program Choices
                         echo "Incomplete";
                       } ?></td>
                   <td><a data-toggle='modal' data-if='<?php echo $othername ?>' data-ir='<?php echo $sname ?>' data-ib='<?php echo $pbirth ?>' data-it='<?php echo $appphone ?>' data-iz='<?php echo $email ?>' data-iw='<?php echo $hometown ?>' data-io='<?php echo $glocal ?>' data-is='<?php echo $gaddres ?>' data-im='<?php echo $gmobile ?>' data-ik='<?php echo $gplace ?>' data-in='<?php echo $gname ?>' data-ih='<?php echo $ghome ?>' data-iy='<?php echo $gcountry ?>' data-ie='<?php echo $gstate ?>' data-ip='<?php echo $appre ?>' data-id='<?php echo $dob ?>' data-ig='<?php echo $gender ?>' data-ic='<?php echo $country ?>' data-il='<?php echo $lgvt ?>' data-is='<?php echo $state ?>' data-ia='<?php echo $crapp ?>' href='#Biodata' class='open-Biodata btn  btn-success' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><span class='glyphicon glyphicon-eye-open' style='color: #FFFFFF;'></span></a></td>
-                  <td><a href='biodata.php' class='open-Pic btn  btn-primary' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to edit'><i class='fa fa-edit' style='color: #FFFFFF;'></i></a></td>
+                  <td><a href='biodata.php?ids=1' class='open-Pic btn  btn-primary' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to edit'><i class='fa fa-edit' style='color: #FFFFFF;'></i></a></td>
                 </tr>
                 <tr class="danger">
                   <td>2</td>
@@ -832,7 +833,7 @@ Program Choices
                         echo "Incomplete";
                       } ?></td>
                   <td><a data-toggle='modal' data-id='1' href='#Pic' class='open-Pic btn  btn-success' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><span class='glyphicon glyphicon-eye-open' style='color: #FFFFFF;'></span></a></td>
-                  <td><a href='document.php' class='btn  btn-primary' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to edit documents'><i class='fa fa-edit' style='color: #FFFFFF;'></i></a></td>
+                  <td><a href='document.php?ids=1' class='btn  btn-primary' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to edit documents'><i class='fa fa-edit' style='color: #FFFFFF;'></i></a></td>
                 </tr>
                 <tr class="info">
                   <td>3</td>
@@ -843,7 +844,7 @@ Program Choices
                         echo "Incomplete";
                       } ?></td>
                   <td><a data-toggle='modal' data-id='1' href='#Course' class='btn  btn-success' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><span class='glyphicon glyphicon-eye-open' style='color: #FFFFFF;'></span></a></td>
-                  <td><a href='program-choice.php' class='btn  btn-primary' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to edit'><i class='fa fa-edit' style='color: #FFFFFF;'></i></a></td>
+                  <td><a href='program-choice.php?ids=1' class='btn  btn-primary' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to edit'><i class='fa fa-edit' style='color: #FFFFFF;'></i></a></td>
 
                 </tr>
                 <!-- <tr class="warning">
@@ -909,7 +910,7 @@ Program Choices
 
             <hr />
             <?php
-            // if ($numb != 0 && $nume != 0 && $num5 != 0 && $num3 != 0 && $num12 != 0 && $checks2 != 0 && $checks1 != 0) { ?>
+            if ($numb != 0 && $nume != 0 && $num5 != 0 && $num3 != 0 && $num12 != 0 && $checks2 != 0 && $checks1 != 0) { ?>
               <div class="alert alert-warning">
                 I&nbsp;<?php if (isset($firstname)) {
                           echo $firstname . ' ' . $sirname;
@@ -919,22 +920,22 @@ Program Choices
               <div class="form-check mb-3">
                 <input class="form-check-input" type="checkbox" id="declarationCheckbox" required style="margin-top: 0.3em; margin-left: 0.1em;">
                 <label class="form-check-label" for="declarationCheckbox" style="margin-left: 1.5em; font-weight: 500;">
-                    I agree to the above declaration
+                  I agree to the above declaration
                 </label>
-            </div>
+              </div>
 
-            <hr />
+              <hr />
               <div class="form-group">
                 <button type="submit" class="Decla btn btn-default" name="Change" value="changes">
                   <span class="glyphicon glyphicon-check"></span> &nbsp;Submit Application
                 </button>
               </div>
             <?php
-        //     } else {
-        //       echo "<div class='alert alert-warning'>
-        //   Please complete other required sections above for you to submit this application             
-        // </div>";
-        //     }
+            } else {
+              echo "<div class='alert alert-warning'>
+          Please complete other required sections above for you to submit this application.           
+        </div>";
+            }
             ?>
 
 
@@ -1010,7 +1011,7 @@ Program Choices
   <!-- copyright -->
   <section class="copyright-w3layouts py-xl-4 py-3">
     <div class="container">
-      <p>© 2024 PNTC . All Rights Reserved | Design & Developed by mvumapatrick@gmail.com
+      <p>© 2024 PNTC . All Rights Reserved | Design & Developed by namibra.io
       </p>
       <ul class="social-nav footer-social social two text-center mt-2">
         <li>

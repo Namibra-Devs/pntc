@@ -5,6 +5,7 @@ try {
     $pin = $_COOKIE['pin'];
     $serial = $_COOKIE['serial'];
 
+
     if (isset($_POST['Value4'])) {
 
         // $username = mysql_real_escape_string( $_POST[ 'Value1' ] );
@@ -95,7 +96,7 @@ try {
         } else {
             echo 'Yes';
         }
-    } 
+    }
     if (isset($_FILES['file2']['name']) && $_POST['Change']) {
         $serial = $_POST['serial'];
         $pin = $_POST['pin'];
@@ -198,7 +199,7 @@ try {
 
         // die($courseapplied1 == "Select Choice" || $courseapplied2 == "Select Choice" );
 
-        if($courseapplied1 == "Select Choice" || $courseapplied2 == "Select Choice" ){
+        if ($courseapplied1 == "Select Choice" || $courseapplied2 == "Select Choice") {
             $_SESSION['uploaded'] = 'no';
             header('Location:program-choice.php');
             exit;
@@ -825,53 +826,181 @@ try {
         echo 'ok';
     }
 
+    //     if (isset($_POST['result'])) {
+    //         // die(500);
+    //         // // echo "Keeeeeabiru";
+    //         // // exit;
+    //         // $exam = $_POST['exam'];
+    //         // $examdate = $_POST['examdate'];
+    //         // $examtype = $_POST['examtype'];
+    //         // // $grade = $_POST['grade'];
+    //         // $sitting = $_POST['sitting'];
+    //         // $subjects = $_POST['subjects'];
+    //         // $grades = $_POST['grades'];
+
+    //         // var_dump($_POST);
+    //         // // echo($grades);
+    //         // exit;
+
+    //         // Assuming these variables are already populated from your form or previous processing
+    //         $exam = isset($_POST['exam']) ? mysqli_real_escape_string($db, $_POST['exam']) : '';
+    //         $exam = isset($_POST['exam2']) ? mysqli_real_escape_string($db, $_POST['exam2']) : '';
+    //         $examdate = isset($_POST['examdate']) ? mysqli_real_escape_string($db, $_POST['examdate']) : '';
+    //         $examdate = isset($_POST['examdate2']) ? mysqli_real_escape_string($db, $_POST['examdate2']) : '';
+    //         $examtype = isset($_POST['examtype']) ? mysqli_real_escape_string($db, $_POST['examtype']) : '';
+    //         $examtype = isset($_POST['examtype2']) ? mysqli_real_escape_string($db, $_POST['examtype2']) : '';
+    //         $sitting = isset($_POST['sitting']) ? mysqli_real_escape_string($db, $_POST['sitting']) : '';
+    //         $sitting = isset($_POST['sitting2']) ? mysqli_real_escape_string($db, $_POST['sitting2']) : '';
+    //         // $serial = isset($_POST['serial']) ? mysqli_real_escape_string($db, $_POST['serial']) : '';
+    //         // $pin = isset($_POST['pin']) ? mysqli_real_escape_string($db, $_POST['pin']) : '';
+    //         $subjects = isset($_POST['subjects']) ? $_POST['subjects'] : [];
+    //         $grades = isset($_POST['grades']) ? $_POST['grades'] : [];
+    //         $subjects2 = isset($_POST['subjects2']) ? $_POST['subjects2'] : [];
+    //         $grades2 = isset($_POST['grades2']) ? $_POST['grades2'] : [];
+
+    //         // Check if any of the required items are empty
+    //         $required_fields = [];
+    //         if (empty($exam)) {
+    //             $required_fields[] = 'Exam Number';
+    //         }
+    //         if (empty($examdate)) {
+    //             $required_fields[] = 'Exam Date';
+    //         }
+    //         if (empty($examtype)) {
+    //             $required_fields[] = 'Exam Type';
+    //         }
+    //         if (empty($sitting)) {
+    //             $required_fields[] = 'Sitting';
+    //         }
+    //         if (empty($subjects)) {
+    //             $required_fields[] = 'Subjects';
+    //         }
+    //         if (empty($grades)) {
+    //             $required_fields[] = 'Grades';
+    //         }
+
+    //         // If any required field is empty, terminate with an error message
+    //         if (!empty($required_fields)) {
+    //             // Append "and" if more than one field is required
+    //             if (count($required_fields) > 1) {
+    //                 $last_field = array_pop($required_fields); // Remove the last element
+    //                 $required_fields[] = "and $last_field"; // Append with "and"
+    //             }
+
+    //             $fields_message = implode(', ', $required_fields);
+    //             // $_SESSION["error"] = True;
+    //             echo "The following field(s) are required - $fields_message.";
+    //             exit;
+    //         }
+
+
+    //         // Check if the combination of Serial and Pin already exists
+    //         $check_query = "SELECT * FROM Olevel WHERE Serial='$serial' AND Pin='$pin'";
+    //         $check_result = mysqli_query($db, $check_query);
+
+    //         if (mysqli_num_rows($check_result) > 0) {
+    //             // Delete existing records for the given Serial and Pin
+    //             $delete_query = "DELETE FROM Olevel WHERE Serial='$serial' AND Pin='$pin'";
+    //             $delete_result = mysqli_query($db, $delete_query);
+
+    //             if (!$delete_result) {
+    //                 die('Error deleting existing records: ' . mysqli_error($db));
+    //             }
+
+    //             // Insert new records
+    //             for ($i = 0; $i < count($subjects); $i++) {
+    //                 $subject = mysqli_real_escape_string($db, $subjects[$i]);
+    //                 $grade = mysqli_real_escape_string($db, $grades[$i]);
+
+    //                 $insert_query = "INSERT INTO Olevel (Exam, Examdate, Examtype, Grade, Sitting, Subjects, Serial, Pin) " .
+    //                                 "VALUES ('$exam', '$examdate', '$examtype', '$grade', '$sitting', '$subject', '$serial', '$pin')";
+    //                 $insert_result = mysqli_query($db, $insert_query);
+
+    //                 if (!$insert_result) {
+    //                     die('Error inserting new records: ' . mysqli_error($db));
+    //                 }
+    //             }
+
+    //             echo 'Existing records updated successfully.';
+    //         } else {
+    //             // Insert new records
+    //             for ($i = 0; $i < count($subjects); $i++) {
+    //                 $subject = mysqli_real_escape_string($db, $subjects[$i]);
+    //                 $grade = mysqli_real_escape_string($db, $grades[$i]);
+
+    //                 $insert_query = "INSERT INTO Olevel (Exam, Examdate, Examtype, Grade, Sitting, Subjects, Serial, Pin) " .
+    //                                 "VALUES ('$exam', '$examdate', '$examtype', '$grade', '$sitting', '$subject', '$serial', '$pin')";
+    //                 $insert_result = mysqli_query($db, $insert_query);
+
+    //                 if (!$insert_result) {
+    //                     die('Error inserting new records: ' . mysqli_error($db));
+    //                 }
+    //             }
+
+    //             echo 'New records inserted successfully.';
+    //         }
+
+
+
+    // }
+
     if (isset($_POST['result'])) {
-        // die(500);
-        // // echo "Keeeeeabiru";
-        // // exit;
-        // $exam = $_POST['exam'];
-        // $examdate = $_POST['examdate'];
-        // $examtype = $_POST['examtype'];
-        // // $grade = $_POST['grade'];
-        // $sitting = $_POST['sitting'];
-        // $subjects = $_POST['subjects'];
-        // $grades = $_POST['grades'];
 
-        // var_dump($_POST);
-        // // echo($grades);
-        // exit;
 
-        // Assuming these variables are already populated from your form or previous processing
-        $exam = isset($_POST['exam']) ? mysqli_real_escape_string($db, $_POST['exam']) : '';
-        $examdate = isset($_POST['examdate']) ? mysqli_real_escape_string($db, $_POST['examdate']) : '';
-        $examtype = isset($_POST['examtype']) ? mysqli_real_escape_string($db, $_POST['examtype']) : '';
-        $sitting = isset($_POST['sitting']) ? mysqli_real_escape_string($db, $_POST['sitting']) : '';
-        // $serial = isset($_POST['serial']) ? mysqli_real_escape_string($db, $_POST['serial']) : '';
-        // $pin = isset($_POST['pin']) ? mysqli_real_escape_string($db, $_POST['pin']) : '';
-        $subjects = isset($_POST['subjects']) ? $_POST['subjects'] : [];
-        $grades = isset($_POST['grades']) ? $_POST['grades'] : [];
-        
+        $exam1 = isset($_POST['exam']) ? mysqli_real_escape_string($db, $_POST['exam']) : '';
+        $examdate1 = isset($_POST['examdate']) ? mysqli_real_escape_string($db, $_POST['examdate']) : '';
+        $examtype1 = isset($_POST['examtype']) ? mysqli_real_escape_string($db, $_POST['examtype']) : '';
+        $sitting1 = isset($_POST['sitting']) ? mysqli_real_escape_string($db, $_POST['sitting']) : '';
+        $subjects1 = isset($_POST['subjects']) ? $_POST['subjects'] : [];
+        $grades1 = isset($_POST['grades']) ? $_POST['grades'] : [];
+
+        $exam2 = (isset($_POST['exam2']) && !empty($_POST['exam2'])) ? mysqli_real_escape_string($db, $_POST['exam2']) : "NA";
+        $examdate2 = (isset($_POST['examdate2']) && !empty($_POST['examdate2'])) ? mysqli_real_escape_string($db, $_POST['examdate2']) : "NA";
+        $examtype2 = (isset($_POST['examtype2']) && !empty($_POST['examtype2'])) ? mysqli_real_escape_string($db, $_POST['examtype2']) : "NA";
+        $sitting2 = (isset($_POST['sitting2']) && !empty($_POST['sitting2'])) ? mysqli_real_escape_string($db, $_POST['sitting2']) : "NA";
+
+        $subjects2 = isset($_POST['subjects2']) ? $_POST['subjects2'] : [];
+        $grades2 = isset($_POST['grades2']) ? $_POST['grades2'] : [];
+
         // Check if any of the required items are empty
         $required_fields = [];
-        if (empty($exam)) {
-            $required_fields[] = 'Exam Number';
+        if (empty($exam1)) {
+            $required_fields[] = 'First Sitting Exam Number';
         }
-        if (empty($examdate)) {
-            $required_fields[] = 'Exam Date';
+        if (empty($examdate1)) {
+            $required_fields[] = 'First Sitting Exam Date';
         }
-        if (empty($examtype)) {
-            $required_fields[] = 'Exam Type';
+        if (empty($examtype1)) {
+            $required_fields[] = 'First Sitting Exam Type';
         }
-        if (empty($sitting)) {
-            $required_fields[] = 'Sitting';
+        if (empty($sitting1)) {
+            $required_fields[] = 'First Sitting';
         }
-        if (empty($subjects)) {
-            $required_fields[] = 'Subjects';
+        if (empty($subjects1)) {
+            $required_fields[] = 'Subjects for First Sitting';
         }
-        if (empty($grades)) {
-            $required_fields[] = 'Grades';
+        if (empty($grades1)) {
+            $required_fields[] = 'Grades for First Sitting';
         }
-        
+        if (empty($exam2)) {
+            $required_fields[] = 'Second Sitting Exam Number';
+        }
+        if (empty($examdate2)) {
+            $required_fields[] = 'Second Sitting Exam Date';
+        }
+        if (empty($examtype2)) {
+            $required_fields[] = 'Second Sitting Exam Type';
+        }
+        if (empty($sitting2)) {
+            $required_fields[] = 'Second Sitting';
+        }
+        if (empty($subjects2)) {
+            $required_fields[] = 'Subjects for Second Sitting';
+        }
+        if (empty($grades2)) {
+            $required_fields[] = 'Grades for Second Sitting';
+        }
+
         // If any required field is empty, terminate with an error message
         if (!empty($required_fields)) {
             // Append "and" if more than one field is required
@@ -879,62 +1008,87 @@ try {
                 $last_field = array_pop($required_fields); // Remove the last element
                 $required_fields[] = "and $last_field"; // Append with "and"
             }
-            
             $fields_message = implode(', ', $required_fields);
-            // $_SESSION["error"] = True;
-            die("The following field(s) are required - $fields_message.");
+            echo "The following field(s) are required - $fields_message.";
+            exit;
         }
-        
-        
+
         // Check if the combination of Serial and Pin already exists
         $check_query = "SELECT * FROM Olevel WHERE Serial='$serial' AND Pin='$pin'";
         $check_result = mysqli_query($db, $check_query);
-        
+
         if (mysqli_num_rows($check_result) > 0) {
             // Delete existing records for the given Serial and Pin
             $delete_query = "DELETE FROM Olevel WHERE Serial='$serial' AND Pin='$pin'";
             $delete_result = mysqli_query($db, $delete_query);
-        
+
             if (!$delete_result) {
                 die('Error deleting existing records: ' . mysqli_error($db));
             }
-        
-            // Insert new records
-            for ($i = 0; $i < count($subjects); $i++) {
-                $subject = mysqli_real_escape_string($db, $subjects[$i]);
-                $grade = mysqli_real_escape_string($db, $grades[$i]);
-        
-                $insert_query = "INSERT INTO Olevel (Exam, Examdate, Examtype, Grade, Sitting, Subjects, Serial, Pin) " .
-                                "VALUES ('$exam', '$examdate', '$examtype', '$grade', '$sitting', '$subject', '$serial', '$pin')";
-                $insert_result = mysqli_query($db, $insert_query);
-        
-                if (!$insert_result) {
-                    die('Error inserting new records: ' . mysqli_error($db));
-                }
-            }
-        
-            echo 'Existing records updated successfully.';
-        } else {
-            // Insert new records
-            for ($i = 0; $i < count($subjects); $i++) {
-                $subject = mysqli_real_escape_string($db, $subjects[$i]);
-                $grade = mysqli_real_escape_string($db, $grades[$i]);
-        
-                $insert_query = "INSERT INTO Olevel (Exam, Examdate, Examtype, Grade, Sitting, Subjects, Serial, Pin) " .
-                                "VALUES ('$exam', '$examdate', '$examtype', '$grade', '$sitting', '$subject', '$serial', '$pin')";
-                $insert_result = mysqli_query($db, $insert_query);
-        
-                if (!$insert_result) {
-                    die('Error inserting new records: ' . mysqli_error($db));
-                }
-            }
-        
-            echo 'New records inserted successfully.';
-        }
-        
-        
 
-}
+            // Insert new records for first sitting
+            for ($i = 0; $i < count($subjects1); $i++) {
+                $subject = mysqli_real_escape_string($db, $subjects1[$i]);
+                $grade = mysqli_real_escape_string($db, $grades1[$i]);
+
+                $insert_query = "INSERT INTO Olevel (Exam, Examdate, Examtype, Grade, Sitting, Subjects, Serial, Pin) " .
+                    "VALUES ('$exam1', '$examdate1', '$examtype1', '$grade', '$sitting1', '$subject', '$serial', '$pin')";
+                $insert_result = mysqli_query($db, $insert_query);
+
+                if (!$insert_result) {
+                    die('Error inserting new records for first sitting: ' . mysqli_error($db));
+                }
+            }
+
+            // Insert new records for second sitting
+            for ($i = 0; $i < count($subjects2); $i++) {
+                $subject = mysqli_real_escape_string($db, $subjects2[$i]);
+                $grade = mysqli_real_escape_string($db, $grades2[$i]);
+
+                $insert_query = "INSERT INTO Olevel (Exam, Examdate, Examtype, Grade, Sitting, Subjects, Serial, Pin) " .
+                    "VALUES ('$exam2', '$examdate2', '$examtype2', '$grade', '$sitting2', '$subject', '$serial', '$pin')";
+                $insert_result = mysqli_query($db, $insert_query);
+
+                if (!$insert_result) {
+                    die('Error inserting new records for second sitting: ' . mysqli_error($db));
+                }
+            }
+
+            echo 'Existing OLevel details updated successfully.';
+        } else {
+            // Insert new records for first sitting
+            for ($i = 0; $i < count($subjects1); $i++) {
+                $subject = mysqli_real_escape_string($db, $subjects1[$i]);
+                $grade = mysqli_real_escape_string($db, $grades1[$i]);
+
+                $insert_query = "INSERT INTO Olevel (Exam, Examdate, Examtype, Grade, Sitting, Subjects, Serial, Pin) " .
+                    "VALUES ('$exam1', '$examdate1', '$examtype1', '$grade', '$sitting1', '$subject', '$serial', '$pin')";
+                $insert_result = mysqli_query($db, $insert_query);
+
+                if (!$insert_result) {
+                    die('Error inserting new records for first sitting: ' . mysqli_error($db));
+                }
+            }
+
+            // Insert new records for second sitting
+            for ($i = 0; $i < count($subjects2); $i++) {
+                $subject = mysqli_real_escape_string($db, $subjects2[$i]);
+                $grade = mysqli_real_escape_string($db, $grades2[$i]);
+
+                $insert_query = "INSERT INTO Olevel (Exam, Examdate, Examtype, Grade, Sitting, Subjects, Serial, Pin) " .
+                    "VALUES ('$exam2', '$examdate2', '$examtype2', '$grade', '$sitting2', '$subject', '$serial', '$pin')";
+                $insert_result = mysqli_query($db, $insert_query);
+
+                if (!$insert_result) {
+                    die('Error inserting new records for second sitting: ' . mysqli_error($db));
+                }
+            }
+
+            echo 'Olevel details saved successfully.';
+        }
+    }
+
+
 
     if (isset($_POST['Deleteolevel'])) {
 
