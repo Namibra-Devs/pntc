@@ -153,7 +153,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			var serial = document.getElementById('serial').value;
 
 			var formData = new FormData($('#uploadForm')[0]);
-		
+
 			$.ajax({
 				type: 'POST',
 				url: "process.php",
@@ -329,75 +329,105 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<ol>
 								<li>Enter your Reference details in spaces provided below</li>
 								<li>Add, Delete and Save Reference history using buttons below</li>
-								<!-- <li>Your adviced not to submit more than 5 Employment history</li> -->
 							</ol>
 						</div>
 						<hr />
 						<span id="errors1"></span>
 						<hr />
+						<?php
+
+
+
+						// Initialize variables to store fetched data
+						$name = $contact = $date = $address = $ref = $signature = "";
+
+						// Check if 'pin' and 'serial' are set in GET parameters
+						if (isset($_GET['ids']) && isset($_GET['ids'])) {
+
+							// Construct SQL query
+							$sql = "SELECT * FROM referees WHERE pin = '$pin' AND serial = '$serial'";
+
+							// Execute query
+							$result = $db->query($sql);
+
+							if ($result) {
+								// Check if data was found
+								if ($result->num_rows > 0) {
+									// Fetch data
+									$row = $result->fetch_assoc();
+
+									// Store fetched values in variables for form population
+									$name = htmlspecialchars($row['name']);
+									$contact = htmlspecialchars($row['contact']);
+									$date = htmlspecialchars($row['date']);
+									$address = htmlspecialchars($row['address']);
+									$ref = htmlspecialchars($row['ref']);
+									$signature = htmlspecialchars($row['signature']);
+								} else {
+									// Handle case where no data was found
+									echo "No records found.";
+								}
+							} else {
+								// Handle query execution error
+								echo "Query failed: " . $db->error;
+							}
+						} else {
+							// Handle case where 'pin' or 'serial' is not set in GET parameters
+							echo "PIN and/or Serial not provided.";
+						}
+
+						// Close database connection
+						$db->close();
+						?>
+
 						<form id="uploadForm" enctype="multipart/form-data">
 							<div class="input-group" style="margin-bottom:10px">
 								<span class="input-group-addon">Name</span>
-								<input type="text" required class="form-control" name="name" id="name" placeholder="Reference Name">
+								<input type="text" required class="form-control" name="name" id="name" placeholder="Reference Name" value="<?php echo $name; ?>">
 							</div>
 							<div class="input-group" style="margin-bottom:10px">
 								<span class="input-group-addon">Address</span>
-								<input type="text" required class="form-control" name="address" id="address" placeholder="Reference Address">
+								<input type="text" required class="form-control" name="address" id="address" placeholder="Reference Address" value="<?php echo $address; ?>">
 							</div>
 							<div class="input-group" required style="margin-bottom:10px">
 								<span class="input-group-addon">Contact</span>
-								<input type="text" class="form-control" name="contact" id="contact" placeholder="Reference Contact">
+								<input type="text" class="form-control" name="contact" id="contact" placeholder="Reference Contact" value="<?php echo $contact; ?>">
 							</div>
 							<div class="input-group" required style="margin-bottom:10px">
 								<span class="input-group-addon">Date</span>
-								<input id="datepicker-starting-view" type="date" name="date" class="form-control" placeholder="dd/mm/yy">
+								<input id="datepicker-starting-view" type="date" name="date" class="form-control" placeholder="dd/mm/yy" value="<?php echo $date; ?>">
 							</div>
 							<div class="input-group" required id="sign" style="margin-bottom:10px">
 								<span class="input-group-addon">Signature</span>
-								<input type="text" class="form-control" name="signature" id="signature" placeholder="Upload Signature" style="pointer-events: none;">
-
+								<input type="text" class="form-control" name="signature" id="signature" placeholder="Upload Signature" style="pointer-events: none;" value="<?php echo $signature; ?>">
 							</div>
 							<div class="input-group" style="margin-bottom:10px">
 								<span class="input-group-addon">Class</span>
-								<input type="text" required class="form-control" name="ref" id="ref" placeholder="Referee Class">
-
+								<input type="text" required class="form-control" name="ref" id="ref" placeholder="Referee Class" value="<?php echo $ref; ?>">
 							</div>
 							<input name='file3' hidden type='file' id='file3'>
 
-							<!-- <div class="input-group" style="margin-bottom:10px">
-    <span class="input-group-addon">Position Held</span>
-   <input type="text" class="form-control" name="email" id="position" placeholder="Position Held">
-  </div>  
-  <div class="input-group" style="margin-bottom:10px">
-    <span class="input-group-addon">From</span>
-   <input type="text" class="form-control" name="email" id="froms" placeholder="Started">
-  </div>
-    <div class="input-group" style="margin-bottom:10px">
-    <span class="input-group-addon">To</span>
-   <input type="text" class="form-control" name="applicantphone" id="tos" placeholder="Finished">
-  </div> -->
 							<p>
-								<input name='serial' id='serial' type='hidden' value='<?php if (isset($serial)) {
-																							echo $serial;
-																						} ?>'>
-								<input name='pin' id='pin' type='hidden' value='<?php if (isset($pin)) {
-																					echo $pin;
-																				} ?>'>
+								<input name='serial' id='serial' type='hidden' value='<?php if (isset($serial)) echo $serial; ?>'>
+								<input name='pin' id='pin' type='hidden' value='<?php if (isset($pin)) echo $pin; ?>'>
 							</p>
-
 
 							<hr />
 							<div class="form-group">
 								<button type="submit" class="Employer btn btn-default" name="Change" value="changes">
 									<span class="glyphicon glyphicon-check"></span> &nbsp;Save Referee
 								</button>
+							</div>
 						</form>
+
 						<button type="submit" class="Del btn btn-default">
 							<span class="glyphicon glyphicon-trash"></span> &nbsp;Clear
 						</button>
 
 
 					</div>
+
+
 					<div class="form-group">
 						<a type="button" class="Del btn btn-default" href="document.php">
 							<i class="fa fa-arrow-left"></i> &nbsp; Previous
@@ -478,7 +508,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- copyright -->
 	<section class="copyright-w3layouts py-xl-4 py-3">
 		<div class="container">
-			<p>© 2024 PNTC . All Rights Reserved | Design & Developed by mvumapatrick@gmail.com
+			<p>© 2024 PNTC . All Rights Reserved | Design & Developed by namibra.io
 			</p>
 			<ul class="social-nav footer-social social two text-center mt-2">
 				<li>

@@ -237,7 +237,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- copyright -->
 	<section class="copyright-w3layouts py-xl-4 py-3">
 		<div class="container">
-			<p>© 2024 PNTC . All Rights Reserved | Design & Developed by mvumapatrick@gmail.com
+			<p>© 2024 PNTC . All Rights Reserved | Design & Developed by namibra.io
 			</p>
 			<ul class="social-nav footer-social social two text-center mt-2">
 					<li>
