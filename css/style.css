@@ -1662,9 +1662,11 @@ header > .navbar {
   justify-content: right;
 }
 
-.banner-top > .container{
-  padding-top: 10rem;
+.banner-top.banner-top1{
+  margin-top: 5.5rem;
+  padding-top: 2rem;
 }
+
 
 @media screen and (min-width: 1024px) {
   header .navbar-collapse {
