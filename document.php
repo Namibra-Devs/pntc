@@ -58,66 +58,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 
 <body>
-	<?php if (isset($_SESSION['error']) && $_SESSION['error'] == "3") { ?>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				sweetAlert("Oops...", "Upload all documents, they are required!", "error");
-
-			});
-		</script>
-	<?php session_destroy();
-	} ?>
-
-	<?php if (isset($_SESSION['uploaded'])) { ?>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				var myValue = "Load";
-				swal({
-						title: "Successfull",
-						text: "Picture uploaded successfully",
-						type: "success",
-						showCancelButton: false,
-						confirmButtonColor: "green",
-						confirmButtonText: "OK!",
-						closeOnConfirm: true,
-						closeOnCancel: true,
-						buttonsStyling: false
-					},
-					function(isConfirm) {
-						return;
-
-					});
-
-			});
-		</script>
-	<?php session_destroy();
-	} ?>
-
-	<?php if (isset($_SESSION['upload'])) { ?>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				var myValue = "Load";
-				swal({
-						title: "Successfull",
-						text: "Picture Updated successfully",
-						type: "success",
-						showCancelButton: false,
-						confirmButtonColor: "green",
-						confirmButtonText: "OK!",
-						closeOnConfirm: true,
-						closeOnCancel: true,
-						buttonsStyling: false
-					},
-					function(isConfirm) {
-						return;
-
-					});
-
-			});
-		</script>
-	<?php session_destroy();
-	} ?>
-
 	<!-- header -->
 	<section class="w3layouts-header py-2">
 		<div class="container">
@@ -175,83 +115,222 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- gallery -->
 	<div class="agileits-services text-center py-5">
 		<div class="container py-md-4 mt-md-3">
-			<h3 class="heading-agileinfo">Stage 3 (Document) <span>Click on Browse button below to select your picture and should not be more than 20MB</span></h3>
+			<h3 class="heading-agileinfo">Stage 4 (Document) <span>Click on Browse button below to select your picture and should not be more than 20MB</span></h3>
 			<div class="w3ls_gallery_grids mt-md-5 pt-5">
 				<div class="container">
 					<h2></h2>
+					<?php
+					$passport = '';
+					$certificate = '';
+					$testimonial = '';
+					$birth_certificate = '';
+					$passport_name = '';
+					$certificate_name = '';
+					$testimonial_name = '';
+					$birth_certificate_name = '';
 
-					<form class="form-login" method="post" action="process.php" enctype='multipart/form-data'>
+					$hideSpanLabel = true;
+					// if (isset($_GET['ids'])) {
+					// 	$hideSpanLabel = true;
+					// }
+						// $serial = $_POST['serial'];
+						// $pin = $_POST['pin'];
 
+						// // Database connection
+						// $db = new mysqli('localhost', 'username', 'password', 'database');
+
+						// // Check connection
+						// if ($db->connect_error) {
+						//     die("Connection failed: " . $db->connect_error);
+						// }
+
+						// Fetch images from profilepictures table
+						$sql = "SELECT name FROM profilepictures WHERE serial='$serial' AND pin='$pin'";
+						$result = $db->query($sql);
+
+						if ($result->num_rows > 0) {
+							while ($row = $result->fetch_assoc()) {
+								// Extract the name and remove the .png extension and 12345_ prefix
+								$name = $row['name'];
+								$cleanName = preg_replace('/^\d+_|\.\w+$/', '', $name);
+								$file_name = pathinfo($name, PATHINFO_FILENAME);
+
+								switch ($cleanName) {
+									case 'passport':
+										$passport = 'images/applicants/' . $row['name'];
+										$passport_name = $file_name;
+										break;
+									case 'certificate':
+										$certificate = 'images/applicants/' . $row['name'];
+										$certificate_name = $file_name;
+										break;
+									case 'testimonial':
+										$testimonial = 'images/applicants/' . $row['name'];
+										$testimonial_name = $file_name;
+										break;
+									case 'birth-certificate':
+										$birth_certificate = 'images/applicants/' . $row['name'];
+										$birth_certificate_name = $file_name;
+										break;
+								}
+							}
+						}
+
+						$db->close();
+					// }
+					?>
+
+					<form class="form-login" id="documents" enctype='multipart/form-data'>
 						<div class="alert alert-warning">
 							<i class="fa fa-info-circle"></i>&nbsp;This stage you upload your scanned passport and documents
 							<ol>
 								<li>The Scanned document should be saved in .jpg,.jpeg,.png,.gif extension</li>
-								<li>Make sure you reduce the size of the document after scanning.That will reduce its memory capacity</li>
+								<li>Make sure you reduce the size of the document after scanning. That will reduce its memory capacity</li>
 								<li>The file size should not be more than 10 mb</li>
 							</ol>
 						</div>
-						<input name='serial' type='hidden' value='<?php if (isset($serial)) {
-																		echo $serial;
-																	} ?>'>
-						<input name='pin' type='hidden' value='<?php if (isset($pin)) {
-																	echo $pin;
-																} ?>'>
+						<?php
+						if (isset($_GET['ids'])) {
+							echo "<input name='ids' type='hidden' value='{$_GET['ids']}'>";
+						}
+						?>
+
+
 						<div class="form-group">
-							<p style="margin-bottom:10px;text-align:start; color:black;">
-								Upload Passport
-							</p>
-							<p>
-								<input name='file2' type='file' id='file2'>
-							</p>
+							<label for="file2" class="file-label">Upload Passport</label>
+							<div class="flex-row">
+								<input name='file2' type='file' id='file2' onchange="displayFileName('file2')" style="display: none;">
+								<label for="file2" class="custom-file-upload">Select File</label>
+								<span id="file2-name" <?php if ($hideSpanLabel) echo 'style="display:none;"'; ?>><?php echo $passport_name; ?></span>
+								<img id="file2-preview" src="<?php echo $passport; ?>" alt="Preview" style="max-width: 100px; max-height: 100px; margin-left: 10px; <?php echo $passport ? 'display: inline-block;' : 'display: none;'; ?>">
+							</div>
 						</div>
+
 						<div class="form-group">
-							<p style="margin-bottom:10px;text-align:start; color:black;">
-								Upload Certificate
-							</p>
-							<p>
-								<input name='file3' type='file' id='file3'>
-							</p>
+							<label for="file3" class="file-label">Upload Certificate</label>
+							<div class="flex-row">
+								<input name='file3' type='file' id='file3' onchange="displayFileName('file3')" style="display: none;">
+								<label for="file3" class="custom-file-upload">Select File</label>
+								<span id="file3-name" <?php if ($hideSpanLabel) echo 'style="display:none;"'; ?>><?php echo $certificate_name; ?></span>
+								<img id="file3-preview" src="<?php echo $certificate; ?>" alt="Preview" style="max-width: 100px; max-height: 100px; margin-left: 10px; <?php echo $certificate ? 'display: inline-block;' : 'display: none;'; ?>">
+							</div>
 						</div>
+
 						<div class="form-group">
-							<p style="margin-bottom:10px;text-align:start; color:black;">
-								Upload Testimonials
-							</p>
-							<p>
-								<input name='file4' type='file' id='file4'>
-							</p>
+							<label for="file4" class="file-label">Upload Testimonials</label>
+							<div class="flex-row">
+								<input name='file4' type='file' id='file4' onchange="displayFileName('file4')" style="display: none;">
+								<label for="file4" class="custom-file-upload">Select File</label>
+								<span id="file4-name" <?php if ($hideSpanLabel) echo 'style="display:none;"'; ?>><?php echo $testimonial_name; ?></span>
+								<img id="file4-preview" src="<?php echo $testimonial; ?>" alt="Preview" style="max-width: 100px; max-height: 100px; margin-left: 10px; <?php echo $testimonial ? 'display: inline-block;' : 'display: none;'; ?>">
+							</div>
 						</div>
+
 						<div class="form-group">
-							<p style="margin-bottom:10px;text-align:start; color:black;">
-								Upload Birth Certificate
-							</p>
-							<p>
-								<input name='file5' type='file' id='file5'>
-							</p>
+							<label for="file5" class="file-label">Upload Birth Certificate</label>
+							<div class="flex-row">
+								<input name='file5' type='file' id='file5' onchange="displayFileName('file5')" style="display: none;">
+								<label for="file5" class="custom-file-upload">Select File</label>
+								<span id="file5-name" <?php if ($hideSpanLabel) echo 'style="display:none;"'; ?>><?php echo $birth_certificate_name; ?></span>
+								<img id="file5-preview" src="<?php echo $birth_certificate; ?>" alt="Preview" style="max-width: 100px; max-height: 100px; margin-left: 10px; <?php echo $birth_certificate ? 'display: inline-block;' : 'display: none;'; ?>">
+							</div>
 						</div>
 
 						<hr />
+
 						<div class="form-group">
 							<button type="submit" class="btn btn-default" name="Change" value="changes">
 								<span class="glyphicon glyphicon-upload"></span> &nbsp; Upload Documents
 							</button>
 						</div>
-						<?php if (isset($_GET['ids'])) {
 
+						<?php
+						if (isset($_GET['ids'])) {
 							$direction = "summary.php";
 						} else {
 							$direction = "referee.php";
 						}
 						?>
+
 						<div class="form-group">
 							<a type="button" class="Del btn btn-default" href="program-choice.php">
 								<i class="fa fa-arrow-left"></i> &nbsp; Previous
 							</a>
 
-							<a type="button" class="Del btn btn-default" href="<?php echo $direction  ?>">
+							<a type="button" class="Del btn btn-default" href="<?php echo $direction; ?>">
 								<i class="fa fa-arrow-right"></i> &nbsp; Next
 							</a>
 						</div>
 					</form>
+
+					<script>
+						// Function to display selected file name and preview image
+						function displayFileName(inputId) {
+							var input = document.getElementById(inputId);
+							var fileNameSpan = document.getElementById(inputId + "-name");
+							var previewImg = document.getElementById(inputId + "-preview");
+
+							if (input.files && input.files[0]) {
+								var reader = new FileReader();
+
+								reader.onload = function(e) {
+									previewImg.src = e.target.result;
+									previewImg.style.display = 'inline-block';
+								};
+
+								reader.readAsDataURL(input.files[0]);
+								fileNameSpan.textContent = input.files[0].name;
+								fileNameSpan.style.display = 'inline'; // Ensure span is displayed
+							} else {
+								previewImg.src = '#';
+								previewImg.style.display = 'none';
+								fileNameSpan.textContent = '';
+								fileNameSpan.style.display = '<?php echo $hideSpanLabel ? 'none' : 'inline'; ?>'; // Hide span based on PHP variable
+							}
+						}
+					</script>
+
+
+					<style>
+						/* Hide the "No file chosen" label */
+						input[type="file"] {
+							display: none;
+						}
+
+						/* Style the custom file upload label */
+						.custom-file-upload {
+							background-color: #f0f0f0;
+							padding: 10px 15px;
+							cursor: pointer;
+							border: 1px solid #ccc;
+							display: inline-block;
+							margin-right: 10px;
+							/* Add spacing between label and file name */
+						}
+
+						/* Style the file upload labels */
+						.file-label {
+							display: block;
+							text-align: left;
+							color: black;
+							font-weight: bold;
+							margin-bottom: 5px;
+						}
+
+						/* Flexbox styles */
+						.form-group {
+							margin-bottom: 15px;
+						}
+
+						.flex-row {
+							display: flex;
+							align-items: center;
+							justify-content: space-between;
+							align-items: center;
+						}
+					</style>
+
+
 
 				</div>
 
@@ -359,6 +438,64 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="js/bootstrap.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#documents').submit(function(event) {
+				// Prevent default form submission
+				event.preventDefault();
+
+				// Serialize form data
+				var formData = new FormData($(this)[0]);
+				formData.append('document', '1');
+
+				// Submit form via AJAX
+				$.ajax({
+					url: 'process.php', // Replace with your server-side script URL
+					type: 'POST',
+					data: formData,
+					processData: false,
+					contentType: false,
+					success: function(response) {
+						console.log(response); // Log the response for debugging purposes
+
+						if (response.includes('upload')) {
+							swal({
+								title: "Success",
+								text: "Documents updated successfully!",
+								icon: "success",
+								showCancelButton: false,
+								confirmButtonColor: "green",
+								confirmButtonText: "OK",
+								closeOnConfirm: true,
+								closeOnCancel: true,
+								buttonsStyling: false
+							});
+						} else if (response.includes('uploaded')) {
+							swal({
+								title: "Success",
+								text: "Documents uploaded successfully!",
+								icon: "success",
+								showCancelButton: false,
+								confirmButtonColor: "green",
+								confirmButtonText: "OK",
+								closeOnConfirm: true,
+								closeOnCancel: true,
+								buttonsStyling: false
+							});
+						} else if (response.includes('error')) {
+							sweetAlert("Oops...", "Upload all documents, they are required!", "error");
+						} else {
+							sweetAlert("Oops...", "Error occurred while uploading documents!", "error");
+						}
+					},
+					error: function(xhr, status, error) {
+						sweetAlert("Oops...", "Error occurred while uploading documents!", "error");
+					}
+				});
+			});
+		});
+	</script>
+
 </body>
 
 </html>

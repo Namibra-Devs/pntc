@@ -153,7 +153,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- gallery -->
 	<div class="agileits-services text-center py-5">
 		<div class="container py-md-4 mt-md-3">
-			<h3 class="heading-agileinfo">Stage 4 (Program Choice) <span>
+			<h3 class="heading-agileinfo">Stage 3 (Program Choice) <span>
 					Here click the course your applying for in the dropdown button and click save
 				</span></h3>
 			<div class="w3ls_gallery_grids mt-md-5 pt-5">
@@ -167,7 +167,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					$choice1 = $choice2 = "";
 
 					// Check if 'pin' and 'serial' are set in GET parameters
-					if (isset($_GET['ids']) && isset($_GET['ids'])) {
+					// if (isset($_GET['ids']) && isset($_GET['ids'])) {
 						$sql = "SELECT * FROM courseapplied WHERE pin = '$pin' AND serial = '$serial'";
 
 						// Execute query
@@ -184,7 +184,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								$choice2 = htmlspecialchars($row['Choice2']);
 							}
 						}
-					}
+					// }
 
 					$db->close();
 					?>
