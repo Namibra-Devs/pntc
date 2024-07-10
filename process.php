@@ -64,13 +64,13 @@ try {
             && $localgvt != '' && $apresaddress != '' && $guardianname != '' &&  $guardianplace != '' && $guardianhometown != '' && $gcountry != ''
             && $gstate != '' &&  $glocalgovt != '' && $gaddress != '' && $gmobile != '' &&  $applicantphone != '' && $email != '' && $apcaddress != '' && $religion != ''
         ) {
-            $sql = "SELECT * FROM Applicants2  WHERE Serial='$serial' && Pin='$pin'";
+            $sql = "SELECT * FROM applicants2  WHERE Serial='$serial' && Pin='$pin'";
             $resultn = mysqli_query($db, $sql);
             $rowcount = mysqli_num_rows($resultn);
 
             if ($rowcount == 0) {
                 // Insert new record if no record exists
-                $enter = "INSERT INTO Applicants2 (Othername, Surname, DOB, Gender, PlaceOfbirth, Hometown, Country, State, Localgvt, Appresaddress, Appcoraddress,
+                $enter = "INSERT INTO applicants2 (Othername, Surname, DOB, Gender, PlaceOfbirth, Hometown, Country, State, Localgvt, Appresaddress, Appcoraddress,
                             Gname, Gplace, Ghometown, Gcountry, Gstate, Glocalgvt, Gaddress, Applicantphone, Email, Gmobile, religion, Serial, Pin)
                             VALUES ('$othernames', '$surname', '$dob', '$gender', '$placebirth', '$hometown', '$country', '$state', '$localgvt', '$apresaddress', '$apcaddress',
                             '$guardianname', '$guardianplace', '$guardianhometown', '$gcountry', '$gstate', '$glocalgovt', '$gaddress', '$applicantphone', '$email',
@@ -82,7 +82,7 @@ try {
                 }
             } else {
                 // Update the existing record if it already exists
-                $update = "UPDATE Applicants2 SET Othername='$othernames', Surname='$surname', DOB='$dob', Gender='$gender', PlaceOfbirth='$placebirth',
+                $update = "UPDATE applicants2 SET Othername='$othernames', Surname='$surname', DOB='$dob', Gender='$gender', PlaceOfbirth='$placebirth',
                             Hometown='$hometown', Country='$country', State='$state', Localgvt='$localgvt', Appresaddress='$apresaddress', Appcoraddress='$apcaddress',
                             Gname='$guardianname', Gplace='$guardianplace', Ghometown='$guardianhometown', Gcountry='$gcountry', Gstate='$gstate', Glocalgvt='$glocalgovt',
                             Gaddress='$gaddress', Applicantphone='$applicantphone', Email='$email', Gmobile='$gmobile', religion='$religion'
@@ -138,7 +138,7 @@ try {
                 // Query to fetch existing file name
 
                 if ($_FILES[$fileInput]['size'] !== 0) {
-                    $fetchQuery = "SELECT name FROM Profilepictures WHERE Serial = '$serial' AND Pin = '$pin' AND name LIKE '%$newName%'";
+                    $fetchQuery = "SELECT name FROM profilepictures WHERE Serial = '$serial' AND Pin = '$pin' AND name LIKE '%$newName%'";
                     $result = $db->query($fetchQuery);
 
                     if ($result->num_rows > 0) {
@@ -172,7 +172,7 @@ try {
                         $targetFilePath = $targetDirectory . $newFileName;
 
                         if (move_uploaded_file($fileTmpName, $targetFilePath)) {
-                            $query = "UPDATE Profilepictures SET 
+                            $query = "UPDATE profilepictures SET 
                                         name = '$newFileName',
                                         size = '$fileSize',
                                         type = '$fileType',
@@ -190,7 +190,7 @@ try {
         }
 
         // Check for existing records
-        $qued = "SELECT * FROM Profilepictures WHERE Serial='$serial' AND Pin='$pin'";
+        $qued = "SELECT * FROM profilepictures WHERE Serial='$serial' AND Pin='$pin'";
         $resul = mysqli_query($db, $qued);
         $checks = mysqli_num_rows($resul);
 
@@ -206,7 +206,7 @@ try {
                     $targetFilePath = $targetDirectory . $newFileName;
 
                     if (move_uploaded_file($fileTmpName, $targetFilePath)) {
-                        $queryz = "INSERT INTO Profilepictures (name, size, type, content, Serial, Pin) " .
+                        $queryz = "INSERT INTO profilepictures (name, size, type, content, Serial, Pin) " .
                             "VALUES ('$newFileName', '$fileSize', '$fileType', '$newFileName', '$serial', '$pin')";
                         $db->query($queryz) or die('Error, query failed to upload');
                     } else {
@@ -220,7 +220,7 @@ try {
             // header('Location: document.php');
         } else {
             // Delete existing records
-            $deleteQuery = "DELETE FROM Profilepictures WHERE Serial='$serial' AND Pin='$pin'";
+            $deleteQuery = "DELETE FROM profilepictures WHERE Serial='$serial' AND Pin='$pin'";
             $db->query($deleteQuery) or die('Error, query failed to delete old records');
 
             // Insert new records for each file
@@ -234,7 +234,7 @@ try {
                     $targetFilePath = $targetDirectory . $newFileName;
 
                     if (move_uploaded_file($fileTmpName, $targetFilePath)) {
-                        $queryz = "INSERT INTO Profilepictures (name, size, type, content, Serial, Pin) " .
+                        $queryz = "INSERT INTO profilepictures (name, size, type, content, Serial, Pin) " .
                             "VALUES ('$newFileName', '$fileSize', '$fileType', '$newFileName', '$serial', '$pin')";
                         $db->query($queryz) or die('Error, query failed to upload');
                     } else {
@@ -268,11 +268,11 @@ try {
             exit;
         }
 
-        $qued = "SELECT * FROM Courseapplied WHERE Serial='$serial'&& Pin='$pin' ";
+        $qued = "SELECT * FROM courseapplied WHERE Serial='$serial'&& Pin='$pin' ";
         $resul = mysqli_query($db, $qued);
         $checks = mysqli_num_rows($resul);
         if ($checks == 0) {
-            $queryz = 'INSERT INTO Courseapplied (Choice1,Choice2,Serial,Pin) ' .
+            $queryz = 'INSERT INTO courseapplied (Choice1,Choice2,Serial,Pin) ' .
                 "VALUES ('$courseapplied1','$courseapplied2','$serial','$pin')";
 
             $db->query($queryz) or die('Errorr, query failed to upload');
@@ -280,7 +280,7 @@ try {
             $_SESSION['uploaded'] = 'yes';
             header('Location:program-choice.php');
         } else {
-            $queryz = "UPDATE Courseapplied SET Choice1='$courseapplied1',Choice2='$courseapplied2' WHERE Pin='$pin' ";
+            $queryz = "UPDATE courseapplied SET Choice1='$courseapplied1',Choice2='$courseapplied2' WHERE Pin='$pin' ";
 
             $db->query($queryz) or die('Error, query failed to upload');
 
@@ -454,7 +454,7 @@ try {
         } else {
             // if ( move_uploaded_file ( $receipttmpName, 'images/applicants/'.$receiptName ) ) {
             //image is a folder in which you will save documents
-            // $queryz = "UPDATE Profilepictures SET name='$receiptName',size='$receiptSize',type='$receiptType',content='$receiptName' WHERE Pin='$pin' ";
+            // $queryz = "UPDATE profilepictures SET name='$receiptName',size='$receiptSize',type='$receiptType',content='$receiptName' WHERE Pin='$pin' ";
             // $db->query( $queryz ) or die( 'Errorr, query failed to upload' );
 
             // }
@@ -609,16 +609,16 @@ try {
         $employer = $_POST['employer'];
         $position = $_POST['position'];
 
-        $qued = "SELECT * FROM Employment WHERE Serial='$serial'&& Pin='$pin' && Employer='$employer' ";
+        $qued = "SELECT * FROM employment WHERE Serial='$serial'&& Pin='$pin' && Employer='$employer' ";
         $resul = mysqli_query($db, $qued);
         $checks = mysqli_num_rows($resul);
         if ($checks == 0) {
-            $queryz = 'INSERT INTO Employment (Employer,Position,Froms,Tos,Serial,Pin) ' .
+            $queryz = 'INSERT INTO employment (Employer,Position,Froms,Tos,Serial,Pin) ' .
                 "VALUES ('$employer','$position','$froms','$tos','$serial','$pin')";
 
             $db->query($queryz) or die('Errorr, query failed to upload');
 
-            $sql = "SELECT * FROM Employment  WHERE Serial='$serial'&& Pin='$pin' ";
+            $sql = "SELECT * FROM employment  WHERE Serial='$serial'&& Pin='$pin' ";
             $rget = mysqli_query($db, $sql);
             $num = mysqli_num_rows($rget);
             if ($num != 0) {
@@ -656,7 +656,7 @@ try {
         } else {
             // if ( move_uploaded_file ( $receipttmpName, 'images/applicants/'.$receiptName ) ) {
             //image is a folder in which you will save documents
-            // $queryz = "UPDATE Profilepictures SET name='$receiptName',size='$receiptSize',type='$receiptType',content='$receiptName' WHERE Pin='$pin' ";
+            // $queryz = "UPDATE profilepictures SET name='$receiptName',size='$receiptSize',type='$receiptType',content='$receiptName' WHERE Pin='$pin' ";
             // $db->query( $queryz ) or die( 'Errorr, query failed to upload' );
 
             // }
@@ -668,7 +668,7 @@ try {
         $serial = $_POST['userserial'];
         $pin = $_POST['userpin'];
 
-        $sql = "SELECT * FROM Employment  WHERE Serial='$serial'&& Pin='$pin' ";
+        $sql = "SELECT * FROM employment  WHERE Serial='$serial'&& Pin='$pin' ";
         $rget = mysqli_query($db, $sql);
         $num = mysqli_num_rows($rget);
         if ($num != 0) {
@@ -711,7 +711,7 @@ try {
 
         $id = $_POST['Deletework'];
 
-        $enter = "DELETE FROM Employment WHERE id='$id' ";
+        $enter = "DELETE FROM employment WHERE id='$id' ";
         $db->query($enter);
         echo 'ok';
     }
@@ -721,11 +721,11 @@ try {
         $serial = $_POST['userserial'];
         $pin = $_POST['userpin'];
 
-        $qued = "SELECT * FROM Declared WHERE Serial='$serial' && Pin='$pin'  ";
+        $qued = "SELECT * FROM declared WHERE Serial='$serial' && Pin='$pin'  ";
         $resul = mysqli_query($db, $qued);
         $checks = mysqli_num_rows($resul);
         if ($checks == 0) {
-            $queryz = 'INSERT INTO Declared (Serial,Pin,Status) ' .
+            $queryz = 'INSERT INTO declared (Serial,Pin,Status) ' .
                 "VALUES ('$serial','$pin','Yes')";
 
             $db->query($queryz) or die('Errorr, query failed to upload');
@@ -753,16 +753,16 @@ try {
         $serial = $_POST['emailz'];
         $pin = $_POST['pin'];
 
-        $quedl = 'SELECT * FROM Applicants ';
+        $quedl = 'SELECT * FROM applicants ';
         $resulc = mysqli_query($db, $quedl);
         $checked = mysqli_num_rows($resulc);
         if ($checked == 0) {
 
-            $enter = "INSERT INTO Applicants (Serial,Pin) 
+            $enter = "INSERT INTO applicants (Serial,Pin) 
                                	 VALUES('$serial','$pin')";
             $db->query($enter);
 
-            $sql = 'SELECT * FROM Applicants  ';
+            $sql = 'SELECT * FROM applicants  ';
             $rget = mysqli_query($db, $sql);
             $num = mysqli_num_rows($rget);
             if ($num != 0) {
@@ -794,16 +794,16 @@ try {
                                                                            </table>";
             }
         } else {
-            $qued = "SELECT * FROM Applicants WHERE Pin='$pin'  ";
+            $qued = "SELECT * FROM applicants WHERE Pin='$pin'  ";
             $resul = mysqli_query($db, $qued);
             $checks = mysqli_num_rows($resul);
             if ($checks == 0) {
                 if ($serial != '' || $pin != '') {
-                    $enter = "INSERT INTO Applicants (Serial,Pin) 
+                    $enter = "INSERT INTO applicants (Serial,Pin) 
                                	 VALUES('$serial','$pin')";
                     $db->query($enter);
 
-                    $sql = 'SELECT * FROM Applicants  ';
+                    $sql = 'SELECT * FROM applicants  ';
                     $rget = mysqli_query($db, $sql);
                     $num = mysqli_num_rows($rget);
                     if ($num != 0) {
@@ -847,7 +847,7 @@ try {
 
     if (isset($_POST['loadapps'])) {
 
-        $sql = 'SELECT * FROM Applicants  ';
+        $sql = 'SELECT * FROM applicants  ';
         $rget = mysqli_query($db, $sql);
         $num = mysqli_num_rows($rget);
         if ($num != 0) {
@@ -884,7 +884,7 @@ try {
 
         $id = $_POST['Deletepin'];
 
-        $enter = "DELETE FROM Applicants  WHERE id='$id' ";
+        $enter = "DELETE FROM applicants  WHERE id='$id' ";
         $db->query($enter);
         echo 'ok';
     }
@@ -958,12 +958,12 @@ try {
 
 
     //         // Check if the combination of Serial and Pin already exists
-    //         $check_query = "SELECT * FROM Olevel WHERE Serial='$serial' AND Pin='$pin'";
+    //         $check_query = "SELECT * FROM olevel WHERE Serial='$serial' AND Pin='$pin'";
     //         $check_result = mysqli_query($db, $check_query);
 
     //         if (mysqli_num_rows($check_result) > 0) {
     //             // Delete existing records for the given Serial and Pin
-    //             $delete_query = "DELETE FROM Olevel WHERE Serial='$serial' AND Pin='$pin'";
+    //             $delete_query = "DELETE FROM olevel WHERE Serial='$serial' AND Pin='$pin'";
     //             $delete_result = mysqli_query($db, $delete_query);
 
     //             if (!$delete_result) {
@@ -975,7 +975,7 @@ try {
     //                 $subject = mysqli_real_escape_string($db, $subjects[$i]);
     //                 $grade = mysqli_real_escape_string($db, $grades[$i]);
 
-    //                 $insert_query = "INSERT INTO Olevel (Exam, Examdate, Examtype, Grade, Sitting, Subjects, Serial, Pin) " .
+    //                 $insert_query = "INSERT INTO olevel (Exam, Examdate, examtype, Grade, Sitting, Subjects, Serial, Pin) " .
     //                                 "VALUES ('$exam', '$examdate', '$examtype', '$grade', '$sitting', '$subject', '$serial', '$pin')";
     //                 $insert_result = mysqli_query($db, $insert_query);
 
@@ -991,7 +991,7 @@ try {
     //                 $subject = mysqli_real_escape_string($db, $subjects[$i]);
     //                 $grade = mysqli_real_escape_string($db, $grades[$i]);
 
-    //                 $insert_query = "INSERT INTO Olevel (Exam, Examdate, Examtype, Grade, Sitting, Subjects, Serial, Pin) " .
+    //                 $insert_query = "INSERT INTO olevel (Exam, Examdate, examtype, Grade, Sitting, Subjects, Serial, Pin) " .
     //                                 "VALUES ('$exam', '$examdate', '$examtype', '$grade', '$sitting', '$subject', '$serial', '$pin')";
     //                 $insert_result = mysqli_query($db, $insert_query);
 
@@ -1077,12 +1077,12 @@ try {
         }
 
         // Check if the combination of Serial and Pin already exists
-        $check_query = "SELECT * FROM Olevel WHERE Serial='$serial' AND Pin='$pin'";
+        $check_query = "SELECT * FROM olevel WHERE Serial='$serial' AND Pin='$pin'";
         $check_result = mysqli_query($db, $check_query);
 
         if (mysqli_num_rows($check_result) > 0) {
             // Delete existing records for the given Serial and Pin
-            $delete_query = "DELETE FROM Olevel WHERE Serial='$serial' AND Pin='$pin'";
+            $delete_query = "DELETE FROM olevel WHERE Serial='$serial' AND Pin='$pin'";
             $delete_result = mysqli_query($db, $delete_query);
 
             if (!$delete_result) {
@@ -1094,7 +1094,7 @@ try {
                 $subject = mysqli_real_escape_string($db, $subjects1[$i]);
                 $grade = mysqli_real_escape_string($db, $grades1[$i]);
 
-                $insert_query = "INSERT INTO Olevel (Exam, Examdate, Examtype, Grade, Sitting, Subjects, Serial, Pin) " .
+                $insert_query = "INSERT INTO olevel (Exam, Examdate, examtype, Grade, Sitting, Subjects, Serial, Pin) " .
                     "VALUES ('$exam1', '$examdate1', '$examtype1', '$grade', '$sitting1', '$subject', '$serial', '$pin')";
                 $insert_result = mysqli_query($db, $insert_query);
 
@@ -1108,7 +1108,7 @@ try {
                 $subject = mysqli_real_escape_string($db, $subjects2[$i]);
                 $grade = mysqli_real_escape_string($db, $grades2[$i]);
 
-                $insert_query = "INSERT INTO Olevel (Exam, Examdate, Examtype, Grade, Sitting, Subjects, Serial, Pin) " .
+                $insert_query = "INSERT INTO olevel (Exam, Examdate, examtype, Grade, Sitting, Subjects, Serial, Pin) " .
                     "VALUES ('$exam2', '$examdate2', '$examtype2', '$grade', '$sitting2', '$subject', '$serial', '$pin')";
                 $insert_result = mysqli_query($db, $insert_query);
 
@@ -1124,7 +1124,7 @@ try {
                 $subject = mysqli_real_escape_string($db, $subjects1[$i]);
                 $grade = mysqli_real_escape_string($db, $grades1[$i]);
 
-                $insert_query = "INSERT INTO Olevel (Exam, Examdate, Examtype, Grade, Sitting, Subjects, Serial, Pin) " .
+                $insert_query = "INSERT INTO olevel (Exam, Examdate, examtype, Grade, Sitting, Subjects, Serial, Pin) " .
                     "VALUES ('$exam1', '$examdate1', '$examtype1', '$grade', '$sitting1', '$subject', '$serial', '$pin')";
                 $insert_result = mysqli_query($db, $insert_query);
 
@@ -1138,7 +1138,7 @@ try {
                 $subject = mysqli_real_escape_string($db, $subjects2[$i]);
                 $grade = mysqli_real_escape_string($db, $grades2[$i]);
 
-                $insert_query = "INSERT INTO Olevel (Exam, Examdate, Examtype, Grade, Sitting, Subjects, Serial, Pin) " .
+                $insert_query = "INSERT INTO olevel (Exam, Examdate, examtype, Grade, Sitting, Subjects, Serial, Pin) " .
                     "VALUES ('$exam2', '$examdate2', '$examtype2', '$grade', '$sitting2', '$subject', '$serial', '$pin')";
                 $insert_result = mysqli_query($db, $insert_query);
 
@@ -1147,7 +1147,7 @@ try {
                 }
             }
 
-            echo 'Olevel details saved successfully.';
+            echo 'olevel details saved successfully.';
         }
     }
 
@@ -1157,7 +1157,7 @@ try {
 
         $id = $_POST['Deleteolevel'];
 
-        $enter = "DELETE FROM Olevel WHERE id='$id' ";
+        $enter = "DELETE FROM olevel WHERE id='$id' ";
         $db->query($enter);
         echo 'ok';
     }
@@ -1167,7 +1167,7 @@ try {
         $serial = $_POST['userserial'];
         $pin = $_POST['userpin'];
 
-        $sql = "SELECT * FROM Olevel WHERE Serial='$serial'&& Pin='$pin' ";
+        $sql = "SELECT * FROM olevel WHERE Serial='$serial'&& Pin='$pin' ";
         $rget = mysqli_query($db, $sql);
         $num = mysqli_num_rows($rget);
         if ($num != 0) {
@@ -1185,7 +1185,7 @@ try {
                                                                         <tbody>";
 
             while ($foundk = mysqli_fetch_array($rget)) {
-                $type = $foundk['Examtype'];
+                $type = $foundk['examtype'];
                 $date = $foundk['Examdate'];
                 $examno = $foundk['Exam'];
                 $subj = $foundk['Subjects'];
@@ -1311,11 +1311,11 @@ try {
 
         $adname = $_POST['examtype'];
 
-        $sqlused = "SELECT * FROM Examtype WHERE Name='$adname' ";
+        $sqlused = "SELECT * FROM examtype WHERE Name='$adname' ";
         $resul = mysqli_query($db, $sqlused);
         $checks = mysqli_num_rows($resul);
         if ($checks == 0) {
-            $queryd = 'INSERT INTO Examtype (Name) ' .
+            $queryd = 'INSERT INTO examtype (Name) ' .
                 "VALUES ('$adname')";
 
             $db->query($queryd) or die('Errorr, query failed to upload');
@@ -1328,7 +1328,7 @@ try {
 
         $id = $_POST['delexam'];
 
-        $enter = "DELETE FROM Examtype  WHERE id='$id' ";
+        $enter = "DELETE FROM examtype  WHERE id='$id' ";
         $db->query($enter);
         echo 'ok';
     }
@@ -1338,11 +1338,11 @@ try {
 
         $adname = $_POST['subjectname'];
 
-        $sqlused = "SELECT * FROM Schoolsubjects WHERE Name='$adname' ";
+        $sqlused = "SELECT * FROM schoolsubjects WHERE Name='$adname' ";
         $resul = mysqli_query($db, $sqlused);
         $checks = mysqli_num_rows($resul);
         if ($checks == 0) {
-            $queryd = 'INSERT INTO Schoolsubjects (Name) ' .
+            $queryd = 'INSERT INTO schoolsubjects (Name) ' .
                 "VALUES ('$adname')";
 
             $db->query($queryd) or die('Errorr, query failed to upload');
@@ -1354,7 +1354,7 @@ try {
 
         $id = $_POST['delsubj'];
 
-        $enter = "DELETE FROM Schoolsubjects  WHERE id='$id' ";
+        $enter = "DELETE FROM schoolsubjects  WHERE id='$id' ";
         $db->query($enter);
         echo 'ok';
     }
@@ -1365,11 +1365,11 @@ try {
 
         $adname = $_POST['schoolgrade'];
 
-        $sqlused = "SELECT * FROM Schoolgrades WHERE Name='$adname' ";
+        $sqlused = "SELECT * FROM schoolgrades WHERE Name='$adname' ";
         $resul = mysqli_query($db, $sqlused);
         $checks = mysqli_num_rows($resul);
         if ($checks == 0) {
-            $queryd = 'INSERT INTO Schoolgrades (Name) ' .
+            $queryd = 'INSERT INTO schoolgrades (Name) ' .
                 "VALUES ('$adname')";
 
             $db->query($queryd) or die('Errorr, query failed to upload');
@@ -1381,7 +1381,7 @@ try {
 
         $id = $_POST['delgrade'];
 
-        $enter = "DELETE FROM Schoolgrades WHERE id='$id' ";
+        $enter = "DELETE FROM schoolgrades WHERE id='$id' ";
         $db->query($enter);
         echo 'ok';
     }
@@ -1445,7 +1445,7 @@ try {
             $count++;
             if ($count > 1) {
 
-                $sql = "INSERT INTO Applicants (Serial,Pin)
+                $sql = "INSERT INTO applicants (Serial,Pin)
 			VALUES ('$serial','$pin')";
                 $db->query($sql);
                 $c = $c + 1;

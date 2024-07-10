@@ -6,7 +6,7 @@ if (isset($_COOKIE['pin']) && $_COOKIE['serial']) {
   $pin = $_COOKIE['pin'];
   $serial = $_COOKIE['serial'];
 
-  $sqluser = "SELECT * FROM Applicants2 WHERE Serial='$serial' && Pin='$pin' ";
+  $sqluser = "SELECT * FROM applicants2 WHERE Serial='$serial' && Pin='$pin' ";
 
   $retrieved = mysqli_query($db, $sqluser);
   while ($found = mysqli_fetch_array($retrieved)) {
@@ -20,7 +20,7 @@ if (isset($_COOKIE['pin']) && $_COOKIE['serial']) {
 }
 
 
-$sqluser = "SELECT * FROM Applicants WHERE Serial='$serial' && Pin='$pin' ";
+$sqluser = "SELECT * FROM applicants WHERE Serial='$serial' && Pin='$pin' ";
 $retrieved = mysqli_query($db, $sqluser);
 while ($found = mysqli_fetch_array($retrieved)) {
   $idS = $found['id'];
@@ -77,7 +77,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     }
 
-    #Olevel {
+    #olevel {
       padding-top: 55rem !important;
     }
 
@@ -213,7 +213,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             return ucwords(str_replace('-', ' ', $str));
           }
 
-          $qued = "SELECT * FROM Profilepictures WHERE Serial='$serial'&& Pin='$pin' ";
+          $qued = "SELECT * FROM profilepictures WHERE Serial='$serial'&& Pin='$pin' ";
           $resul = mysqli_query($db, $qued);
           $checks1 = mysqli_num_rows($resul);
           if ($checks1 != 0) {
@@ -336,7 +336,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
   </div>
 
-  <div id="Employment" class="modal fade" role="dialog" style="background-color:#222d32;">
+  <div id="employment" class="modal fade" role="dialog" style="background-color:#222d32;">
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content" style="font-size: 14px; font-family: Times New Roman;color:black;">
@@ -408,7 +408,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
   </div>
 
-  <div id="Olevel" class="modal fade" role="dialog" style="background-color:#222d32;">
+  <div id="olevel" class="modal fade" role="dialog" style="background-color:#222d32;">
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content" style="font-size: 14px; font-family: Times New Roman;color:black;">
@@ -435,14 +435,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </thead>
             <tbody>
               <?php
-              $sql = "SELECT * FROM Olevel  WHERE Serial='$serial'&& Pin='$pin' ";
+              $sql = "SELECT * FROM olevel  WHERE Serial='$serial'&& Pin='$pin' ";
               $rget = mysqli_query($db, $sql);
               $num3 = mysqli_num_rows($rget);
               if ($num3 != 0) {
 
                 while ($foundk = mysqli_fetch_array($rget)) {
                   $exam = $foundk['Exam'];
-                  $type = $foundk['Exam'] == 'NA' ? 'NA' : $foundk['Examtype'];
+                  $type = $foundk['Exam'] == 'NA' ? 'NA' : $foundk['examtype'];
                   $date = $foundk['Exam'] == 'NA' ? 'NA' : $foundk['Examdate'];
                   $subjects = $foundk['Exam'] == 'NA' ? 'NA' : $foundk['Subjects'];
                   $sitting = $foundk['Sitting'];
@@ -562,7 +562,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <tbody>
               <?php
 
-              $quedk = "SELECT * FROM Courseapplied WHERE Serial='$serial'&& Pin='$pin' ";
+              $quedk = "SELECT * FROM courseapplied WHERE Serial='$serial'&& Pin='$pin' ";
               $resulk = mysqli_query($db, $quedk);
               $checks2 = mysqli_num_rows($resulk);
               if ($checks2 != 0) {
@@ -763,7 +763,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
               </thead>
               <tbody>
                 <?php
-                $sqln2 = "SELECT * FROM Applicants2 WHERE Serial='$serial' && Pin='$pin' ";
+                $sqln2 = "SELECT * FROM applicants2 WHERE Serial='$serial' && Pin='$pin' ";
                 $rgetb2 = mysqli_query($db, $sqln2);
                 $numb = mysqli_num_rows($rgetb2);
                 if ($numb != 0) {
@@ -870,7 +870,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                       } else {
                         echo "Incomplete";
                       } ?></td>
-                  <td><a data-toggle='modal' data-id='1' href='#Olevel' class='btn  btn-success' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><span class='glyphicon glyphicon-eye-open' style='color: #FFFFFF;'></span></a></td>
+                  <td><a data-toggle='modal' data-id='1' href='#olevel' class='btn  btn-success' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><span class='glyphicon glyphicon-eye-open' style='color: #FFFFFF;'></span></a></td>
                   <td><a href='olevel.php?ids=1' class='btn  btn-primary' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><i class='fa fa-edit' style='color: #FFFFFF;'></i></a></td>
 
                 </tr>
@@ -894,7 +894,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                       } else {
                         echo "Incomplete";
                       } ?></td>
-                  <td><a data-toggle='modal' data-id='1' href='#Employment' class='btn  btn-success' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><span class='glyphicon glyphicon-eye-open' style='color: #FFFFFF;'></span></a></td>
+                  <td><a data-toggle='modal' data-id='1' href='#employment' class='btn  btn-success' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><span class='glyphicon glyphicon-eye-open' style='color: #FFFFFF;'></span></a></td>
                   <td><a href='referee.php?ids=1' class='btn btn-primary' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><i class='fa fa-edit' style='color: #FFFFFF;'></i></a></td>
 
                 </tr>

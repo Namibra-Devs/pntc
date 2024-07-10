@@ -266,7 +266,7 @@ Below is the List of Serial Numbers and Pin You have Uploaded.
 </div> ";
 						$number = $_SESSION['Import'];
 
-						$sql = "SELECT * FROM Applicants ORDER BY id DESC LIMIT $number ";
+						$sql = "SELECT * FROM applicants ORDER BY id DESC LIMIT $number ";
 						$rget = mysqli_query($db, $sql);
 						$num = mysqli_num_rows($rget);
 						if ($num != 0) {
@@ -299,7 +299,7 @@ Below is the List of Serial Numbers and Pin You have Uploaded.
 						}
 					} else {
 
-						$sql = "SELECT * FROM Applicants";
+						$sql = "SELECT * FROM applicants";
 						$rget = mysqli_query($db, $sql);
 						$num = mysqli_num_rows($rget);
 						if ($num != 0) {

@@ -204,7 +204,7 @@ $retrieved = mysqli_query($db,$sqluser);
 	  	
 		  
 				  
-		$sql ="SELECT * FROM Schoolsubjects ";
+		$sql ="SELECT * FROM schoolsubjects ";
                                                $rget = mysqli_query($db,$sql);
 										    $num=mysqli_num_rows($rget);
                                                 if($num!=0){

@@ -54,6 +54,11 @@ body {
   min-height: 50%;
   margin-top: 5.5rem;
 }
+
+.banner-top > .container{
+  padding-top: 10rem;
+}
+
 .navbar-collapse > ul {
 	width: 100%;
 	justify-content: right;

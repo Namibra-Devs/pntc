@@ -204,7 +204,7 @@ $retrieved = mysqli_query($db,$sqluser);
 	  	
 		  
 				  
-		$sql ="SELECT * FROM Examtype ";
+		$sql ="SELECT * FROM examtype ";
                                                $rget = mysqli_query($db,$sql);
 										    $num=mysqli_num_rows($rget);
                                                 if($num!=0){

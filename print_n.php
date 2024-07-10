@@ -6,7 +6,7 @@ if(isset($_COOKIE['pin'])&&$_COOKIE['serial']){
 $pin=$_COOKIE['pin'];
 $serial=$_COOKIE['serial'];
 
- $sqluser ="SELECT * FROM Applicants2 WHERE Serial='$serial' && Pin='$pin' ";
+ $sqluser ="SELECT * FROM applicants2 WHERE Serial='$serial' && Pin='$pin' ";
 
 $retrieved = mysqli_query($db,$sqluser);
     while($found = mysqli_fetch_array($retrieved))
@@ -179,7 +179,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                      } 
                                            else {
                                                        $("#errors1").html(result);
-                                                       $("#errors2").html("<a  class='btn btn-default' href='summary.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Employment</a>");
+                                                       $("#errors2").html("<a  class='btn btn-default' href='summary.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit employment</a>");
 
                                                  }
                                           }
@@ -273,14 +273,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                                                <td >Grade</td>
                                                                                </tr>
                                                                           <?php
-                                                                               $sql ="SELECT * FROM Olevel  WHERE Serial='$serial'&& Pin='$pin' ";
+                                                                               $sql ="SELECT * FROM olevel  WHERE Serial='$serial'&& Pin='$pin' ";
                                                                                       $rget = mysqli_query($db,$sql);
 										                                                $num=mysqli_num_rows($rget);
                                                                                  if($num!=0){                                                	                      
                                      
 												                                             while($foundk = mysqli_fetch_array($rget))
 	                                                                                        {
-                                                                                               $type= $foundk['Examtype'];
+                                                                                               $type= $foundk['examtype'];
 																	                            $exam= $foundk['Exam'];
 																	                             $date= $foundk['Examdate'];
 																	                            $subjects= $foundk['Subjects'];
@@ -338,7 +338,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                                              ?>
                                 
                                                                               <tr>
-                                                                              <td>SECTION 6 Employment History</td>                                                                             
+                                                                              <td>SECTION 6 employment History</td>                                                                             
                                                                               </tr>
                                                                               <tr class="success">                                                                              
                                                                                <td>Employer Name</td>
@@ -349,7 +349,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                                                <td ></td>
                                                                                </tr>
                                                                                <?php
-                                                                               $sql ="SELECT * FROM Employment  WHERE Serial='$serial'&& Pin='$pin' ";
+                                                                               $sql ="SELECT * FROM employment  WHERE Serial='$serial'&& Pin='$pin' ";
                                                                                   $rget = mysqli_query($db,$sql);
 										                                        $num=mysqli_num_rows($rget);
                                                                                       if($num!=0){

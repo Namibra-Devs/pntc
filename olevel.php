@@ -137,7 +137,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</script>
 
 	<script type="text/javascript">
-		$(document).on("click", ".Olevel", function() {
+		$(document).on("click", ".olevel", function() {
 			var name = document.getElementById('examtype').value;
 			var examtype_2 = document.getElementById('examtype2').value;
 			var froms = document.getElementById('sitting').value;
@@ -327,7 +327,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 						//Subjects
-						$sql = "SELECT * FROM Schoolsubjects";
+						$sql = "SELECT * FROM schoolsubjects";
 						$rget = mysqli_query($db, $sql);
 						$subjects = array();
 						if ($rget) {
@@ -339,7 +339,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 						// Grades
 						$numSubjects = count($subjects);
-						$sql = "SELECT * FROM Schoolgrades";
+						$sql = "SELECT * FROM schoolgrades";
 						$rgetGrades = mysqli_query($db, $sql);
 						$grades = array();
 						if ($rgetGrades) {
@@ -361,7 +361,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						// $serial = mysqli_real_escape_string($db, $_GET['serial']);
 						// $pin = mysqli_real_escape_string($db, $_GET['pin']);
 
-						$query1 = "SELECT * FROM Olevel WHERE Serial='$serial' AND Pin='$pin' AND Sitting='1st Sitting'";
+						$query1 = "SELECT * FROM olevel WHERE Serial='$serial' AND Pin='$pin' AND Sitting='1st Sitting'";
 						$result1 = mysqli_query($db, $query1);
 						$existingData1 = mysqli_fetch_all($result1, MYSQLI_ASSOC);
 
@@ -378,7 +378,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						}
 
 						// Fetch data for the second sitting
-						$query2 = "SELECT * FROM Olevel WHERE Serial='$serial' AND Pin='$pin' AND Sitting='2nd Sitting'";
+						$query2 = "SELECT * FROM olevel WHERE Serial='$serial' AND Pin='$pin' AND Sitting='2nd Sitting'";
 						$result2 = mysqli_query($db, $query2);
 						$existingData2 = mysqli_fetch_all($result2, MYSQLI_ASSOC);
 
@@ -395,7 +395,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						}
 
 						// Subjects
-						$sql = "SELECT * FROM Schoolsubjects";
+						$sql = "SELECT * FROM schoolsubjects";
 						$rget = mysqli_query($db, $sql);
 						$subjects = array();
 						if ($rget) {
@@ -405,7 +405,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						}
 
 						// Grades
-						$sql = "SELECT * FROM Schoolgrades";
+						$sql = "SELECT * FROM schoolgrades";
 						$rgetGrades = mysqli_query($db, $sql);
 						$grades = array();
 						if ($rgetGrades) {
@@ -423,7 +423,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<span class="input-group-addon">Exam Type</span>
 									<select style='height:37px;width:100%;border:1px solid black;' name="examtype" id='examtype'>
 										<?php
-										$sql = "SELECT * FROM Examtype";
+										$sql = "SELECT * FROM examtype";
 										$rget = mysqli_query($db, $sql);
 										$num = mysqli_num_rows($rget);
 										if ($num != 0) {
@@ -475,7 +475,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<span class="input-group-addon">Exam Type</span>
 									<select style='height:37px;width:100%;border:1px solid black;' name="examtype2" id='examtype2'>
 										<?php
-										$sql = "SELECT * FROM Examtype";
+										$sql = "SELECT * FROM examtype";
 										$rget = mysqli_query($db, $sql);
 										$num = mysqli_num_rows($rget);
 										if ($num != 0) {
@@ -541,7 +541,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 						<hr />
 						<div class="form-group">
-							<button type="submit" class="Olevel btn btn-default" name="Change" value="changes">
+							<button type="submit" class="olevel btn btn-default" name="Change" value="changes">
 								<span class="glyphicon glyphicon-check"></span> &nbsp;Save School
 							</button>
 							<button type="submit" class="Del btn btn-default">

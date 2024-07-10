@@ -6,7 +6,7 @@ if (isset($_COOKIE['pin']) && $_COOKIE['serial']) {
   $pin = $_COOKIE['pin'];
   $serial = $_COOKIE['serial'];
 
-  $sqluser = "SELECT * FROM Applicants2 WHERE Serial='$serial' && Pin='$pin' ";
+  $sqluser = "SELECT * FROM applicants2 WHERE Serial='$serial' && Pin='$pin' ";
 
   $retrieved = mysqli_query($db, $sqluser);
   while ($found = mysqli_fetch_array($retrieved)) {
@@ -200,7 +200,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
           } else {
             $("#errors1").html(result);
-            $("#errors2").html("<a  class='btn btn-default' href='summary.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Employment</a>");
+            $("#errors2").html("<a  class='btn btn-default' href='summary.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit employment</a>");
 
           }
         }
@@ -248,7 +248,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <td></td>
                 <td>
                   <?php
-                  $sqln = "SELECT * FROM Profilepictures WHERE Serial='$serial' && Pin='$pin' ";
+                  $sqln = "SELECT * FROM profilepictures WHERE Serial='$serial' && Pin='$pin' ";
                   $rgetb = mysqli_query($db, $sqln);
                   $numb = mysqli_num_rows($rgetb);
                   if ($numb != 0) {
@@ -278,7 +278,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
               </tr>
               <?php
-              $sqln2 = "SELECT * FROM Applicants2 WHERE Serial='$serial' && Pin='$pin' ";
+              $sqln2 = "SELECT * FROM applicants2 WHERE Serial='$serial' && Pin='$pin' ";
               $rgetb2 = mysqli_query($db, $sqln2);
               $numb = mysqli_num_rows($rgetb2);
               if ($numb != 0) {
@@ -420,7 +420,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
               <tr>
                 <td class="success">Course Applied</td>
                 <?php
-                $qued = "SELECT * FROM Courseapplied WHERE Serial='$serial'&& Pin='$pin' ";
+                $qued = "SELECT * FROM courseapplied WHERE Serial='$serial'&& Pin='$pin' ";
                 $resul = mysqli_query($db, $qued);
                 $checks = mysqli_num_rows($resul);
                 if ($checks != 0) {

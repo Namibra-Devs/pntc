@@ -293,7 +293,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					$gcountry = $gaddress = $gmobile = $applicantphone = $email = "";
 
 					// if (isset($_GET['ids'])) {
-					$sql = "SELECT * FROM Applicants2 WHERE pin = '$pin' AND serial = '$serial'";
+					$sql = "SELECT * FROM applicants2 WHERE pin = '$pin' AND serial = '$serial'";
 
 					$result = $db->query($sql);
 

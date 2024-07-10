@@ -229,7 +229,7 @@ $retrieved = mysqli_query($db,$sqluser);
 				                                                                                          
 																										
 																										
-																										 $qued="SELECT * FROM Courseapplied  ";
+																										 $qued="SELECT * FROM courseapplied  ";
                                                                                                                $resul=mysqli_query($db,$qued);
                                                                                                                       $checks=mysqli_num_rows($resul);
                                                                                                                       if($checks!=0)
@@ -239,7 +239,7 @@ $retrieved = mysqli_query($db,$sqluser);
                                                                                                                            $course= $found['Name'];
                                                                                                                            $serial= $found['Serial'];$pin= $found['Pin'];
                                                                                                                            
-																														    $sqln2 ="SELECT * FROM Applicants2 WHERE Serial='$serial'&& Pin='$pin' ";
+																														    $sqln2 ="SELECT * FROM applicants2 WHERE Serial='$serial'&& Pin='$pin' ";
                                                                                                                             $rgetb2 = mysqli_query($db,$sqln2);
 	                                                                                                                         $numb=mysqli_num_rows($rgetb2);
                                                                                                                     if($numb!=0){

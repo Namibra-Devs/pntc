@@ -15,7 +15,7 @@
 //                  PRIMARY KEY(id) )";
 //                $db->query($stableZ);
 									 
-// 			 $stable56="CREATE TABLE IF NOT EXISTS Applicants (id int(11) NOT NULL auto_increment,
+// 			 $stable56="CREATE TABLE IF NOT EXISTS applicants (id int(11) NOT NULL auto_increment,
 //                                   Serial varchar(300)NOT NULL,
 //                                   Pin varchar(300)NOT NULL,                         
 //                                   PRIMARY KEY(id) )";
@@ -26,17 +26,17 @@
 //                                   PRIMARY KEY(id) )";
 //                          $db->query($stable6); 
 						 
-// 						  $stable61="CREATE TABLE IF NOT EXISTS Examtype (id int(11) NOT NULL auto_increment,
+// 						  $stable61="CREATE TABLE IF NOT EXISTS examtype (id int(11) NOT NULL auto_increment,
 //                                   Name varchar(300)NOT NULL,                                                         
 //                                   PRIMARY KEY(id) )";
 //                          $db->query($stable61);
 						 
-// 						   $stable6u="CREATE TABLE IF NOT EXISTS Schoolsubjects (id int(11) NOT NULL auto_increment,
+// 						   $stable6u="CREATE TABLE IF NOT EXISTS schoolsubjects (id int(11) NOT NULL auto_increment,
 //                                   Name varchar(300)NOT NULL,                                                         
 //                                   PRIMARY KEY(id) )";
 //                          $db->query($stable6u);  
 						 
-// 						  $stable6us="CREATE TABLE IF NOT EXISTS Schoolgrades (id int(11) NOT NULL auto_increment,
+// 						  $stable6us="CREATE TABLE IF NOT EXISTS schoolgrades (id int(11) NOT NULL auto_increment,
 //                                   Name varchar(300)NOT NULL,                                                         
 //                                   PRIMARY KEY(id) )";
 //                          $db->query($stable6us); 
@@ -47,7 +47,7 @@
 //                                   PRIMARY KEY(id) )";
 //                          $db->query($stables);         		                       
 		    
-// 				 $stable561="CREATE TABLE IF NOT EXISTS Applicants2 (id int(11) NOT NULL auto_increment,                                 
+// 				 $stable561="CREATE TABLE IF NOT EXISTS applicants2 (id int(11) NOT NULL auto_increment,                                 
 //                                   Othername varchar(300)NOT NULL,
 //                                   Surname Varchar(300)NOT NULL,                                                                  
 //                                   DOB varchar(300)NOT NULL,
@@ -75,13 +75,13 @@
 //                          $db->query($stable561);          		                       
 		    
 		    				 
-// 							 $stableZ="CREATE TABLE IF NOT EXISTS Profilepictures (id int(11) NOT NULL auto_increment,
+// 							 $stableZ="CREATE TABLE IF NOT EXISTS profilepictures (id int(11) NOT NULL auto_increment,
 //                  Serial varchar(300)NOT NULL,Pin varchar(300)NOT NULL,name varchar(1000)NOT NULL,type varchar(30)NOT NULL,
 //                  Size decimal(10)NOT NULL,content longblob NOT NULL,
 //                  PRIMARY KEY(id) )";
 //                $db->query($stableZ);
                
-//                $stab="CREATE TABLE IF NOT EXISTS Courseapplied (id int(11) NOT NULL auto_increment,
+//                $stab="CREATE TABLE IF NOT EXISTS courseapplied (id int(11) NOT NULL auto_increment,
 //                  Serial varchar(300)NOT NULL,Pin varchar(300)NOT NULL,Name varchar(1000)NOT NULL,
 //                  PRIMARY KEY(id) )";
 //                $db->query($stab);
@@ -98,19 +98,19 @@
 //                  PRIMARY KEY(id) )";
 //                $db->query($stablec);
                
-//                 $stablef="CREATE TABLE IF NOT EXISTS Olevel (id int(11) NOT NULL auto_increment,
+//                 $stablef="CREATE TABLE IF NOT EXISTS olevel (id int(11) NOT NULL auto_increment,
 //                  Serial varchar(300)NOT NULL,Pin varchar(300)NOT NULL,Subjects varchar(300)NOT NULL,Grade varchar(300)NOT NULL,
-//                  Examdate varchar(300)NOT NULL,Exam Varchar(300) NOT NULL,Sitting Varchar(300) NOT NULL,Examtype Varchar(300) NOT NULL,
+//                  Examdate varchar(300)NOT NULL,Exam Varchar(300) NOT NULL,Sitting Varchar(300) NOT NULL,examtype Varchar(300) NOT NULL,
 //                  PRIMARY KEY(id) )";
 //                $db->query($stablef);
                
-//                 $stablec="CREATE TABLE IF NOT EXISTS Employment (id int(11) NOT NULL auto_increment,
+//                 $stablec="CREATE TABLE IF NOT EXISTS employment (id int(11) NOT NULL auto_increment,
 //                  Serial varchar(300)NOT NULL,Pin varchar(300)NOT NULL,Employer varchar(300)NOT NULL,Froms varchar(30)NOT NULL,
 //                  Tos varchar(300)NOT NULL,Position Varchar(300) NOT NULL,
 //                  PRIMARY KEY(id) )";
 //                $db->query($stablec);
                
-//                $stabled="CREATE TABLE IF NOT EXISTS Declared (id int(11) NOT NULL auto_increment,
+//                $stabled="CREATE TABLE IF NOT EXISTS declared (id int(11) NOT NULL auto_increment,
 //                  Serial varchar(300)NOT NULL,Pin varchar(300)NOT NULL,Status varchar(300)NOT NULL,                 
 //                  PRIMARY KEY(id) )";
 //                $db->query($stabled);
