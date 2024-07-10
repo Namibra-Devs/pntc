@@ -49,6 +49,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<script type="text/javascript" src="js/login.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
+	<style>
+		select {
+			height: 100% !important;
+		}
+
+		label {
+			float: left !important;
+		}
+	</style>
+
 
 
 </head>
@@ -65,9 +75,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				const fileInput = event.target;
 				const fileName = fileInput.files.length ? fileInput.files[0].name : 'Upload Signature';
 				$('#signature').attr('placeholder', fileName);
+				showThumbnail(fileInput);
 			});
+
+
+
+			function showThumbnail(input) {
+				if (input.files && input.files[0]) {
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						var img = document.getElementById('signatureThumbnail');
+						img.src = e.target.result;
+						img.style.display = 'block';
+					};
+					reader.readAsDataURL(input.files[0]);
+				}
+			}
 		});
 	</script>
+
 
 
 	<script type="text/javascript">
@@ -173,9 +199,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 						swal({
 								title: "Confirm",
-								text: "Reference Information Updated. Do you want to continue?",
+								text: "Referee Information Updated.",
 								type: "success",
-								showCancelButton: true,
+								showCancelButton: false,
 								confirmButtonText: "OK",
 								cancelButtonText: "Cancel",
 								closeOnConfirm: true,
@@ -183,18 +209,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								buttonsStyling: false
 							},
 							function(isConfirm) {
-								if (isConfirm) {
-									window.location = "summary.php";
-								}
+								return;
 							});
 					} else {
 						$("#errors1").html("Reference Details Added.");
 
 						swal({
 								title: "Confirm",
-								text: "Reference Information Saved. Do you want to continue?",
+								text: "Referee Information Saved",
 								type: "success",
-								showCancelButton: true,
+								showCancelButton: false,
 								confirmButtonText: "OK",
 								cancelButtonText: "Cancel",
 								closeOnConfirm: true,
@@ -202,9 +226,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								buttonsStyling: false
 							},
 							function(isConfirm) {
-								if (isConfirm) {
-									window.location = "summary.php";
-								}
+								return;
 							});
 					}
 				}
@@ -317,12 +339,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- gallery -->
 	<div class="agileits-services text-center py-5">
 		<div class="container py-md-4 mt-md-3">
-			<h3 class="heading-agileinfo">Stage 7 (Referee)<span>Complete form below</span></h3>
+			<h3 class="heading-agileinfo">Stage 5 (Referee)<span>Complete form below</span></h3>
 			<div class="w3ls_gallery_grids mt-md-5 pt-5">
 				<div class="container">
 					<h2></h2>
 
-					<div class="form-login" style="width:1000px">
+					<div class="form-login" style="">
 						<hr />
 						<div class="alert alert-warning">
 							<i class="fa fa-info-circle"></i>&nbsp;This stage you Enter your Referee Details in the spaces provided
@@ -339,77 +361,79 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 						// Initialize variables to store fetched data
-						$name = $contact = $date = $address = $ref = $signature = "";
+						$name = $contact = $date = $address = $ref = $signature = $signature_thumbnail = "";
 
 						// Check if 'pin' and 'serial' are set in GET parameters
-						if (isset($_GET['ids']) && isset($_GET['ids'])) {
+						// if (isset($_GET['ids']) && isset($_GET['ids'])) {
 
-							// Construct SQL query
-							$sql = "SELECT * FROM referees WHERE pin = '$pin' AND serial = '$serial'";
+						// Construct SQL query
+						$sql = "SELECT * FROM referees WHERE pin = '$pin' AND serial = '$serial'";
 
-							// Execute query
-							$result = $db->query($sql);
+						// Execute query
+						$result = $db->query($sql);
 
-							if ($result) {
-								// Check if data was found
-								if ($result->num_rows > 0) {
-									// Fetch data
-									$row = $result->fetch_assoc();
+						if ($result) {
+							// Check if data was found
+							if ($result->num_rows > 0) {
+								// Fetch data
+								$row = $result->fetch_assoc();
 
-									// Store fetched values in variables for form population
-									$name = htmlspecialchars($row['name']);
-									$contact = htmlspecialchars($row['contact']);
-									$date = htmlspecialchars($row['date']);
-									$address = htmlspecialchars($row['address']);
-									$ref = htmlspecialchars($row['ref']);
-									$signature = htmlspecialchars($row['signature']);
-								} else {
-									// Handle case where no data was found
-									echo "No records found.";
-								}
+								// Store fetched values in variables for form population
+								$name = htmlspecialchars($row['name']);
+								$contact = htmlspecialchars($row['contact']);
+								$date = htmlspecialchars($row['date']);
+								$address = htmlspecialchars($row['address']);
+								$ref = htmlspecialchars($row['ref']);
+								$signature = explode("_", htmlspecialchars($row['signature']))[1];
+								$signature_thumbnail = 'images/applicants/' . htmlspecialchars($row['signature']);
 							} else {
-								// Handle query execution error
-								echo "Query failed: " . $db->error;
+								// Handle case where no data was found
+								echo "No records found.";
 							}
 						} else {
-							// Handle case where 'pin' or 'serial' is not set in GET parameters
-							echo "PIN and/or Serial not provided.";
+							// Handle query execution error
+							echo "Query failed: " . $db->error;
 						}
+						// } else {
+						// 	// Handle case where 'pin' or 'serial' is not set in GET parameters
+						// 	echo "PIN and/or Serial not provided.";
+						// }
 
 						// Close database connection
 						$db->close();
 						?>
 
 						<form id="uploadForm" enctype="multipart/form-data">
-							<div class="input-group" style="margin-bottom:10px">
-								<span class="input-group-addon">Name</span>
+							<div class="form-group">
+								<label for="name">Name</label>
 								<input type="text" required class="form-control" name="name" id="name" placeholder="Reference Name" value="<?php echo $name; ?>">
 							</div>
-							<div class="input-group" style="margin-bottom:10px">
-								<span class="input-group-addon">Address</span>
+							<div class="form-group">
+								<label for="address">Address</label>
 								<input type="text" required class="form-control" name="address" id="address" placeholder="Reference Address" value="<?php echo $address; ?>">
 							</div>
-							<div class="input-group" required style="margin-bottom:10px">
-								<span class="input-group-addon">Contact</span>
-								<input type="text" class="form-control" name="contact" id="contact" placeholder="Reference Contact" value="<?php echo $contact; ?>">
+							<div class="form-group">
+								<label for="contact">Contact</label>
+								<input type="text" required class="form-control" name="contact" id="contact" placeholder="Reference Contact" value="<?php echo $contact; ?>">
 							</div>
-							<div class="input-group" required style="margin-bottom:10px">
-								<span class="input-group-addon">Date</span>
+							<div class="form-group">
+								<label for="datepicker-starting-view">Date</label>
 								<input id="datepicker-starting-view" type="date" name="date" class="form-control" placeholder="dd/mm/yy" value="<?php echo $date; ?>">
 							</div>
-							<div class="input-group" required id="sign" style="margin-bottom:10px">
-								<span class="input-group-addon">Signature</span>
+							<div class="form-group" id="sign">
+								<label for="signature">Signature</label>
 								<input type="text" class="form-control" name="signature" id="signature" placeholder="Upload Signature" style="pointer-events: none;" value="<?php echo $signature; ?>">
+								<img id="signatureThumbnail" src="<?php echo $signature_thumbnail; ?>" alt="Signature Thumbnail" style="display: <?php echo $signature ? 'block' : 'none'; ?>; width: 100px; margin-top: 10px;">
 							</div>
-							<div class="input-group" style="margin-bottom:10px">
-								<span class="input-group-addon">Class</span>
+							<div class="form-group">
+								<label for="ref">Class</label>
 								<input type="text" required class="form-control" name="ref" id="ref" placeholder="Referee Class" value="<?php echo $ref; ?>">
 							</div>
-							<input name='file3' hidden type='file' id='file3'>
+							<input name="file3" hidden type="file" id="file3">
 
 							<p>
-								<input name='serial' id='serial' type='hidden' value='<?php if (isset($serial)) echo $serial; ?>'>
-								<input name='pin' id='pin' type='hidden' value='<?php if (isset($pin)) echo $pin; ?>'>
+								<input name="serial" id="serial" type="hidden" value="<?php if (isset($serial)) echo $serial; ?>">
+								<input name="pin" id="pin" type="hidden" value="<?php if (isset($pin)) echo $pin; ?>">
 							</p>
 
 							<hr />
@@ -417,26 +441,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<button type="submit" class="Employer btn btn-default" name="Change" value="changes">
 									<span class="glyphicon glyphicon-check"></span> &nbsp;Save Referee
 								</button>
+								<button type="submit" class="Del btn btn-default">
+									<span class="glyphicon glyphicon-trash"></span> &nbsp;Clear
+								</button>
+							</div>
+							<div class="form-group">
+								<a type="button" class="Del btn btn-default" href="document.php">
+									<i class="fa fa-arrow-left"></i> &nbsp; Previous
+								</a>
+
+								<a type="button" class="Del btn btn-default" href="summary.php">
+									<i class="fa fa-arrow-right"></i> &nbsp; Next
+								</a>
 							</div>
 						</form>
 
-						<button type="submit" class="Del btn btn-default">
-							<span class="glyphicon glyphicon-trash"></span> &nbsp;Clear
-						</button>
+
 
 
 					</div>
 
 
-					<div class="form-group">
-						<a type="button" class="Del btn btn-default" href="document.php">
-							<i class="fa fa-arrow-left"></i> &nbsp; Previous
-						</a>
 
-						<a type="button" class="Del btn btn-default" href="summary.php">
-							<i class="fa fa-arrow-right"></i> &nbsp; Next
-						</a>
-					</div>
 				</div>
 
 			</div>

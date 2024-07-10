@@ -49,7 +49,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<nav class="navbar navbar-expand-lg navbar-light bg-gradient-secondary">
 					<h>
 						<a class="navbar-brand" href="index.php">
-							COLLEGE OF HEALTH SCIENCES & TECHNOLOGY, TSAFE
+						PREMIER NURSING COLLEGE
 						</a>
 					</h>
 					<button class="navbar-toggler ml-md-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

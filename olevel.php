@@ -125,12 +125,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		});
 
 		$(document).on("change", "#sitting", function() {
-    let label = $(this).val();
-    $(".sitting").each(function(index, element) {
-        console.log({index, element});
-        $(element).text(`Subject ${label}`);
-    });
-});
+			let label = $(this).val();
+			$(".sitting").each(function(index, element) {
+				console.log({
+					index,
+					element
+				});
+				$(element).text(`Subject ${label}`);
+			});
+		});
 	</script>
 
 	<script type="text/javascript">
@@ -154,25 +157,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			var subjects2 = [];
 			var grades2 = [];
 
-            for (var i = 0; i < serial.length; i++) {
-                subjects.push(serial[i].value);
-            }
+			for (var i = 0; i < serial.length; i++) {
+				subjects.push(serial[i].value);
+			}
 
-            for (var i = 0; i < tos.length; i++) {
-                grades.push(tos[i].value);
-            }
+			for (var i = 0; i < tos.length; i++) {
+				grades.push(tos[i].value);
+			}
 
-            for (var i = 0; i < subjects_2.length; i++) {
-                subjects2.push(subjects_2[i].value);
-            }
+			for (var i = 0; i < subjects_2.length; i++) {
+				subjects2.push(subjects_2[i].value);
+			}
 
-            for (var i = 0; i < grades_2.length; i++) {
-                grades2.push(grades_2[i].value);
-            }
+			for (var i = 0; i < grades_2.length; i++) {
+				grades2.push(grades_2[i].value);
+			}
 
-			 console.log({serial});
-			 console.log({tos});
-			 console.log(grades.length, subjects.length);
+			console.log({
+				serial
+			});
+			console.log({
+				tos
+			});
+			console.log(grades.length, subjects.length);
 
 
 			$.ajax({
@@ -191,30 +198,32 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					examdate2: examdate_2,
 					subjects: subjects,
 					subjects2: subjects2,
-					result: "olevel" 
+					result: "olevel"
 				},
 				success: function(result) {
-				console.log({result});
-				// return;
-				if(result.includes("required")){
+					console.log({
+						result
+					});
+					// return;
+					if (result.includes("required")) {
 
-					$("#errors1").html(result);
-					$("#errors2").html("<a  class='btn btn-default' href='referee.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Courses</a>");
-					swal({
-						title: "Error!",
-						text: result,
-						type: "error"
-					});
-				}else{
-					
-					$("#errors1").html(result);
-					$("#errors2").html("<a  class='btn btn-default' href='referee.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Courses</a>");
-					swal({
-						title: "Successful!",
-						text: result,
-						type: "success"
-					});
-				}
+						$("#errors1").html(result);
+						$("#errors2").html("<a  class='btn btn-default' href='referee.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Courses</a>");
+						swal({
+							title: "Error!",
+							text: result,
+							type: "error"
+						});
+					} else {
+
+						$("#errors1").html(result);
+						$("#errors2").html("<a  class='btn btn-default' href='referee.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Courses</a>");
+						swal({
+							title: "Successful!",
+							text: result,
+							type: "success"
+						});
+					}
 
 
 				}
@@ -295,12 +304,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- gallery -->
 	<div class="agileits-services text-center py-5">
 		<div class="container py-md-4 mt-md-3">
-			<h3 class="heading-agileinfo">Stage 6 (Educational Background)<span>Click on Browse button below to select your picture and should not be more than 20MB</span></h3>
+			<h3 class="heading-agileinfo">Stage 2 (Educational Background)<span>Click on Browse button below to select your picture and should not be more than 20MB</span></h3>
 			<div class="w3ls_gallery_grids mt-md-5 pt-5">
 				<div class="container">
 					<h2></h2>
 
-					<div class="form-login" style="width:1000px">
+					<div class="form-login">
 						<hr />
 						<div class="alert alert-warning">
 							<i class="fa fa-info-circle"></i>&nbsp;This stage you Enter your O'Level results in the space provided
@@ -314,210 +323,210 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<span id="errors1"></span>
 						<hr />
 
-        <?php
+						<?php
 
 
-//Subjects
-$sql = "SELECT * FROM Schoolsubjects";
-$rget = mysqli_query($db, $sql);
-$subjects = array();
-if ($rget) {
-    while ($foundk = mysqli_fetch_array($rget)) {
-        $subjects[] = $foundk['Name'];
-    }
-}
+						//Subjects
+						$sql = "SELECT * FROM Schoolsubjects";
+						$rget = mysqli_query($db, $sql);
+						$subjects = array();
+						if ($rget) {
+							while ($foundk = mysqli_fetch_array($rget)) {
+								$subjects[] = $foundk['Name'];
+							}
+						}
 
 
-// Grades
-$numSubjects = count($subjects);
-        $sql = "SELECT * FROM Schoolgrades";
-        $rgetGrades = mysqli_query($db, $sql);
-        $grades = array();
-        if ($rgetGrades) {
-            while ($foundk = mysqli_fetch_array($rgetGrades)) {
-                $grades[] = $foundk['Name'];
-            }
-        }
+						// Grades
+						$numSubjects = count($subjects);
+						$sql = "SELECT * FROM Schoolgrades";
+						$rgetGrades = mysqli_query($db, $sql);
+						$grades = array();
+						if ($rgetGrades) {
+							while ($foundk = mysqli_fetch_array($rgetGrades)) {
+								$grades[] = $foundk['Name'];
+							}
+						}
 
-// Fetch existing data if available (example query)
-// <?php
-// Connect to the database
-// $db = new mysqli("hostname", "username", "password", "database");
+						// Fetch existing data if available (example query)
+						// <?php
+						// Connect to the database
+						// $db = new mysqli("hostname", "username", "password", "database");
 
-// if ($db->connect_error) {
-//     die("Connection failed: " . $db->connect_error);
-// }
+						// if ($db->connect_error) {
+						//     die("Connection failed: " . $db->connect_error);
+						// }
 
-// Fetch data for the first sitting
-// $serial = mysqli_real_escape_string($db, $_GET['serial']);
-// $pin = mysqli_real_escape_string($db, $_GET['pin']);
+						// Fetch data for the first sitting
+						// $serial = mysqli_real_escape_string($db, $_GET['serial']);
+						// $pin = mysqli_real_escape_string($db, $_GET['pin']);
 
-$query1 = "SELECT * FROM Olevel WHERE Serial='$serial' AND Pin='$pin' AND Sitting='1st Sitting'";
-$result1 = mysqli_query($db, $query1);
-$existingData1 = mysqli_fetch_all($result1, MYSQLI_ASSOC);
+						$query1 = "SELECT * FROM Olevel WHERE Serial='$serial' AND Pin='$pin' AND Sitting='1st Sitting'";
+						$result1 = mysqli_query($db, $query1);
+						$existingData1 = mysqli_fetch_all($result1, MYSQLI_ASSOC);
 
-$exam1 = isset($existingData1[0]['Exam']) ? $existingData1[0]['Exam'] : '';
-$examdate1 = isset($existingData1[0]['Examdate']) ? $existingData1[0]['Examdate'] : '';
-$examtype1 = isset($existingData1[0]['Examtype']) ? $existingData1[0]['Examtype'] : '';
-$sitting1 = isset($existingData1[0]['Sitting']) ? $existingData1[0]['Sitting'] : '';
-$subjects1 = [];
-$grades1 = [];
+						$exam1 = isset($existingData1[0]['Exam']) ? $existingData1[0]['Exam'] : '';
+						$examdate1 = isset($existingData1[0]['Examdate']) ? $existingData1[0]['Examdate'] : '';
+						$examtype1 = isset($existingData1[0]['Examtype']) ? $existingData1[0]['Examtype'] : '';
+						$sitting1 = isset($existingData1[0]['Sitting']) ? $existingData1[0]['Sitting'] : '';
+						$subjects1 = [];
+						$grades1 = [];
 
-foreach ($existingData1 as $data) {
-    $subjects1[] = $data['Subjects'];
-    $grades1[] = $data['Grade'];
-}
+						foreach ($existingData1 as $data) {
+							$subjects1[] = $data['Subjects'];
+							$grades1[] = $data['Grade'];
+						}
 
-// Fetch data for the second sitting
-$query2 = "SELECT * FROM Olevel WHERE Serial='$serial' AND Pin='$pin' AND Sitting='2nd Sitting'";
-$result2 = mysqli_query($db, $query2);
-$existingData2 = mysqli_fetch_all($result2, MYSQLI_ASSOC);
+						// Fetch data for the second sitting
+						$query2 = "SELECT * FROM Olevel WHERE Serial='$serial' AND Pin='$pin' AND Sitting='2nd Sitting'";
+						$result2 = mysqli_query($db, $query2);
+						$existingData2 = mysqli_fetch_all($result2, MYSQLI_ASSOC);
 
-$exam2 = isset($existingData2[0]['Exam']) ? $existingData2[0]['Exam'] : '';
-$examdate2 = isset($existingData2[0]['Examdate']) ? $existingData2[0]['Examdate'] : '';
-$examtype2 = isset($existingData2[0]['Examtype']) ? $existingData2[0]['Examtype'] : '';
-$sitting2 = isset($existingData2[0]['Sitting']) ? $existingData2[0]['Sitting'] : '';
-$subjects2 = [];
-$grades2 = [];
+						$exam2 = isset($existingData2[0]['Exam']) ? $existingData2[0]['Exam'] : '';
+						$examdate2 = isset($existingData2[0]['Examdate']) ? $existingData2[0]['Examdate'] : '';
+						$examtype2 = isset($existingData2[0]['Examtype']) ? $existingData2[0]['Examtype'] : '';
+						$sitting2 = isset($existingData2[0]['Sitting']) ? $existingData2[0]['Sitting'] : '';
+						$subjects2 = [];
+						$grades2 = [];
 
-foreach ($existingData2 as $data) {
-    $subjects2[] = $data['Subjects'];
-    $grades2[] = $data['Grade'];
-}
+						foreach ($existingData2 as $data) {
+							$subjects2[] = $data['Subjects'];
+							$grades2[] = $data['Grade'];
+						}
 
-// Subjects
-$sql = "SELECT * FROM Schoolsubjects";
-$rget = mysqli_query($db, $sql);
-$subjects = array();
-if ($rget) {
-    while ($foundk = mysqli_fetch_array($rget)) {
-        $subjects[] = $foundk['Name'];
-    }
-}
+						// Subjects
+						$sql = "SELECT * FROM Schoolsubjects";
+						$rget = mysqli_query($db, $sql);
+						$subjects = array();
+						if ($rget) {
+							while ($foundk = mysqli_fetch_array($rget)) {
+								$subjects[] = $foundk['Name'];
+							}
+						}
 
-// Grades
-$sql = "SELECT * FROM Schoolgrades";
-$rgetGrades = mysqli_query($db, $sql);
-$grades = array();
-if ($rgetGrades) {
-    while ($foundk = mysqli_fetch_array($rgetGrades)) {
-        $grades[] = $foundk['Name'];
-    }
-}
-$numSubjects = count($subjects);
-?>
+						// Grades
+						$sql = "SELECT * FROM Schoolgrades";
+						$rgetGrades = mysqli_query($db, $sql);
+						$grades = array();
+						if ($rgetGrades) {
+							while ($foundk = mysqli_fetch_array($rgetGrades)) {
+								$grades[] = $foundk['Name'];
+							}
+						}
+						$numSubjects = count($subjects);
+						?>
 
-    <?php for ($i = 0; $i < $numSubjects; $i++): ?>
-        <?php if ($i == 0): ?>
-            <h3>First Sitting</h3>
-            <div class="input-group" style="margin-bottom:10px">
-                <span class="input-group-addon">Exam Type</span>
-                <select style='height:37px;width:100%;border:1px solid black;' name="examtype" id='examtype'>
-                    <?php
-                    $sql = "SELECT * FROM Examtype";
-                    $rget = mysqli_query($db, $sql);
-                    $num = mysqli_num_rows($rget);
-                    if ($num != 0) {
-                        while ($foundk = mysqli_fetch_array($rget)) {
-                            $nms = $foundk['Name'];
-                            echo "<option value='$nms' " . ($examtype1 == $nms ? 'selected' : '') . ">$nms</option>";
-                        }
-                    }
-                    ?>
-                </select>
-            </div>
+						<?php for ($i = 0; $i < $numSubjects; $i++) : ?>
+							<?php if ($i == 0) : ?>
+								<h3>First Sitting</h3>
+								<div class="input-group" style="margin-bottom:10px">
+									<span class="input-group-addon">Exam Type</span>
+									<select style='height:37px;width:100%;border:1px solid black;' name="examtype" id='examtype'>
+										<?php
+										$sql = "SELECT * FROM Examtype";
+										$rget = mysqli_query($db, $sql);
+										$num = mysqli_num_rows($rget);
+										if ($num != 0) {
+											while ($foundk = mysqli_fetch_array($rget)) {
+												$nms = $foundk['Name'];
+												echo "<option value='$nms' " . ($examtype1 == $nms ? 'selected' : '') . ">$nms</option>";
+											}
+										}
+										?>
+									</select>
+								</div>
 
-            <div class="input-group" style="margin-bottom:10px">
-                <span class="input-group-addon">Exam Date</span>
-                <input type="date" class="form-control" name="examdate" id="examdate" value="<?php echo $examdate1; ?>">
-            </div>
-            <div class="input-group" style="margin-bottom:10px">
-                <span class="input-group-addon">Exam Number</span>
-                <input type="text" class="form-control" name="examnumber" id="examnumber" value="<?php echo $exam1; ?>">
-            </div>
+								<div class="input-group" style="margin-bottom:10px">
+									<span class="input-group-addon">Exam Date</span>
+									<input type="date" class="form-control" name="examdate" id="examdate" value="<?php echo $examdate1; ?>">
+								</div>
+								<div class="input-group" style="margin-bottom:10px">
+									<span class="input-group-addon">Exam Number</span>
+									<input type="text" class="form-control" name="examnumber" id="examnumber" value="<?php echo $exam1; ?>">
+								</div>
 
-            <div class="input-group" style="margin-bottom:10px">
-                <span class="input-group-addon">Sitting</span>
-                <select style='height:37px;width:100%;border:1px solid black;' name="sitting" id='sitting'>
-                    <option value="1st Sitting" <?php echo ($sitting1 == '1st Sitting' ? 'selected' : ''); ?>>1st Sitting</option>
-                </select>
-            </div>
-        <?php endif; ?>
-        <div class="input-group" style="margin-bottom:10px;">
-            <span class="input-group-addon sitting">Subject First Sitting</span>
-            <select style='height:37px;width:100%;border:1px solid black;' class="subjects" name="subjects[]" id='subjects'>
-                <?php foreach ($subjects as $subject): ?>
-                    <option value="<?php echo $subject; ?>" <?php echo (isset($subjects1[$i]) && $subjects1[$i] == $subject ? 'selected' : ''); ?>><?php echo $subject; ?></option>
-                <?php endforeach; ?>
-            </select>
-            <span class="input-group-addon">Grade</span>
-            <select style='height:37px;width:100%;border:1px solid black;' class="grades" name="grade[]" id='grade'>
-                <?php foreach ($grades as $grade): ?>
-                    <option value="<?php echo $grade; ?>" <?php echo (isset($grades1[$i]) && $grades1[$i] == $grade ? 'selected' : ''); ?>><?php echo $grade; ?></option>
-                <?php endforeach; ?>
-            </select>
-        </div>
-    <?php endfor; ?>
-    <hr>
-    <?php for ($i = 0; $i < $numSubjects; $i++): ?>
-        <?php if ($i == 0): ?>
-            <h3>Second Sitting (Please do not fill if not applicable)</h3>
-            <div class="input-group" style="margin-bottom:10px">
-                <span class="input-group-addon">Exam Type</span>
-                <select style='height:37px;width:100%;border:1px solid black;' name="examtype2" id='examtype2'>
-                    <?php
-                    $sql = "SELECT * FROM Examtype";
-                    $rget = mysqli_query($db, $sql);
-                    $num = mysqli_num_rows($rget);
-                    if ($num != 0) {
-							echo '<option selected value="">Select Exam Type</option>';
-                        while ($foundk = mysqli_fetch_array($rget)) {
-                            $nms = $foundk['Name'];
-                            echo "<option value='$nms' " . ($examtype2 == $nms ? 'selected' : '') . ">$nms</option>";
-                        }
-                    }
-                    ?>
-                </select>
-            </div>
+								<div class="input-group" style="margin-bottom:10px">
+									<span class="input-group-addon">Sitting</span>
+									<select style='height:37px;width:100%;border:1px solid black;' name="sitting" id='sitting'>
+										<option value="1st Sitting" <?php echo ($sitting1 == '1st Sitting' ? 'selected' : ''); ?>>1st Sitting</option>
+									</select>
+								</div>
+							<?php endif; ?>
+							<div class="input-group" style="margin-bottom:10px;">
+								<span class="input-group-addon sitting">Subject</span>
+								<select style='height:37px;width:100%;border:1px solid black;' class="subjects" name="subjects[]" id='subjects'>
+									<?php foreach ($subjects as $subject) : ?>
+										<option value="<?php echo $subject; ?>" <?php echo (isset($subjects1[$i]) && $subjects1[$i] == $subject ? 'selected' : ''); ?>><?php echo $subject; ?></option>
+									<?php endforeach; ?>
+								</select>
+								<span class="input-group-addon">Grade</span>
+								<select style='height:37px;width:100%;border:1px solid black;' class="grades" name="grade[]" id='grade'>
+									<?php foreach ($grades as $grade) : ?>
+										<option value="<?php echo $grade; ?>" <?php echo (isset($grades1[$i]) && $grades1[$i] == $grade ? 'selected' : ''); ?>><?php echo $grade; ?></option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+						<?php endfor; ?>
+						<hr>
+						<?php for ($i = 0; $i < $numSubjects; $i++) : ?>
+							<?php if ($i == 0) : ?>
+								<h3>Second Sitting (Please do not fill if not applicable)</h3>
+								<div class="input-group" style="margin-bottom:10px">
+									<span class="input-group-addon">Exam Type</span>
+									<select style='height:37px;width:100%;border:1px solid black;' name="examtype2" id='examtype2'>
+										<?php
+										$sql = "SELECT * FROM Examtype";
+										$rget = mysqli_query($db, $sql);
+										$num = mysqli_num_rows($rget);
+										if ($num != 0) {
+											echo '<option selected value="">Select Exam Type</option>';
+											while ($foundk = mysqli_fetch_array($rget)) {
+												$nms = $foundk['Name'];
+												echo "<option value='$nms' " . ($examtype2 == $nms ? 'selected' : '') . ">$nms</option>";
+											}
+										}
+										?>
+									</select>
+								</div>
 
-            <div class="input-group" style="margin-bottom:10px">
-                <span class="input-group-addon">Exam Date</span>
-                <input type="date" class="form-control" name="examdate2" id="examdate2" value="<?php echo $examdate2; ?>">
-            </div>
-            <div class="input-group" style="margin-bottom:10px">
-                <span class="input-group-addon">Exam Number</span>
-                <input type="text" class="form-control" name="examnumber2" id="examnumber2" value="<?php echo $exam2 == "NA" ? '' : $exam2; ?>">
-            </div>
-            <div class="input-group" style="margin-bottom:10px">
-                <span class="input-group-addon">Sitting</span>
-                <select style='height:37px;width:100%;border:1px solid black;' name="sitting2" id='sitting2'>
-                    <option value="2nd Sitting" <?php echo ($sitting2 == '2nd Sitting' ? 'selected' : ''); ?>>2nd Sitting</option>
-                </select>
-            </div>
-        <?php endif; ?>
-        <div class="input-group" style="margin-bottom:10px;">
-            <span class="input-group-addon sitting">Subject Second Sitting</span>
-            <select style='height:37px;width:100%;border:1px solid black;' class="subjects2" name="subjects2[]" id='subjects2'>
-                <?php foreach ($subjects as $num => $subject): ?>
-					<?php if ($num == "0"): ?>
-            <option selected value="">Select Subject</option>
-                    <?php endif; ?>
-                    <option value="<?php echo $subject; ?>" <?php echo (isset($subjects2[$i]) && $subjects2[$i] == $subject ? 'selected' : ''); ?>><?php echo $subject; ?></option>
-                <?php endforeach; ?>
-            </select>
-            <span class="input-group-addon">Grade</span>
-            <select style='height:37px;width:100%;border:1px solid black;' class="grades2" name="grade2[]" id='grade2'>
-                <?php foreach ($grades as $num => $grade): ?>
-					<?php if ($num == "0"): ?>
-            <option selected value="">Select Grade</option>
-                    <?php endif; ?>
-                    <option value="<?php echo $grade; ?>" <?php echo (isset($grades2[$i]) && $grades2[$i] == $grade ? 'selected' : ''); ?>><?php echo $grade; ?></option>
-                <?php endforeach; ?>
-            </select>
-        </div>
-    <?php endfor; ?>
-   <!-- <button type="submit">Submit</button> -->
-<!-- // </form> -->
+								<div class="input-group" style="margin-bottom:10px">
+									<span class="input-group-addon">Exam Date</span>
+									<input type="date" class="form-control" name="examdate2" id="examdate2" value="<?php echo $examdate2; ?>">
+								</div>
+								<div class="input-group" style="margin-bottom:10px">
+									<span class="input-group-addon">Exam Number</span>
+									<input type="text" class="form-control" name="examnumber2" id="examnumber2" value="<?php echo $exam2 == "NA" ? '' : $exam2; ?>">
+								</div>
+								<div class="input-group" style="margin-bottom:10px">
+									<span class="input-group-addon">Sitting</span>
+									<select style='height:37px;width:100%;border:1px solid black;' name="sitting2" id='sitting2'>
+										<option value="2nd Sitting" <?php echo ($sitting2 == '2nd Sitting' ? 'selected' : ''); ?>>2nd Sitting</option>
+									</select>
+								</div>
+							<?php endif; ?>
+							<div class="input-group" style="margin-bottom:10px;">
+								<span class="input-group-addon sitting">Subject</span>
+								<select style='height:37px;width:100%;border:1px solid black;' class="subjects2" name="subjects2[]" id='subjects2'>
+									<?php foreach ($subjects as $num => $subject) : ?>
+										<?php if ($num == "0") : ?>
+											<option selected value="">Select Subject</option>
+										<?php endif; ?>
+										<option value="<?php echo $subject; ?>" <?php echo (isset($subjects2[$i]) && $subjects2[$i] == $subject ? 'selected' : ''); ?>><?php echo $subject; ?></option>
+									<?php endforeach; ?>
+								</select>
+								<span class="input-group-addon">Grade</span>
+								<select style='height:37px;width:100%;border:1px solid black;' class="grades2" name="grade2[]" id='grade2'>
+									<?php foreach ($grades as $num => $grade) : ?>
+										<?php if ($num == "0") : ?>
+											<option selected value="">Select Grade</option>
+										<?php endif; ?>
+										<option value="<?php echo $grade; ?>" <?php echo (isset($grades2[$i]) && $grades2[$i] == $grade ? 'selected' : ''); ?>><?php echo $grade; ?></option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+						<?php endfor; ?>
+						<!-- <button type="submit">Submit</button> -->
+						<!-- // </form> -->
 
 
 						<p>

@@ -377,7 +377,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                   $date = $foundk['date'];
                   $address = $foundk['address'];
                   $ref = $foundk['ref'];
-                  $signature = $foundk['ref'];
+                  $signature = 'images/applicants/' . $foundk['signature'];
 
                   echo "<tr>
                                                                               <td>$name</td> 
@@ -385,7 +385,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                                                <td>$date</td>
                                                                               <td>$address</td>                                                                                 
                                                                               <td>$ref</td>                                                                                 
-                                                                              <td>$signature</td>                                                                                 
+                                                                              <td>
+                                                                              <img id='signatureThumbnail' src='$signature' alt='Signature Thumbnail' style='width:100px;'>
+                                                                            
+                                                                              </td>                                                                                 
                                                                            
                                                                               </tr>";
                 }
@@ -741,7 +744,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <!-- gallery -->
   <div class="agileits-services text-center py-5">
     <div class="container py-md-4 mt-md-3">
-      <h3 class="heading-agileinfo">Stage 8 (Summary)<span>You have fill all relevant information click decleration button to finish</span></h3>
+      <h3 class="heading-agileinfo">Stage 6 (Summary)<span>You have fill all relevant information click declaration button to finish</span></h3>
       <div class="w3ls_gallery_grids mt-md-5 pt-5">
         <div class="container">
           <h2></h2>

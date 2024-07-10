@@ -97,10 +97,7 @@ try {
             echo 'Yes';
         }
     }
-    if (isset($_FILES['file2']['name']) && $_POST['Change']) {
-        $serial = $_POST['serial'];
-        $pin = $_POST['pin'];
-        $pages = $_POST['page'];
+    if (isset($_FILES['file2']['name']) && $_POST['document']) {
 
         // Define the target directory
         $targetDirectory = 'images/applicants/';
@@ -113,20 +110,82 @@ try {
             'file5' => 'birth-certificate'
         ];
 
-        // Check if any files are empty or have errors
-        foreach ($fileInputs as $fileInput => $newName) {
-            if (!isset($_FILES[$fileInput])) {
-                $_SESSION['error'] = '1';
+        $errors = array(); // Initialize an array to store errors
+
+        if (!isset($_POST['ids'])) {
+            foreach ($fileInputs as $fileInput => $newName) {
+                if (!isset($_FILES[$fileInput])) {
+                    $errors[] = 'File ' . $fileInput . ' is missing.';
+                } elseif ($_FILES[$fileInput]['error'] != UPLOAD_ERR_OK) {
+                    $errors[] = 'Error uploading file ' . $fileInput . ': ' . $_FILES[$fileInput]['error'];
+                } elseif ($_FILES[$fileInput]['size'] == 0) {
+                    $errors[] = 'File ' . $fileInput . ' is empty.';
+                }
             }
-            if ($_FILES[$fileInput]['error'] != UPLOAD_ERR_OK) {
-                $_SESSION['error'] = '2';
-            }
-            if ($_FILES[$fileInput]['size'] == 0) {
-                $_SESSION['error'] = '3';
+
+            if (!empty($errors)) {
+                echo "error";
+                exit;
             }
         }
-        if ($_SESSION['error']) {
-            header('Location: document.php');
+
+
+        if (isset($_POST['ids'])) {
+            // Update existing records based on Serial and Pin
+
+            // Delete existing files before updating
+            foreach ($fileInputs as $fileInput => $newName) {
+                // Query to fetch existing file name
+
+                if ($_FILES[$fileInput]['size'] !== 0) {
+                    $fetchQuery = "SELECT name FROM Profilepictures WHERE Serial = '$serial' AND Pin = '$pin' AND name LIKE '%$newName%'";
+                    $result = $db->query($fetchQuery);
+
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            // Get the existing file name
+                            $existingFileName = $row['name'];
+
+
+
+                            // Construct full path to existing file
+                            $existingFilePath = $targetDirectory . $existingFileName;
+
+                            // Delete the existing file if it exists
+                            if (file_exists($existingFilePath)) {
+                                unlink($existingFilePath);
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Insert new records for each file
+            foreach ($fileInputs as $fileInput => $newName) {
+                if ($_FILES[$fileInput]['size'] !== 0) {
+                    if (isset($_FILES[$fileInput]) && $_FILES[$fileInput]['error'] == UPLOAD_ERR_OK) {
+                        $fileName = $_FILES[$fileInput]['name'];
+                        $fileTmpName = $_FILES[$fileInput]['tmp_name'];
+                        $fileSize = $_FILES[$fileInput]['size'];
+                        $fileType = $_FILES[$fileInput]['type'];
+                        $newFileName = $serial . '_' . $newName . '.' . pathinfo($fileName, PATHINFO_EXTENSION);
+                        $targetFilePath = $targetDirectory . $newFileName;
+
+                        if (move_uploaded_file($fileTmpName, $targetFilePath)) {
+                            $query = "UPDATE Profilepictures SET 
+                                        name = '$newFileName',
+                                        size = '$fileSize',
+                                        type = '$fileType',
+                                        content = '$newFileName'
+                                      WHERE Serial = '$serial' AND Pin = '$pin' AND name LIKE '%$newName%'";
+                            $db->query($query) or die('Error, query failed to update');
+                        } else {
+                            die('Error, failed to move the uploaded file: ' . $fileName);
+                        }
+                    }
+                }
+            }
+            echo "uploaded"; // Echo upload status
             exit;
         }
 
@@ -156,7 +215,9 @@ try {
                 }
             }
             $_SESSION['uploaded'] = 'yes';
-            header('Location: document.php');
+            echo "uploaded";
+            exit;
+            // header('Location: document.php');
         } else {
             // Delete existing records
             $deleteQuery = "DELETE FROM Profilepictures WHERE Serial='$serial' AND Pin='$pin'";
@@ -182,7 +243,9 @@ try {
                 }
             }
             $_SESSION['upload'] = 'yes';
-            header('Location: document.php');
+            // header('Location: document.php');
+            echo "upload";
+            exit;
         }
     }
 

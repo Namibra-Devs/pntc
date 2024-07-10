@@ -44,12 +44,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- //for-javascript -->
 	<script src="js/jquery.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<style>
+		select{
+			height: 100% !important;
+		}
+
+		label{
+			float: left !important;
+		}
+	</style>
 
 </head>
 
 <body>
 	<script type="text/javascript">
-		$(document).on("click", ".biodata", function() {
+		$(document).on("click", ".biodata", function(e) {
+			e.preventDefault();
 			var surname = document.getElementById('surname').value;
 			var othernames = document.getElementById('othernames').value;
 			var dob = document.getElementById('datepicker-starting-view').value;
@@ -113,7 +123,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					});
 
 					if (result == 'Yes') {
-						sweetAlert("Oops...", "Fill all textbox fields they are required", "error");
+						sweetAlert("Oops...", "Fill all textbox fields, they are required!", "error");
 					} else if (result == 'Yes2') {
 						sweetAlert("Updated", "Biodata Updated Successfully", "success");
 					} else {
@@ -130,9 +140,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								buttonsStyling: false
 							},
 							function(isConfirm) {
-								if (isConfirm) {
-									window.location = "olevel.php";
-								}
+								return;
 							});
 					}
 				}
@@ -280,189 +288,190 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 					<?php
 
-$othernames = $surname = $dob = $gender = $placeofbirth = $religion = $hometown = "";
-$country = $appcoraddress = $appresaddress = $gname = $gplace = $ghometown = "";
-$gcountry = $gaddress = $gmobile = $applicantphone = $email = "";
+					$othernames = $surname = $dob = $gender = $placeofbirth = $religion = $hometown = "";
+					$country = $appcoraddress = $appresaddress = $gname = $gplace = $ghometown = "";
+					$gcountry = $gaddress = $gmobile = $applicantphone = $email = "";
 
-if (isset($_GET['ids'])) {
-    $sql = "SELECT * FROM Applicants2 WHERE pin = '$pin' AND serial = '$serial'";
-    
-    $result = $db->query($sql);
+					// if (isset($_GET['ids'])) {
+					$sql = "SELECT * FROM Applicants2 WHERE pin = '$pin' AND serial = '$serial'";
 
-    if ($result) {
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
+					$result = $db->query($sql);
 
-			$surname = htmlspecialchars($row['Surname']);
-            $othernames = htmlspecialchars($row['Othername']);
-            $dob = htmlspecialchars($row['DOB']);
-            $gender = htmlspecialchars($row['Gender']);
-            $placeofbirth = htmlspecialchars($row['PlaceOfbirth']);
-            $religion = htmlspecialchars($row['religion']);
-            $hometown = htmlspecialchars($row['Hometown']);
-            $country = htmlspecialchars($row['Country']);
-            $appcoraddress = htmlspecialchars($row['Appcoraddress']);
-            $appresaddress = htmlspecialchars($row['Appresaddress']);
-            $gname = htmlspecialchars($row['Gname']);
-            $gplace = htmlspecialchars($row['Gplace']);
-            $ghometown = htmlspecialchars($row['Ghometown']);
-            $gcountry = htmlspecialchars($row['Gcountry']);
-            $gaddress = htmlspecialchars($row['Gaddress']);
-            $gmobile = htmlspecialchars($row['Gmobile']);
-            $applicantphone = htmlspecialchars($row['Applicantphone']);
-            $email = htmlspecialchars($row['Email']);
-        } 
-    } 
-}
+					if ($result) {
+						if ($result->num_rows > 0) {
+							$row = $result->fetch_assoc();
 
-?>
+							$surname = htmlspecialchars($row['Surname']);
+							$othernames = htmlspecialchars($row['Othername']);
+							$dob = htmlspecialchars($row['DOB']);
+							$gender = htmlspecialchars($row['Gender']);
+							$placeofbirth = htmlspecialchars($row['PlaceOfbirth']);
+							$religion = htmlspecialchars($row['religion']);
+							$hometown = htmlspecialchars($row['Hometown']);
+							$country = htmlspecialchars($row['Country']);
+							$appcoraddress = htmlspecialchars($row['Appcoraddress']);
+							$appresaddress = htmlspecialchars($row['Appresaddress']);
+							$gname = htmlspecialchars($row['Gname']);
+							$gplace = htmlspecialchars($row['Gplace']);
+							$ghometown = htmlspecialchars($row['Ghometown']);
+							$gcountry = htmlspecialchars($row['Gcountry']);
+							$gaddress = htmlspecialchars($row['Gaddress']);
+							$gmobile = htmlspecialchars($row['Gmobile']);
+							$applicantphone = htmlspecialchars($row['Applicantphone']);
+							$email = htmlspecialchars($row['Email']);
+						}
+					}
+					// }
 
-    <div class="form-login">
-        <div class="input-group" style="margin-bottom:10px">
-            <span class="input-group-addon">Surname</span>
-            <input type="text" class="form-control" name="surname" id="surname" placeholder="Surname" value="<?php echo $surname; ?>">
-        </div>
-        <div class="input-group" style="margin-bottom:10px">
-            <span class="input-group-addon">Other Names</span>
-            <input type="text" class="form-control" name="othernames" id="othernames" placeholder="Enter Other Names" value="<?php echo $othernames; ?>">
-        </div>
-        <div class="input-group" style="margin-bottom:10px">
-            <span class="input-group-addon">Date of Birth</span>
-            <input id="datepicker-starting-view" type="date" class="form-control" placeholder="dd/mm/yy" value="<?php echo $dob; ?>">
-        </div>
-        <div class="input-group" style="margin-bottom:10px">
-            <span class="input-group-addon">Gender</span>
-            <select style='height:37px;width:100%;border:1px solid;' name="gender" id='gender'>
-                <option>Select Option</option>
-                <option <?php echo ($gender == 'Male') ? 'selected' : ''; ?>>Male</option>
-                <option <?php echo ($gender == 'Female') ? 'selected' : ''; ?>>Female</option>
-            </select>
-        </div>
-        <div class="input-group" style="margin-bottom:10px">
-            <span class="input-group-addon">Place of Birth</span>
-            <input type="text" class="form-control" name="placebirth" id="placebirth" placeholder="Place of Birth" value="<?php echo $placeofbirth; ?>">
-        </div>
-        <div class="input-group" style="margin-bottom:10px">
-            <span class="input-group-addon">Religion</span>
-            <select style='height:37px;width:100%;border:1px solid;' name="religion" id='religion'>
-                <option disabled>Select Option</option>
-                <option <?php echo ($religion == 'Islam') ? 'selected' : ''; ?>>Islam</option>
-                <option <?php echo ($religion == 'Christianity') ? 'selected' : ''; ?>>Christianity</option>
-                <option <?php echo ($religion == 'African Tradition') ? 'selected' : ''; ?>>African Tradition</option>
-            </select>
-        </div>
-        <div class="input-group" style="margin-bottom:10px">
-            <span class="input-group-addon">Hometown</span>
-            <input type="text" class="form-control" name="hometown" id="hometown" placeholder="Enter Hometown" value="<?php echo $hometown; ?>">
-        </div>
-        
-        <?php
-        $sql = "SELECT name FROM countries ORDER BY name";
-        $result = $db->query($sql);
+					?>
 
-        if (!$result) {
-            die("Query failed: " . $db->error);
-        }
-        ?>
+<div class="container">
+    <form id="documents" enctype="multipart/form-data" method="post">
+        <div class="form-login">
+            <div class="form-group">
+                <label for="surname">Surname</label>
+                <input type="text" class="form-control" name="surname" id="surname" placeholder="Surname" value="<?php echo $surname; ?>">
+            </div>
+            <div class="form-group">
+                <label for="othernames">Other Names</label>
+                <input type="text" class="form-control" name="othernames" id="othernames" placeholder="Enter Other Names" value="<?php echo $othernames; ?>">
+            </div>
+            <div class="form-group">
+                <label for="datepicker-starting-view">Date of Birth</label>
+                <input id="datepicker-starting-view" type="date" class="form-control" placeholder="dd/mm/yy" value="<?php echo $dob; ?>">
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select class="form-control" name="gender" id="gender">
+                    <option>Select Option</option>
+                    <option <?php echo ($gender == 'Male') ? 'selected' : ''; ?>>Male</option>
+                    <option <?php echo ($gender == 'Female') ? 'selected' : ''; ?>>Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="placebirth">Place of Birth</label>
+                <input type="text" class="form-control" name="placebirth" id="placebirth" placeholder="Place of Birth" value="<?php echo $placeofbirth; ?>">
+            </div>
+            <div class="form-group">
+                <label for="religion">Religion</label>
+                <select class="form-control" name="religion" id="religion">
+                    <option disabled>Select Option</option>
+                    <option <?php echo ($religion == 'Islam') ? 'selected' : ''; ?>>Islam</option>
+                    <option <?php echo ($religion == 'Christianity') ? 'selected' : ''; ?>>Christianity</option>
+                    <option <?php echo ($religion == 'African Tradition') ? 'selected' : ''; ?>>African Tradition</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="hometown">Hometown</label>
+                <input type="text" class="form-control" name="hometown" id="hometown" placeholder="Enter Hometown" value="<?php echo $hometown; ?>">
+            </div>
 
-        <div class="input-group" style="margin-bottom:10px">
-            <span class="input-group-addon">Nationality</span>
-            <select style='height:37px;width:100%;border:1px solid black;' name="country" id='country'>
-                <option disabled selected>Select Country</option>
-                <?php
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo '<option value="' . htmlspecialchars($row['name']) . '"' . (($country == htmlspecialchars($row['name'])) ? ' selected' : '') . '>' . htmlspecialchars($row['name']) . '</option>';
+            <?php
+            $sql = "SELECT name FROM countries ORDER BY name";
+            $result = $db->query($sql);
+
+            if (!$result) {
+                die("Query failed: " . $db->error);
+            }
+            ?>
+
+            <div class="form-group">
+                <label for="country">Nationality</label>
+                <select class="form-control" name="country" id="country">
+                    <option disabled selected>Select Country</option>
+                    <?php
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo '<option value="' . htmlspecialchars($row['name']) . '"' . (($country == htmlspecialchars($row['name'])) ? ' selected' : '') . '>' . htmlspecialchars($row['name']) . '</option>';
+                        }
                     }
-                }
-                ?>
-            </select>
-        </div>
+                    ?>
+                </select>
+            </div>
 
-        <span id='localg'></span>
-        <div class="input-group" style="margin-bottom:10px">
-            <span class="input-group-addon">House Number</span>
-            <textarea name="aprecaddress" rows="4" class="form-control" placeholder="Correspondence Address" id="aprecaddress"><?php echo $appcoraddress; ?></textarea>
-        </div>
-        <div class="input-group" style="margin-bottom:10px">
-            <span class="input-group-addon">Digital Address of House Number</span>
-            <textarea name="apresaddress" rows="4" class="form-control" placeholder="Resdential Address" id="apresaddress"><?php echo $appresaddress; ?></textarea>
-        </div>
-        <div class="input-group" style="margin-bottom:10px">
-            <span class="input-group-addon">Name of Parent/Guardian</span>
-            <input type="text" class="form-control" name="guardianname" id="guardianname" placeholder="Guardian Name" value="<?php echo $gname; ?>">
-        </div>
-        <div class="input-group" style="margin-bottom:10px">
-            <span class="input-group-addon">Parent/Guardian Place of Birth</span>
-            <input type="text" class="form-control" name="guardianplace" id="guardianplace" placeholder="Guardian POB" value="<?php echo $gplace; ?>">
-        </div>
-        <div class="input-group" style="margin-bottom:10px">
-            <span class="input-group-addon">Parent/Guardian Home Town</span>
-            <input type="text" class="form-control" name="guardianhometown" id="guardianhometown" placeholder="Guardian Home Town" value="<?php echo $ghometown; ?>">
-        </div>
-        
-		<?php
-        $sql = "SELECT name FROM countries ORDER BY name";
-        $result = $db->query($sql);
+            <span id='localg'></span>
+            <div class="form-group">
+                <label for="aprecaddress">House Number</label>
+                <textarea name="aprecaddress" rows="4" class="form-control" placeholder="Correspondence Address" id="aprecaddress"><?php echo $appcoraddress; ?></textarea>
+            </div>
+            <div class="form-group">
+                <label for="apresaddress">Digital Address of House Number</label>
+                <textarea name="apresaddress" rows="4" class="form-control" placeholder="Residential Address" id="apresaddress"><?php echo $appresaddress; ?></textarea>
+            </div>
+            <div class="form-group">
+                <label for="guardianname">Name of Parent/Guardian</label>
+                <input type="text" class="form-control" name="guardianname" id="guardianname" placeholder="Guardian Name" value="<?php echo $gname; ?>">
+            </div>
+            <div class="form-group">
+                <label for="guardianplace">Parent/Guardian Place of Birth</label>
+                <input type="text" class="form-control" name="guardianplace" id="guardianplace" placeholder="Guardian POB" value="<?php echo $gplace; ?>">
+            </div>
+            <div class="form-group">
+                <label for="guardianhometown">Parent/Guardian Home Town</label>
+                <input type="text" class="form-control" name="guardianhometown" id="guardianhometown" placeholder="Guardian Home Town" value="<?php echo $ghometown; ?>">
+            </div>
 
-        if (!$result) {
-            die("Query failed: " . $db->error);
-        }
-        ?>
+            <?php
+            $sql = "SELECT name FROM countries ORDER BY name";
+            $result = $db->query($sql);
 
-        <div class="input-group" style="margin-bottom:10px">
-            <span class="input-group-addon">Parent/Guardian Country</span>
-            <select style='height:37px;width:100%;border:1px solid black;' name="gcountry" id='gcountry'>
-                <option disabled selected>Select Country</option>
-                <?php
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo '<option value="' . htmlspecialchars($row['name']) . '"' . (($gcountry == htmlspecialchars($row['name'])) ? ' selected' : '') . '>' . htmlspecialchars($row['name']) . '</option>';
+            if (!$result) {
+                die("Query failed: " . $db->error);
+            }
+            ?>
+
+            <div class="form-group">
+                <label for="gcountry">Parent/Guardian Country</label>
+                <select class="form-control" name="gcountry" id="gcountry">
+                    <option disabled selected>Select Country</option>
+                    <?php
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo '<option value="' . htmlspecialchars($row['name']) . '"' . (($gcountry == htmlspecialchars($row['name'])) ? ' selected' : '') . '>' . htmlspecialchars($row['name']) . '</option>';
+                        }
                     }
-                }
-                ?>
-            </select>
-        </div>
+                    ?>
+                </select>
+            </div>
 
-        <span id="paregvt"></span>
-        <div class="input-group" style="margin-bottom:10px">
-            <span class="input-group-addon">Parent/Guardian Address</span>
-            <textarea name="gaddress" id="gaddress" rows="4" class="form-control" placeholder="Guardian Correspondence Address"><?php echo $gaddress; ?></textarea>
-        </div>
-        <div class="input-group" style="margin-bottom:10px">
-            <span class="input-group-addon">Parent/Guardian Phone</span>
-            <input type="text" class="form-control" name="gmobile" id="gmobile" placeholder="Guardian Phone Number" value="<?php echo $gmobile; ?>">
-        </div>
-        <div class="input-group" style="margin-bottom:10px">
-            <span class="input-group-addon">Applicant Phone</span>
-            <input type="text" class="form-control" name="applicantphone" id="applicantphone" placeholder="Applicant Phone Number" value="<?php echo $applicantphone; ?>">
-        </div>
-        <div class="input-group" style="margin-bottom:10px">
-            <span class="input-group-addon">Applicant Email</span>
-            <input type="email" class="form-control" name="email" id="email" placeholder="E-mail Address" value="<?php echo $email; ?>">
-        </div>
+            <span id="paregvt"></span>
+            <div class="form-group">
+                <label for="gaddress">Parent/Guardian Address</label>
+                <textarea name="gaddress" id="gaddress" rows="4" class="form-control" placeholder="Guardian Correspondence Address"><?php echo $gaddress; ?></textarea>
+            </div>
+            <div class="form-group">
+                <label for="gmobile">Parent/Guardian Phone</label>
+                <input type="text" class="form-control" name="gmobile" id="gmobile" placeholder="Guardian Phone Number" value="<?php echo $gmobile; ?>">
+            </div>
+            <div class="form-group">
+                <label for="applicantphone">Applicant Phone</label>
+                <input type="text" class="form-control" name="applicantphone" id="applicantphone" placeholder="Applicant Phone Number" value="<?php echo $applicantphone; ?>">
+            </div>
+            <div class="form-group">
+                <label for="email">Applicant Email</label>
+                <input type="email" class="form-control" name="email" id="email" placeholder="E-mail Address" value="<?php echo $email; ?>">
+            </div>
 
-        <div class="form-group">
-            <button type="submit" class="biodata btn btn-default" name="login_buttons" id="login_buttons">
-                <span class="glyphicon glyphicon-log-in"></span> &nbsp; Save
-            </button>
-            <button type="reset" class="Del btn btn-default" name="login_button" id="login_button">
-                <span class="glyphicon glyphicon-trash"></span> &nbsp; Clear
-            </button>
+            <div class="form-group">
+                <button type="submit" class="biodata btn btn-default" name="login_buttons" id="login_buttons">
+                    <span class="glyphicon glyphicon-log-in"></span> &nbsp; Save
+                </button>
+                <button type="reset" class="Del btn btn-default" name="login_button" id="login_button">
+                    <span class="glyphicon glyphicon-trash"></span> &nbsp; Clear
+                </button>
+            </div>
+            <?php if (isset($_GET['ids'])) {
+                $direction = "summary.php";
+            } else {
+                $direction = "olevel.php";
+            } ?>
+            <div class="form-group">
+                <a type="button" class="btn btn-default" href="<?php echo $direction; ?>">
+                    <i class="fa fa-arrow-right"></i> &nbsp; Next
+                </a>
+            </div>
         </div>
-		<?php if (isset($_GET['ids'])) {
-
-$direction = "summary.php";
-} else {
-$direction = "olevel.php";
-}
-?>
-        <div class="form-group">
-            <a type="button" class="btn btn-default" href="<?php echo $direction; ?>">
-                <i class="fa fa-arrow-right"></i> &nbsp; Next
-            </a>
-        </div>
-    </div>
+    </form>
 
 
 
