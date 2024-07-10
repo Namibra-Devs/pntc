@@ -1657,6 +1657,11 @@ header > .navbar {
   margin-top: 5.5rem;
 }
 
+.navbar-collapse > ul {
+  width: 100%;
+  justify-content: right;
+}
+
 @media screen and (min-width: 1024px) {
   header .navbar-collapse {
     display: flex !important;
