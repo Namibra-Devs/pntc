@@ -294,10 +294,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			/* Handling login functionality */
 
 			function verifyEmail() {
-				var data = $("#verify-email").serialize();
-				data['type'] = "verify_email";
-				// console.log({data});	
-				// return;		
+				var data = $("#verify-email").serialize();		
 				$.ajax({
 					type: 'POST',
 					url: 'verify_handler.php',
