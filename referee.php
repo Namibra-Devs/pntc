@@ -6,7 +6,7 @@ if (isset($_COOKIE['pin']) && $_COOKIE['serial']) {
 	$pin = $_COOKIE['pin'];
 	$serial = $_COOKIE['serial'];
 } else {
-	header('location:onlineform.php');
+	header('location:index.php');
 	exit;
 }
 ?>
@@ -278,14 +278,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 	<!-- header -->
-	<section class="w3layouts-header py-2">
+	<!-- <section class="w3layouts-header py-2">
 		<div class="container">
-			<!-- header -->
+			header
 			<header>
 				<nav class="navbar navbar-expand-lg navbar-light bg-gradient-secondary">
 					<h>
 						<a class="navbar-brand" href="index.php">
-							PREMIER NURSING COLLEGE,PNTC
+							PREMIER NURSING COLLEGE
 						</a>
 					</h>
 					<button class="navbar-toggler ml-md-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -306,7 +306,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<a class="dropdown-item" href="biodata.php">Online Form</a>
 									<a class="dropdown-item" href="#">Admission Status</a>
 									<a class="dropdown-item" href="#">Admission List</a>
-									<a class="dropdown-item" href="onlineform.php">Print Form</a>
+									<a class="dropdown-item" href="index.php">Print Form</a>
 									<a class="dropdown-item" href="login.php"><i class="fa fa-lock"></i>&nbsp;Administrator</a>
 								</div>
 							</li>
@@ -327,15 +327,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>
 				</nav>
 			</header>
-			<!-- //header -->
+			//header
 		</div>
-	</section>
+	</section> -->
 	<!-- //header -->
 	<!-- banner -->
-	<section class="banner-1">
+	<!-- <section class="banner-1">
 
-	</section>
-	<!-- //banner -->
+	</section> -->
+	<!-- //banner -->>
 	<!-- gallery -->
 	<div class="agileits-services text-center py-5">
 		<div class="container py-md-4 mt-md-3">
@@ -473,7 +473,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 	<!-- //gallery -->
 
-	<footer class="footer-section py-5">
+	<!-- <footer class="footer-section py-5">
 		<div class="container">
 			<div class="row">
 
@@ -529,7 +529,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 			</div>
 		</div>
-	</footer>
+	</footer> -->
 	<!-- //Footer -->
 	<!-- copyright -->
 	<section class="copyright-w3layouts py-xl-4 py-3">

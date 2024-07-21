@@ -407,7 +407,7 @@ h4.modal-title {
   width: 70px;
   position: absolute;
   top: 132%;
-  right: 47%;
+  right: 46%;
 }
 /*-- categories --*/
 .categories_sub h3 {
@@ -1327,6 +1327,16 @@ h2.typoh2 {
   .banner-top3 {
     min-height: 510px;
   }
+
+  heading-agileinfo span:after {
+    content: "";
+    background: #212121;
+    height: 2px;
+    width: 70px;
+    position: absolute;
+    top: 132%;
+    right: 45%;
+}
 }
 @media screen and (min-width: 992px) {
 }
@@ -1445,6 +1455,15 @@ h2.typoh2 {
 @media screen and (max-width: 800px) {
 }
 @media screen and (max-width: 768px) {
+  .heading-agileinfo span:after {
+    content: "";
+    background: #212121;
+    height: 2px;
+    width: 70px;
+    position: absolute;
+    top: 144%;
+    right: 43%;
+}
 }
 @media screen and (max-width: 736px) {
   .banner-top1,
@@ -1535,6 +1554,15 @@ h2.typoh2 {
   .banner-info h3 {
     font-size: 32px;
   }
+  .heading-agileinfo span:after {
+    content: "";
+    background: #212121;
+    height: 2px;
+    width: 70px;
+    position: absolute;
+    top: 135%;
+    right: 42%;
+}
 }
 @media screen and (max-width: 414px) {
   .banner-info h3 {
@@ -1662,6 +1690,12 @@ header > .navbar {
   justify-content: right;
 }
 
+.banner-top.banner-top1{
+  margin-top: 5.5rem;
+  padding-top: 2rem;
+}
+
+
 @media screen and (min-width: 1024px) {
   header .navbar-collapse {
     display: flex !important;
@@ -1670,5 +1704,14 @@ header > .navbar {
   .dropdown-menu {
     background-color: black !important;
   }
+}
+
+.copyright-w3layouts {
+  background: #26a226;
+  border-top: 1px solid #5cb85c;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }
 /* -- //Responsive code -- */

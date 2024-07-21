@@ -6,7 +6,7 @@ if (isset($_COOKIE['pin']) && $_COOKIE['serial']) {
   $pin = $_COOKIE['pin'];
   $serial = $_COOKIE['serial'];
 
-  $sqluser = "SELECT * FROM Applicants2 WHERE Serial='$serial' && Pin='$pin' ";
+  $sqluser = "SELECT * FROM applicants2 WHERE Serial='$serial' && Pin='$pin' ";
 
   $retrieved = mysqli_query($db, $sqluser);
   while ($found = mysqli_fetch_array($retrieved)) {
@@ -15,12 +15,12 @@ if (isset($_COOKIE['pin']) && $_COOKIE['serial']) {
     $id = $found['id'];
   }
 } else {
-  header('location:onlineform.php');
+  header('location:index.php');
   exit;
 }
 
 
-$sqluser = "SELECT * FROM Applicants WHERE Serial='$serial' && Pin='$pin' ";
+$sqluser = "SELECT * FROM applicants WHERE Serial='$serial' && Pin='$pin' ";
 $retrieved = mysqli_query($db, $sqluser);
 while ($found = mysqli_fetch_array($retrieved)) {
   $idS = $found['id'];
@@ -65,6 +65,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <script type="text/javascript" src="js/validation.min.js"></script>
   <script type="text/javascript" src="js/login.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 
 
   <style>
@@ -77,7 +78,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     }
 
-    #Olevel {
+    #olevel {
       padding-top: 55rem !important;
     }
 
@@ -91,52 +92,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
 
 
-  <script type="text/javascript">
-    $(document).on("click", ".Decla", function() {
-      if (!$('#declarationCheckbox').is(':checked')) {
-        swal({
-          title: "Error!",
-          text: "Please agree to the declaration before submitting the form.",
-          type: "error",
-          confirmButtonColor: "green",
-        });
-        return;
-      }
-      var decstatus = "Nice";
-      var pin = document.getElementById('pin').value;
-      var serial = document.getElementById('serial').value;
 
-
-      $.ajax({
-        type: 'POST',
-        url: "process.php",
-        data: {
-          dstatus: decstatus,
-          userpin: pin,
-          userserial: serial
-        },
-        success: function(result) {
-
-          swal({
-              title: 'Application Completed!',
-              text: 'Your application has been submitted successfully. Check your email for further details.',
-              type: "success",
-              showCancelButton: false,
-              confirmButtonColor: "green",
-              confirmButtonText: "OK",
-              closeOnConfirm: true,
-              closeOnCancel: true,
-              buttonsStyling: false
-            },
-            function(isConfirm) {
-              if (isConfirm) {
-                window.location = "index.php";
-              }
-            });
-        }
-      });
-    });
-  </script>
   <script type="text/javascript">
     $(document).on("click", ".open-Biodata", function() {
       var mydob = $(this).data('id');
@@ -213,7 +169,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             return ucwords(str_replace('-', ' ', $str));
           }
 
-          $qued = "SELECT * FROM Profilepictures WHERE Serial='$serial'&& Pin='$pin' ";
+          $qued = "SELECT * FROM profilepictures WHERE Serial='$serial'&& Pin='$pin' ";
           $resul = mysqli_query($db, $qued);
           $checks1 = mysqli_num_rows($resul);
           if ($checks1 != 0) {
@@ -336,7 +292,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
   </div>
 
-  <div id="Employment" class="modal fade" role="dialog" style="background-color:#222d32;">
+  <div id="employment" class="modal fade" role="dialog" style="background-color:#222d32;">
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content" style="font-size: 14px; font-family: Times New Roman;color:black;">
@@ -408,7 +364,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </div>
   </div>
 
-  <div id="Olevel" class="modal fade" role="dialog" style="background-color:#222d32;">
+  <div id="olevel" class="modal fade" role="dialog" style="background-color:#222d32;">
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content" style="font-size: 14px; font-family: Times New Roman;color:black;">
@@ -435,7 +391,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </thead>
             <tbody>
               <?php
-              $sql = "SELECT * FROM Olevel  WHERE Serial='$serial'&& Pin='$pin' ";
+              $sql = "SELECT * FROM olevel  WHERE Serial='$serial'&& Pin='$pin' ";
               $rget = mysqli_query($db, $sql);
               $num3 = mysqli_num_rows($rget);
               if ($num3 != 0) {
@@ -562,7 +518,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <tbody>
               <?php
 
-              $quedk = "SELECT * FROM Courseapplied WHERE Serial='$serial'&& Pin='$pin' ";
+              $quedk = "SELECT * FROM courseapplied WHERE Serial='$serial'&& Pin='$pin' ";
               $resulk = mysqli_query($db, $quedk);
               $checks2 = mysqli_num_rows($resulk);
               if ($checks2 != 0) {
@@ -686,60 +642,63 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   </div>
 
   <!-- header -->
-  <section class="w3layouts-header py-2">
-    <div class="container">
-      <!-- header -->
-      <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-gradient-secondary">
-          <h>
-            <a class="navbar-brand" href="index.php">
-              PREMIER NURSING COLLEGE
-            </a>
-          </h>
-          <button class="navbar-toggler ml-md-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-lg-auto text-center">
-              <li class="nav-item active  mr-3">
-                <a class="nav-link" href="index.php">Home
-                  <span class="sr-only">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item dropdown mr-3">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Admission
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="biodata.php">Online Form</a>
-                  <a class="dropdown-item" href="#">Admission Status</a>
-                  <a class="dropdown-item" href="#">Admission List</a>
-                  <a class="dropdown-item" href="onlineform.php">Print Form</a>
-                  <a class="dropdown-item" href="login.php"><i class="fa fa-lock"></i>&nbsp;Administrator</a>
-                </div>
-              </li>
-              <li class="nav-item  mr-3">
-                <a class="nav-link" href="#">Registration</a>
-              </li>
-              <li class="nav-item  mr-3">
-                <a class="nav-link" href="#">Results</a>
-              </li>
+  <!-- <section class="w3layouts-header py-2">
+		<div class="container">
+			header
+			<header>
+				<nav class="navbar navbar-expand-lg navbar-light bg-gradient-secondary">
+					<h>
+						<a class="navbar-brand" href="index.php">
+							PREMIER NURSING COLLEGE
+						</a>
+					</h>
+					<button class="navbar-toggler ml-md-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav ml-lg-auto text-center">
+							<li class="nav-item active  mr-3">
+								<a class="nav-link" href="index.php">Home
+									<span class="sr-only">(current)</span>
+								</a>
+							</li>
+							<li class="nav-item dropdown mr-3">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									Admission
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+									<a class="dropdown-item" href="biodata.php">Online Form</a>
+									<a class="dropdown-item" href="#">Admission Status</a>
+									<a class="dropdown-item" href="#">Admission List</a>
+									<a class="dropdown-item" href="index.php">Print Form</a>
+									<a class="dropdown-item" href="login.php"><i class="fa fa-lock"></i>&nbsp;Administrator</a>
+								</div>
+							</li>
+							<li class="nav-item  mr-3">
+								<a class="nav-link" href="#">Registration</a>
+							</li>
+							<li class="nav-item  mr-3">
+								<a class="nav-link" href="#">Results</a>
+							</li>
 
-              <li class="nav-item mr-3">
-                <a class="nav-link" href="#">Contact</a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </header>
-      <!-- //header -->
-    </div>
-  </section>
+							<li class="nav-item mr-3">
+								<a class="nav-link" href="#">Contact</a>
+							</li>
+							<li class="nav-item mr-3">
+								<a class="nav-link" href="logout.php" style="font-weight: bold; font-family: 'Comic Sans MS'; color: #5261D1;">Logout</a>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</header>
+			//header
+		</div>
+	</section> -->
   <!-- //header -->
   <!-- banner -->
-  <section class="banner-1">
+  <!-- <section class="banner-1">
 
-  </section>
+	</section> -->
   <!-- //banner -->
   <!-- gallery -->
   <div class="agileits-services text-center py-5">
@@ -763,7 +722,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
               </thead>
               <tbody>
                 <?php
-                $sqln2 = "SELECT * FROM Applicants2 WHERE Serial='$serial' && Pin='$pin' ";
+                $sqln2 = "SELECT * FROM applicants2 WHERE Serial='$serial' && Pin='$pin' ";
                 $rgetb2 = mysqli_query($db, $sqln2);
                 $numb = mysqli_num_rows($rgetb2);
                 if ($numb != 0) {
@@ -870,7 +829,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                       } else {
                         echo "Incomplete";
                       } ?></td>
-                  <td><a data-toggle='modal' data-id='1' href='#Olevel' class='btn  btn-success' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><span class='glyphicon glyphicon-eye-open' style='color: #FFFFFF;'></span></a></td>
+                  <td><a data-toggle='modal' data-id='1' href='#olevel' class='btn  btn-success' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><span class='glyphicon glyphicon-eye-open' style='color: #FFFFFF;'></span></a></td>
                   <td><a href='olevel.php?ids=1' class='btn  btn-primary' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><i class='fa fa-edit' style='color: #FFFFFF;'></i></a></td>
 
                 </tr>
@@ -894,7 +853,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                       } else {
                         echo "Incomplete";
                       } ?></td>
-                  <td><a data-toggle='modal' data-id='1' href='#Employment' class='btn  btn-success' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><span class='glyphicon glyphicon-eye-open' style='color: #FFFFFF;'></span></a></td>
+                  <td><a data-toggle='modal' data-id='1' href='#employment' class='btn  btn-success' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><span class='glyphicon glyphicon-eye-open' style='color: #FFFFFF;'></span></a></td>
                   <td><a href='referee.php?ids=1' class='btn btn-primary' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><i class='fa fa-edit' style='color: #FFFFFF;'></i></a></td>
 
                 </tr>
@@ -913,7 +872,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
             <hr />
             <?php
-            if ($numb != 0 && $nume != 0 && $num5 != 0 && $num3 != 0 && $num12 != 0 && $checks2 != 0 && $checks1 != 0) { ?>
+            if ($numb != 0 && $nume != 0 && $num3 != 0  && $checks2 != 0 && $checks1 != 0) {
+            ?>
               <div class="alert alert-warning">
                 I&nbsp;<?php if (isset($firstname)) {
                           echo $firstname . ' ' . $sirname;
@@ -930,8 +890,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
               <hr />
               <div class="form-group">
                 <button type="submit" class="Decla btn btn-default" name="Change" value="changes">
-                  <span class="glyphicon glyphicon-check"></span> &nbsp;Submit Application
+                  <span class="glyphicon glyphicon-check"></span> &nbsp;<span id="buttonText">Submit Application</span>
                 </button>
+
               </div>
             <?php
             } else {
@@ -953,7 +914,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <!-- //gallery -->
 
   <!-- Footer -->
-  <footer class="footer-section py-5">
+  <!-- <footer class="footer-section py-5">
     <div class="container">
       <div class="row">
 
@@ -1009,7 +970,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
       </div>
     </div>
-  </footer>
+  </footer> -->
   <!-- //Footer -->
   <!-- copyright -->
   <section class="copyright-w3layouts py-xl-4 py-3">
@@ -1042,14 +1003,457 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   </section>
   <!-- //copyright -->
 
-  <!-- js -->
-  <!-- <script src="js/jquery-2.2.3.min.js"></script> --> <!-- //js-->
-  <script src="js/smoothbox.jquery2.js"></script>
 
-  <!-- Bootstrap core JavaScript
+  <?php
+  $sqln2 = "SELECT * FROM applicants2 WHERE Serial='$serial' && Pin='$pin' ";
+  $rgetb2 = mysqli_query($db, $sqln2);
+  $numb = mysqli_num_rows($rgetb2);
+  if ($numb != 0) {
+    while ($foundl = mysqli_fetch_array($rgetb2)) {
+      $dob = $foundl['DOB'];
+      $gender = $foundl['Gender'];
+      $country = $foundl['Country'];
+      $lgvt = $foundl['Localgvt'];
+      $state = $foundl['State'];
+      $crapp = $foundl['Appcoraddress'];
+
+      $gplace = $foundl['Gplace'];
+      $gname = $foundl['Gname'];
+      $ghome = $foundl['Ghometown'];
+      $gcountry = $foundl['Gcountry'];
+      $gstate = $foundl['Gstate'];
+      $appre = $foundl['Appresaddress'];
+
+      $glocal = $foundl['Glocalgvt'];
+      $gaddres = $foundl['Gaddress'];
+      $gmobile = $foundl['Gmobile'];
+      $appphone = $foundl['Applicantphone'];
+      $email = $foundl['Email'];
+      $hometown = $foundl['Hometown'];
+    }
+  }
+  ?>
+
+
+  <body>
+    <div class="container printable-area" style="display: none;">
+      <div id="printableArea">
+        <!-- <p><img src="images/unima.png" alt="" class="img-fluid" style="width:100px;height:100px" /></p> -->
+        <center>
+          <p style="color: black;">THE PREMIER NURSING COLLEGE, PNTC <br>Admission form for 2024-2025 Academic session</p>
+        </center>
+
+
+        <!-- Section 1: Biodata -->
+        <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%;">
+          <thead>
+            <tr style="background-color: #f2f2f2;">
+              <th colspan="4" style="border: 1px solid #000;">SECTION 1: BIODATA</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background-color: #ffffff;">
+              <td style="border: 1px solid #000;">APPLICATION NUMBER</td>
+              <?php
+              $sqln = "SELECT * FROM declared WHERE Serial='$serial' && Pin='$pin'  ";
+              $rgetb = mysqli_query($db, $sqln);
+              if (mysqli_num_rows($rgetb) > 0) {
+                $foundl = mysqli_fetch_array($rgetb);
+                $application_no = $foundl['Applno'];
+              }
+              ?>
+              <td colspan="1" style="border: 1px solid #000;"><?php if (isset($application_no)) {
+                                                                echo $application_no;
+                                                              } ?></td>
+              <td style="border: 1px solid #000;">PASSPORT</td>
+              <td colspan="1" style="border: 1px solid #000;">
+                <?php
+                $sqln = "SELECT * FROM profilepictures WHERE serial='$serial' && pin='$pin'";
+                $rgetb = mysqli_query($db, $sqln);
+                if (mysqli_num_rows($rgetb) > 0) {
+                  $foundl = mysqli_fetch_array($rgetb);
+                  $profile = $foundl['name'];
+                  echo "<center><img src='images/applicants/$profile' class='img-fluid' alt='error' style='width:100px;height:100px'></center/>";
+                }
+                ?>
+              </td>
+            </tr>
+            <tr style="background-color: #f2f2f2;">
+              <td colspan="1" style="border: 1px solid #000;">Name</td>
+              <td colspan="1" style="border: 1px solid #000;"><?php if (isset($firstname)) {
+                                                                echo $firstname . ' ' . $sirname;
+                                                              } ?></td>
+              <td colspan="1" style="border: 1px solid #000;">Date of Birth</td>
+              <td colspan="1" style="border: 1px solid #000;"><?php if (isset($dob)) {
+                                                                echo $dob;
+                                                              } ?></td>
+            </tr>
+            <tr style="background-color: #ffffff;">
+              <td style="border: 1px solid #000;">Gender</td>
+              <td style="border: 1px solid #000;"><?php if (isset($gender)) {
+                                                    echo $gender;
+                                                  } ?></td>
+              <td style="border: 1px solid #000;">Nationality</td>
+              <td style="border: 1px solid #000;"><?php if (isset($country)) {
+                                                    echo $country;
+                                                  } ?></td>
+            </tr>
+            <tr style="background-color: #f2f2f2;">
+              <td style="border: 1px solid #000;">State</td>
+              <td style="border: 1px solid #000;"><?php if (isset($state)) {
+                                                    echo $state;
+                                                  } ?></td>
+              <td style="border: 1px solid #000;">Local Government</td>
+              <td style="border: 1px solid #000;"><?php if (isset($lgvt)) {
+                                                    echo $lgvt;
+                                                  } ?></td>
+            </tr>
+            <tr style="background-color: #ffffff;">
+              <td style="border: 1px solid #000;">Hometown</td>
+              <td style="border: 1px solid #000;"><?php if (isset($hometown)) {
+                                                    echo $hometown;
+                                                  } ?></td>
+              <td style="border: 1px solid #000;">Postal Address</td>
+              <td style="border: 1px solid #000;"><?php if (isset($crapp)) {
+                                                    echo $crapp;
+                                                  } ?></td>
+            </tr>
+            <tr style="background-color: #f2f2f2;">
+              <td style="border: 1px solid #000;">Residential Address</td>
+              <td style="border: 1px solid #000;"><?php if (isset($appre)) {
+                                                    echo $appre;
+                                                  } ?></td>
+              <td style="border: 1px solid #000;">Name of Parent/Guardian</td>
+              <td style="border: 1px solid #000;"><?php if (isset($gname)) {
+                                                    echo $gname;
+                                                  } ?></td>
+            </tr>
+            <tr style="background-color: #ffffff;">
+              <td style="border: 1px solid #000;">Parent/Guardian Place of Birth</td>
+              <td style="border: 1px solid #000;"><?php if (isset($gplace)) {
+                                                    echo $gplace;
+                                                  } ?></td>
+              <td style="border: 1px solid #000;">Parent/Guardian Hometown</td>
+              <td style="border: 1px solid #000;"><?php if (isset($ghome)) {
+                                                    echo $ghome;
+                                                  } ?></td>
+            </tr>
+            <tr style="background-color: #f2f2f2;">
+              <td style="border: 1px solid #000;">Parent/Guardian Country</td>
+              <td style="border: 1px solid #000;"><?php if (isset($gcountry)) {
+                                                    echo $gcountry;
+                                                  } ?></td>
+              <td style="border: 1px solid #000;">Parent/Guardian State</td>
+              <td style="border: 1px solid #000;"><?php if (isset($gstate)) {
+                                                    echo $gstate;
+                                                  } ?></td>
+            </tr>
+            <tr style="background-color: #ffffff;">
+              <td style="border: 1px solid #000;">Parent/Guardian Local Government</td>
+              <td style="border: 1px solid #000;"><?php if (isset($glocal)) {
+                                                    echo $glocal;
+                                                  } ?></td>
+              <td style="border: 1px solid #000;">Parent/Guardian Correspondence Address</td>
+              <td style="border: 1px solid #000;"><?php if (isset($gaddres)) {
+                                                    echo $gaddres;
+                                                  } ?></td>
+            </tr>
+            <tr style="background-color: #f2f2f2;">
+              <td style="border: 1px solid #000;">Parent/Guardian Phone</td>
+              <td style="border: 1px solid #000;"><?php if (isset($gmobile)) {
+                                                    echo $gmobile;
+                                                  } ?></td>
+              <td style="border: 1px solid #000;">Applicant Phone</td>
+              <td style="border: 1px solid #000;"><?php if (isset($appphone)) {
+                                                    echo $appphone;
+                                                  } ?></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Section 2: Documents -->
+        <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%; margin-top: 20px;">
+          <thead>
+            <tr style="background-color: #f2f2f2;">
+              <th colspan="2" style="border: 1px solid #000;">SECTION 2: DOCUMENTS</th>
+            </tr>
+            <tr style="background-color: #ffffff;">
+              <th style="border: 1px solid #000;">Name</th>
+              <th style="border: 1px solid #000;">Document</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+
+            $qued = "SELECT * FROM profilepictures WHERE Serial='$serial' AND Pin='$pin'";
+            $resul = mysqli_query($db, $qued);
+            if (mysqli_num_rows($resul) > 0) {
+              while ($foundl = mysqli_fetch_array($resul)) {
+                $path = htmlspecialchars($foundl['name'], ENT_QUOTES, 'UTF-8');
+                $label = explode($serial . "_", $path);
+                $label = explode(".", implode($label));
+                $labelName = capitalizeAroundSeparator($label[0]);
+
+                echo '<tr style="background-color: #f2f2f2;">';
+                echo '<td style="border: 1px solid #000;">' . htmlspecialchars($labelName, ENT_QUOTES, 'UTF-8') . '</td>';
+                echo '<td style="border: 1px solid #000;"><a href="images/applicants/' . $path . '" download> Download ' . htmlspecialchars($labelName, ENT_QUOTES, 'UTF-8') . '</a></td>';
+                echo '</tr>';
+              }
+            }
+            ?>
+          </tbody>
+        </table>
+
+        <!-- Section 3: Program Choices -->
+        <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%; margin-top: 20px;">
+          <thead>
+            <tr style="background-color: #f2f2f2;">
+              <th colspan="4" style="border: 1px solid #000;">SECTION 3: PROGRAM CHOICES</th>
+            </tr>
+            <tr style="background-color: #ffffff;">
+              <th style="border: 1px solid #000;">First Choice</th>
+              <th style="border: 1px solid #000;">Second Choice</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background-color: #f2f2f2;">
+              <?php
+              $qued = "SELECT * FROM courseapplied WHERE serial='$serial' AND pin='$pin'";
+              $resul = mysqli_query($db, $qued);
+              if (mysqli_num_rows($resul) > 0) {
+                while ($found = mysqli_fetch_array($resul)) {
+                  $choice1 = htmlspecialchars($found['Choice1'], ENT_QUOTES, 'UTF-8');
+                  $choice2 = htmlspecialchars($found['Choice2'], ENT_QUOTES, 'UTF-8');
+                  echo "<td style='border: 1px solid #000;'>{$choice1}</td>";
+                  echo "<td style='border: 1px solid #000;'>{$choice2}</td>";
+                }
+              }
+              ?>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Section 4: O'Level Results -->
+        <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%; margin-top: 20px;">
+          <thead>
+            <tr style="background-color: #f2f2f2;">
+              <th colspan="6" style="border: 1px solid #000;">SECTION 4: O'LEVEL RESULTS</th>
+            </tr>
+            <tr style="background-color: #ffffff;">
+              <th style="border: 1px solid #000;">Type of Exam</th>
+              <th style="border: 1px solid #000;">Center & Exam No</th>
+              <th style="border: 1px solid #000;">Date of Exam</th>
+              <th style="border: 1px solid #000;">Subject</th>
+              <th style="border: 1px solid #000;">Sitting</th>
+              <th style="border: 1px solid #000;">Grade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+            $sql = "SELECT * FROM olevel WHERE serial='$serial' AND pin='$pin'";
+            $rget = mysqli_query($db, $sql);
+            if (mysqli_num_rows($rget) > 0) {
+              while ($foundk = mysqli_fetch_array($rget)) {
+                $grade = $foundk['Grade'] != null ? htmlspecialchars($foundk['Grade'], ENT_QUOTES, 'UTF-8') : "NA";
+                $subject = $foundk['Subjects'] != null ? htmlspecialchars($foundk['Subjects'], ENT_QUOTES, 'UTF-8') : "NA";
+                echo "<tr style='background-color: #f2f2f2;'>
+                               <td style='border: 1px solid #000;'>" . htmlspecialchars($foundk['Examtype'], ENT_QUOTES, 'UTF-8') . "</td>
+                               <td style='border: 1px solid #000;'>" . htmlspecialchars($foundk['Exam'], ENT_QUOTES, 'UTF-8') . "</td>
+                               <td style='border: 1px solid #000;'>" . htmlspecialchars($foundk['Examdate'], ENT_QUOTES, 'UTF-8') . "</td>
+                               <td style='border: 1px solid #000;'>{$subject}</td>
+                               <td style='border: 1px solid #000;'>" . htmlspecialchars($foundk['Sitting'], ENT_QUOTES, 'UTF-8') . "</td>
+                               <td style='border: 1px solid #000;'>{$grade}</td>
+                           </tr>";
+              }
+            }
+            ?>
+          </tbody>
+        </table>
+
+        <!-- Section 5: Referee -->
+        <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%; margin-top: 20px;">
+          <thead>
+            <tr style="background-color: #f2f2f2;">
+              <th colspan="6" style="border: 1px solid #000;">SECTION 5: REFEREE</th>
+            </tr>
+            <tr style="background-color: #ffffff;">
+              <th style="border: 1px solid #000;">Name</th>
+              <th style="border: 1px solid #000;">Contact</th>
+              <th style="border: 1px solid #000;">Date</th>
+              <th style="border: 1px solid #000;">Address</th>
+              <th style="border: 1px solid #000;">Class</th>
+              <th style="border: 1px solid #000;">Signature</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+            $sql = "SELECT * FROM referees WHERE Serial='$serial' AND Pin='$pin'";
+            $rget = mysqli_query($db, $sql);
+            if (mysqli_num_rows($rget) > 0) {
+              while ($foundk = mysqli_fetch_array($rget)) {
+                $name = htmlspecialchars($foundk['name'], ENT_QUOTES, 'UTF-8');
+                $contact = htmlspecialchars($foundk['contact'], ENT_QUOTES, 'UTF-8');
+                $date = htmlspecialchars($foundk['date'], ENT_QUOTES, 'UTF-8');
+                $address = htmlspecialchars($foundk['address'], ENT_QUOTES, 'UTF-8');
+                $ref = htmlspecialchars($foundk['ref'], ENT_QUOTES, 'UTF-8');
+                $signature = 'images/applicants/' . htmlspecialchars($foundk['signature'], ENT_QUOTES, 'UTF-8');
+
+                echo "<tr style='background-color: #f2f2f2;'>
+                               <td style='border: 1px solid #000;'>{$name}</td>
+                               <td style='border: 1px solid #000;'>{$contact}</td>
+                               <td style='border: 1px solid #000;'>{$date}</td>
+                               <td style='border: 1px solid #000;'>{$address}</td>
+                               <td style='border: 1px solid #000;'>{$ref}</td>
+                               <td style='border: 1px solid #000;'><a href='{$signature}' download> Download Signature</a></td>
+                           </tr>";
+              }
+            }
+            ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <!-- </center> -->
+    </div>
+    <div class="form-group">
+      <!-- <a class='btn btn-default' onclick="generateAndDownloadPDF()"><span class='glyphicon glyphicon-download'></span> &nbsp;Download PDF</a> -->
+      <!-- Other buttons -->
+      <!-- <button id="sendPdf">Send PDF</button> -->
+    </div>
+    </div>
+
+    <script>
+      function generateAndDownloadPDF() {
+        const element = document.getElementById('printableArea');
+        const opt = {
+          margin: 1,
+          filename: 'application_form.pdf',
+          image: {
+            type: 'jpeg',
+            quality: 0.98
+          },
+          html2canvas: {
+            scale: 2
+          },
+          jsPDF: {
+            unit: 'in',
+            format: 'letter',
+            orientation: 'portrait'
+          }
+        };
+
+        html2pdf().set(opt).from(element).save();
+      }
+    </script>
+
+
+
+    <script type="text/javascript">
+      $(document).on("click", ".Decla", async function() {
+        if (!$('#declarationCheckbox').is(':checked')) {
+          swal({
+            title: "Error!",
+            text: "Please agree to the declaration before submitting the form.",
+            type: "error",
+            button: "OK",
+            confirmButtonColor: "green"
+          });
+          return;
+        }
+
+
+        $(".Decla").html('<img src="js/ajax-loader.gif" /> &nbsp; Submitting ...');
+
+        var decstatus = "Nice";
+        var pin = $('#pin').val();
+        var serial = $('#serial').val();
+
+        try {
+          const result = await $.ajax({
+            type: 'POST',
+            url: "process.php",
+            data: {
+              dstatus: decstatus,
+              userpin: pin,
+              userserial: serial
+            }
+          });
+
+          if (result.includes("201")) {
+            const emailResult = await sendPdfEmail();
+            if (emailResult) {
+              swal({
+                title: "Application Completed!",
+                text: 'Your application has been submitted successfully. Check your email for further details. Do not submit duplicate applications.',
+                type: "success",
+                button: "OK",
+                confirmButtonColor: "green"
+              });
+            } else {
+              swal({
+                title: "Error!",
+                text: 'An error occurred while sending the email. Please try again.',
+                type: "error",
+                button: "OK",
+                confirmButtonColor: "green"
+              });
+            }
+          } else {
+            swal({
+              title: "Error!",
+              text: 'An error occurred during the application process. Please try again.',
+              type: "error",
+              button: "OK",
+              confirmButtonColor: "green"
+            });
+          }
+        } catch (error) {
+          console.error("Error during submission:", error);
+          swal({
+            title: "Error!",
+            text: 'An error occurred during the submission process. Please try again.',
+            type: "error",
+            button: "OK",
+            confirmButtonColor: "green"
+          });
+        } finally {
+          $(".Decla").html('<span class="glyphicon glyphicon-check"></span> &nbsp; Submit Application');
+        }
+      });
+
+      function sendPdfEmail() {
+        var htmlContent = $('#printableArea').html();
+
+        return $.ajax({
+          url: 'mailer.php',
+          type: 'POST',
+          data: {
+            html: htmlContent
+          }
+        }).then(
+          function(response) {
+            // console.log('Email sent successfully:', response);
+            return true;
+          },
+          function(jqXHR, textStatus, errorThrown) {
+            console.error('Email sending failed:', textStatus, errorThrown);
+            return false;
+          }
+        );
+      }
+    </script>
+
+
+    <!-- js -->
+    <!-- <script src="js/jquery-2.2.3.min.js"></script> --> <!-- //js-->
+    <script src="js/smoothbox.jquery2.js"></script>
+
+    <!-- Bootstrap core JavaScript
     ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  <script src="js/bootstrap.js"></script>
-</body>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/bootstrap.js"></script>
+  </body>
 
 </html>

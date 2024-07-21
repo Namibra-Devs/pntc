@@ -54,6 +54,12 @@ body {
   min-height: 50%;
   margin-top: 5.5rem;
 }
+
+.banner-top.banner-top1{
+  margin-top: 5.5rem;
+  padding-top: 2rem;
+}
+
 .navbar-collapse > ul {
 	width: 100%;
 	justify-content: right;
@@ -67,4 +73,13 @@ body {
   .dropdown-menu {
     background-color: black !important;
   }
+}
+
+.copyright-w3layouts {
+  background: #26a226;
+  border-top: 1px solid #5cb85c;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }

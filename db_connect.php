@@ -2,8 +2,11 @@
  
  $db = new mysqli("localhost","root","");
    if($db->connect_errno > 0){
+//  $db = new mysqli("shareddb-d.hosting.stackcp.net","premier_nursing","0IMDKKSpSCW&");
+//    if($db->connect_errno > 0){
          die('Unable to connect to database [' . $db->connect_error . ']');  } 
-         mysqli_select_db($db,"Unima");
+        //  mysqli_select_db($db,"premier_nursing-363510b0");
+         mysqli_select_db($db,"unima");
      
 // 	 $db->query("CREATE DATABASE IF NOT EXISTS `Unima`");
 	 
