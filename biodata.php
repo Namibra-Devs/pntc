@@ -4,8 +4,9 @@ if (isset($_COOKIE['pin']) && $_COOKIE['serial']) {
 
 	$pin = $_COOKIE['pin'];
 	$serial = $_COOKIE['serial'];
+	$email = $_COOKIE['email'];
 } else {
-	header('location:onlineform.php');
+	header('location:index.php');
 	exit;
 }
 ?>
@@ -82,14 +83,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			var gmobile = document.getElementById('gmobile').value;
 			var applicantphone = document.getElementById('applicantphone').value;
 			var email = document.getElementById('email').value;
-
-
-			// $(".bookId").html(myTitle);
-			//window.alert(gmobile); 
-			// if(myTitle==""){									
-			// $("#login_buttons").html('<img src="js/ajax-loader.gif" /> &nbsp; Loading Stage 2 ...');
-			// setTimeout(' window.location.href = "biodata.php"; ',3000);
-			// } 
+ 
 			$.ajax({
 				type: 'POST',
 				url: "process.php",
@@ -218,9 +212,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</script>
 
 	<!-- header -->
-	<section class="w3layouts-header py-2">
+	<!-- <section class="w3layouts-header py-2">
 		<div class="container">
-			<!-- header -->
+			header
 			<header>
 				<nav class="navbar navbar-expand-lg navbar-light bg-gradient-secondary">
 					<h>
@@ -246,7 +240,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<a class="dropdown-item" href="biodata.php">Online Form</a>
 									<a class="dropdown-item" href="#">Admission Status</a>
 									<a class="dropdown-item" href="#">Admission List</a>
-									<a class="dropdown-item" href="onlineform.php">Print Form</a>
+									<a class="dropdown-item" href="index.php">Print Form</a>
 									<a class="dropdown-item" href="login.php"><i class="fa fa-lock"></i>&nbsp;Administrator</a>
 								</div>
 							</li>
@@ -267,14 +261,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>
 				</nav>
 			</header>
-			<!-- //header -->
+			//header
 		</div>
-	</section>
+	</section> -->
 	<!-- //header -->
 	<!-- banner -->
-	<section class="banner-1">
+	<!-- <section class="banner-1">
 
-	</section>
+	</section> -->
 	<!-- //banner -->
 	<!-- gallery -->
 	<div class="agileits-services text-center py-5">
@@ -322,6 +316,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						}
 					}
 					// }
+
+					if(isset($_COOKIE['email'])){
+						$email = $_COOKIE['email'];
+					}
 
 					?>
 
@@ -486,7 +484,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- //gallery -->
 
 	<!-- Footer -->
-	<footer class="footer-section py-5">
+	<!-- <footer class="footer-section py-5">
 		<div class="container">
 			<div class="row">
 
@@ -542,7 +540,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 			</div>
 		</div>
-	</footer>
+	</footer> -->
 	<!-- //Footer -->
 	<!-- copyright -->
 	<section class="copyright-w3layouts py-xl-4 py-3">

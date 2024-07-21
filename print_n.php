@@ -16,7 +16,7 @@ $retrieved = mysqli_query($db,$sqluser);
 			  	  $id= $found['id'];  
   	     }
 }else{
-	 header('location:onlineform.php');
+	 header('location:index.php');
       exit;
 }
 ?>

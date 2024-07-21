@@ -109,7 +109,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <a class="dropdown-item" href="biodata.php">Online Form</a>
 									 <a class="dropdown-item" href="#">Admission Status</a>
 									 <a class="dropdown-item" href="#">Admission List</a>
-									 <a class="dropdown-item" href="onlineform.php">Print Form</a>
+									 <a class="dropdown-item" href="index.php">Print Form</a>
 									 <a class="dropdown-item" href="login.php"><i class="fa fa-lock"></i>&nbsp;Administrator</a>
                                 </div>
                             </li>

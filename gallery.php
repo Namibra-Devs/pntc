@@ -78,7 +78,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     Admission
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="onlineform.php">Online Form</a>
+                                    <a class="dropdown-item" href="index.php">Online Form</a>
 									 <a class="dropdown-item" href="typo.html">Admission Status</a>
 									 <a class="dropdown-item" href="gallery.html">Admission List</a>
 									 <a class="dropdown-item" href="typo.html">Print Form</a>
