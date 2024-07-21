@@ -315,8 +315,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<i class="fa fa-info-circle"></i>&nbsp;This stage you Enter your O'Level results in the space provided
 							<ol>
 								<li>Enter your O'Level results in space provide below</li>
-								<li>Add ,Delete and Save O'Level results using buttons below</li>
-								<li>Your adviced not to submit more than 5 O'Level results</li>
+								<li>Add, Delete and Save O'Level results using buttons below</li>
 							</ol>
 						</div>
 						<hr />

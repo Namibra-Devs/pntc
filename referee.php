@@ -349,8 +349,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="alert alert-warning">
 							<i class="fa fa-info-circle"></i>&nbsp;This stage you Enter your Referee Details in the spaces provided
 							<ol>
-								<li>Enter your Reference details in spaces provided below</li>
-								<li>Add, Delete and Save Reference history using buttons below</li>
+								<li>Enter your Referee details in spaces provided below</li>
+								<li>Add, Delete and Save Referee details using buttons below</li>
 							</ol>
 						</div>
 						<hr />
