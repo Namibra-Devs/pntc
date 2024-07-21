@@ -383,7 +383,7 @@ Below is the List of Serial Numbers and Pin You have Uploaded.
 
 			<div class="row">
 				<div class="col-lg-12" style="color:black ">
-					© 2024 TSAFE . All Rights Reserved | Design by: <a href="" style="color:black;" target="_blank">namibra.io</a>
+					© 2024 PNTC . All Rights Reserved | Design by: <a href="" style="color:black;" target="_blank">namibra.io</a>
 				</div>
 			</div>
 		</div>

@@ -29,6 +29,7 @@ body {
   font-family: Tahoma, Geneva, sans-serif;
   color: #990000;
   font-weight: lighter;
+  margin-bottom: 10rem;
 }
 .form-login .form-login-heading {
   color: #00a2d1;
@@ -82,4 +83,5 @@ body {
   bottom: 0;
   right: 0;
   left: 0;
+  z-index: 9999;
 }

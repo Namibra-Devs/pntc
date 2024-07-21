@@ -11,6 +11,7 @@ use PHPMailer\PHPMailer\Exception;
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['html'])) {
         $htmlContent = $_POST['html'];
+        $email = $_POST['email'];
 
         $pdf = new TCPDF();
         $pdf->AddPage();
@@ -30,8 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $mail->Port = 587; // TLS port
 
             // Recipients
-            $mail->setFrom('admission@pntc.edu.gh', 'PNTC Admissions');
-            $mail->addAddress('abdulsamadbalogun25@gmail.com', 'Applicant');
+            $mail->setFrom('admissions@pntc.edu.gh', 'PNTC Admissions');
+            $mail->addAddress($email, 'Applicant');
 
             // Attachments
             $mail->addStringAttachment($pdfOutput, 'application_form.pdf');

@@ -5,7 +5,7 @@ include_once("db_connect.php");
 <html lang="zxx">
 
 <head>
-	<title>TSAFE</title>
+	<title>PNTC</title>
 	<!-- for-mobile-apps -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	  <meta charset="utf-8" />
@@ -23,17 +23,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- //for-mobile-apps -->
 	<script src="js/jquery.js"></script>
 
-	<link href="css/style1.css" rel="stylesheet" type="text/css" media="screen">
+	<link href="css/style1.css?v=<?php echo filemtime('css/style1.css'); ?>" rel="stylesheet" type="text/css" media="screen" />
 
 	 <link href="css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
 	<link href="css/font-awesome.css" rel="stylesheet">
 		<!-- gallery -->
 	<link rel="stylesheet" href="css/smoothbox.css" type='text/css' media="all" />
-	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/style.css?v=<?php echo filemtime('css/style.css'); ?>" rel="stylesheet" type="text/css" media="all" />
 	<link href="//fonts.googleapis.com/css?family=Oswald:400,500,600,700" rel="stylesheet">
 <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet">
-<script type="text/javascript" src="js/validation.min.js"></script>
-<script type="text/javascript" src="js/login.js"></script>
+<script type="text/javascript" src="js/validation.min.js?v=<?php echo filemtime('js/validation.min.js'); ?>"></script>
+<script type="text/javascript" src="js/login.js?v=<?php echo filemtime('js/login.js'); ?>"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/progressbar.css">
 </head>
@@ -58,7 +58,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <nav class="navbar navbar-expand-lg navbar-light bg-gradient-secondary">
                     <h>
                         <a class="navbar-brand" href="index.html">
-               COLLEGE OF HEALTH SCIENCES & TECHNOLOGY, TSAFE    
+               COLLEGE OF HEALTH SCIENCES & TECHNOLOGY, PNTC    
                         </a>
                     </h>
                     <button class="navbar-toggler ml-md-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

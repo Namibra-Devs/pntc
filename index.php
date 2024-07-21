@@ -32,18 +32,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</script>
 	<!-- //for-mobile-apps -->
 	<script src="js/jquery.js"></script>
-	<link href="css/style1.css" rel="stylesheet" type="text/css" media="screen">
+	<link href="css/style1.css?v=<?php echo filemtime('css/style1.css'); ?>" rel="stylesheet" type="text/css" media="screen" />
 
 	<link href="css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
 	<link href="css/font-awesome.css" rel="stylesheet">
 	<!-- gallery -->
 	<link rel="stylesheet" href="css/smoothbox.css" type='text/css' media="all" />
-	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/style.css?v=<?php echo filemtime('css/style.css'); ?>" rel="stylesheet" type="text/css" media="all" />
 	<link href="//fonts.googleapis.com/css?family=Oswald:400,500,600,700" rel="stylesheet">
 	<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet">
 
-	<script type="text/javascript" src="js/validation.min.js"></script>
-	<script type="text/javascript" src="js/login.js"></script>
+	<script type="text/javascript" src="js/validation.min.js?v=<?php echo filemtime('js/validation.min.js'); ?>"></script>
+	<script type="text/javascript" src="js/login.js?v=<?php echo filemtime('js/login.js'); ?>"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
 
