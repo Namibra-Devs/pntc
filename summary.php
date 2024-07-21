@@ -703,7 +703,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <!-- gallery -->
   <div class="agileits-services text-center py-5">
     <div class="container py-md-4 mt-md-3">
-      <h3 class="heading-agileinfo">Stage 6 (Summary)<span>You have fill all relevant information click declaration button to finish</span></h3>
+      <h3 class="heading-agileinfo">Stage 6 (Summary)<span>You have fill all relevant information check the declaration box to finish</span></h3>
       <div class="w3ls_gallery_grids mt-md-5 pt-5">
         <div class="container">
           <h2></h2>
