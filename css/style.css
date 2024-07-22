@@ -1560,8 +1560,8 @@ h2.typoh2 {
     height: 2px;
     width: 70px;
     position: absolute;
-    top: 135%;
-    right: 42%;
+    top: 120%;
+    right: 42.5%;
 }
 }
 @media screen and (max-width: 414px) {
