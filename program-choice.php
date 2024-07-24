@@ -235,7 +235,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						}
 						?>
 						<div class="form-group">
-							<a type="button" class="Del btn btn-default" href="olevel.php">
+							<a type="button" class="Del btn btn-default" href="highschool.php">
 								<i class="fa fa-arrow-left"></i> &nbsp; Previous
 							</a>
 							<a type="button" class="Del btn btn-default" href="<?php echo $direction  ?>">

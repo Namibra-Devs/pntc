@@ -17,7 +17,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['user_email'];
     $token = bin2hex(random_bytes(16));
     $expiry = date("Y-m-d H:i:s", strtotime('+30 minutes'));
+  // Check if user already exists
+  $check_user_query = "SELECT email FROM email_verification WHERE email = '$email'";  // Replace 'users' with your actual user table name
+  $result = mysqli_query($db, $check_user_query);
 
+  if (mysqli_num_rows($result) > 0) {
+    echo "Email already exists. Please try a different email address.";
+    exit();
+  } else {
     $query = "INSERT INTO email_verification (email, serial, pin, token, token_expiry, is_verified) VALUES ('$email', '$serial', '$pin', '$token', '$expiry', 0)";
     if (mysqli_query($db, $query)) {
 
@@ -52,4 +59,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Failed to store email verification data.";
     }
+  }
+
 }

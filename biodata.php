@@ -341,7 +341,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="form-group">
                 <label for="gender">Gender</label>
                 <select class="form-control" name="gender" id="gender">
-                    <option>Select Option</option>
+                    <option disabled>Select Option</option>
                     <option <?php echo ($gender == 'Male') ? 'selected' : ''; ?>>Male</option>
                     <option <?php echo ($gender == 'Female') ? 'selected' : ''; ?>>Female</option>
                 </select>
@@ -461,7 +461,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <?php if (isset($_GET['ids'])) {
                 $direction = "summary.php";
             } else {
-                $direction = "olevel.php";
+                $direction = "highschool.php";
             } ?>
             <div class="form-group">
                 <a type="button" class="btn btn-default" href="<?php echo $direction; ?>">

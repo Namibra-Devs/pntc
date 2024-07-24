@@ -830,7 +830,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         echo "Incomplete";
                       } ?></td>
                   <td><a data-toggle='modal' data-id='1' href='#olevel' class='btn  btn-success' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><span class='glyphicon glyphicon-eye-open' style='color: #FFFFFF;'></span></a></td>
-                  <td><a href='olevel.php?ids=1' class='btn  btn-primary' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><i class='fa fa-edit' style='color: #FFFFFF;'></i></a></td>
+                  <td><a href='highschool.php?ids=1' class='btn  btn-primary' style='color: #FFFFFF;font-family:Times New Roman;' title='click here to view'><i class='fa fa-edit' style='color: #FFFFFF;'></i></a></td>
 
                 </tr>
                 <!-- <tr class="success">
@@ -1062,9 +1062,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 $application_no = $foundl['Applno'];
               }
               ?>
-              <td colspan="1" style="border: 1px solid #000;"><?php if (isset($application_no)) {
+              <td id="application-cell" colspan="1" style="border: 1px solid #000;"><?php if (isset($application_no)) {
                                                                 echo $application_no;
                                                               } ?></td>
+                                                                      
               <td style="border: 1px solid #000;">PASSPORT</td>
               <td colspan="1" style="border: 1px solid #000;">
                 <?php
@@ -1099,13 +1100,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                   } ?></td>
             </tr>
             <tr style="background-color: #f2f2f2;">
-              <td style="border: 1px solid #000;">State</td>
-              <td style="border: 1px solid #000;"><?php if (isset($state)) {
-                                                    echo $state;
+                                                               <td style="border: 1px solid #000;">Applicant Phone</td>
+              <td style="border: 1px solid #000;"><?php if (isset($appphone)) {
+                                                    echo $appphone;
                                                   } ?></td>
-              <td style="border: 1px solid #000;">Local Government</td>
-              <td style="border: 1px solid #000;"><?php if (isset($lgvt)) {
-                                                    echo $lgvt;
+                                                                <td style="border: 1px solid #000;">Parent/Guardian Correspondence Address</td>
+              <td style="border: 1px solid #000;"><?php if (isset($gaddres)) {
+                                                    echo $gaddres;
                                                   } ?></td>
             </tr>
             <tr style="background-color: #ffffff;">
@@ -1143,29 +1144,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
               <td style="border: 1px solid #000;"><?php if (isset($gcountry)) {
                                                     echo $gcountry;
                                                   } ?></td>
-              <td style="border: 1px solid #000;">Parent/Guardian State</td>
-              <td style="border: 1px solid #000;"><?php if (isset($gstate)) {
-                                                    echo $gstate;
-                                                  } ?></td>
-            </tr>
-            <tr style="background-color: #ffffff;">
-              <td style="border: 1px solid #000;">Parent/Guardian Local Government</td>
-              <td style="border: 1px solid #000;"><?php if (isset($glocal)) {
-                                                    echo $glocal;
-                                                  } ?></td>
-              <td style="border: 1px solid #000;">Parent/Guardian Correspondence Address</td>
-              <td style="border: 1px solid #000;"><?php if (isset($gaddres)) {
-                                                    echo $gaddres;
-                                                  } ?></td>
-            </tr>
-            <tr style="background-color: #f2f2f2;">
-              <td style="border: 1px solid #000;">Parent/Guardian Phone</td>
+                                                                <td style="border: 1px solid #000;">Parent/Guardian Phone</td>
               <td style="border: 1px solid #000;"><?php if (isset($gmobile)) {
                                                     echo $gmobile;
-                                                  } ?></td>
-              <td style="border: 1px solid #000;">Applicant Phone</td>
-              <td style="border: 1px solid #000;"><?php if (isset($appphone)) {
-                                                    echo $appphone;
                                                   } ?></td>
             </tr>
           </tbody>
@@ -1318,7 +1299,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- </center> -->
     </div>
     <div class="form-group">
-      <!-- <a class='btn btn-default' onclick="generateAndDownloadPDF()"><span class='glyphicon glyphicon-download'></span> &nbsp;Download PDF</a> -->
+      <a class='btn btn-default' onclick="generateAndDownloadPDF()"><span class='glyphicon glyphicon-download'></span> &nbsp;Download PDF</a>
       <!-- Other buttons -->
       <!-- <button id="sendPdf">Send PDF</button> -->
     </div>
@@ -1381,7 +1362,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             }
           });
 
-          if (result.includes("201")) {
+          if (result.includes("NRS")) {
+            $('#application-cell').text(result);
             const emailResult = await sendPdfEmail();
             if (emailResult) {
               swal({
@@ -1400,7 +1382,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 confirmButtonColor: "green"
               });
             }
-          } else {
+          } else if(result.includes("401")) {
+            swal({
+              title: "Error!",
+              text: 'Application Submitted already. Check your email for further details.',
+              type: "error",
+              button: "OK",
+              confirmButtonColor: "green"
+            });
+          }
+           else {
             swal({
               title: "Error!",
               text: 'An error occurred during the application process. Please try again.',

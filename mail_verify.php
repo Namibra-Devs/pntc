@@ -24,7 +24,7 @@ if (isset($_GET['token'])) {
         } elseif ($is_verified) {
             // Email already verified
             setcookie('email', $email, time() + 86400 * 30, '/'); // Set cookie for 30 days
-            header('Location: biodata.php');
+            header('Location: index.php');
             exit();
         } else {
             // Mark the email as verified
@@ -32,7 +32,7 @@ if (isset($_GET['token'])) {
             if (mysqli_query($db, $update_query)) {
                 // Set cookie and redirect to biodata page
                 setcookie('email', $email, time() + 86400 * 30, '/'); // Set cookie for 30 days
-                header('Location: biodata.php');
+                header('Location: index.php');
                 exit();
             } else {
                 // Failed to update the verification status

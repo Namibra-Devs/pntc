@@ -6,7 +6,26 @@ if (isset($_COOKIE['pin']) && $_COOKIE['serial']) {
 	$pin = $_COOKIE['pin'];
 	$serial = $_COOKIE['serial'];
 	if (isset($_COOKIE['email'])) {
-		header('location:biodata.php');
+		$email = $_COOKIE['email']; 
+		$query = "SELECT serial pin, FROM email_verification WHERE email = '$email'";
+		$result = mysqli_query($db, $query);
+		if ($result && mysqli_num_rows($result) > 0) {
+			$row = mysqli_fetch_assoc($result);
+			$verify_serial = $row['serial'];
+			$verify_pin = $row['pin'];
+
+			if(($serial == $verify_serial) && ($pin == $verify_pin)){
+				header('location:biodata.php');
+			}else{
+				    setcookie("serial", "", time() - 3600, '/');
+					setcookie("pin", "", time() - 3600, '/');
+					setcookie("serial",$verify_serial,time()+(60*60*24*7),'/');
+					setcookie("pin",$verify_pin,time()+(60*60*24*7), '/');
+					header('location:biodata.php');
+			}
+		}
+
+
 	}
 	if (isset($_SESSION['verify_status']) && $_SESSION['verify_status'] === 'error') {
 		unset($_SESSION['verify_status']);
@@ -314,6 +333,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							});
 							$("#login_button").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Submit');
 
+						} else if (response.includes("Email already exists")) {
+							swal({
+								title: "Error!",
+								text: response,
+								type: "error",
+								button: "OK",
+								confirmButtonColor: "green"
+							});
+							$("#error").fadeIn(1000, function() {
+								$("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + '</div>');
+								$("#login_button").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Submit');
+							});
+						
 						} else {
 							swal({
 								title: "Error!",
@@ -323,7 +355,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								confirmButtonColor: "green"
 							});
 							$("#error").fadeIn(1000, function() {
-								$("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + ' !</div>');
+								$("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> &nbsp; ' + response + '</div>');
 								$("#login_button").html('<span class="glyphicon glyphicon-log-in"></span> &nbsp; Submit');
 							});
 						}

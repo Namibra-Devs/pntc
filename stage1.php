@@ -11,8 +11,8 @@ if(isset($_POST['login_button'])) {
                    $resul=mysqli_query($db,$sq);                    
                          if($row=mysqli_num_rows($resul)!=0)
                          {         
-                                setcookie("pin",$password,time()+(60*60*24*7));
-                                 setcookie("serial",$username,time()+(60*60*24*7));
+                                setcookie("pin",$password,time()+(60*60*24*7), '/');
+                                 setcookie("serial",$username,time()+(60*60*24*7), '/');
 		                          echo"member";								   		  
 						 }
 				 else{
@@ -21,8 +21,8 @@ if(isset($_POST['login_button'])) {
                          if($rowcount=mysqli_num_rows($resultn)!=0)
                          {                             	
                               	 		  
-								 setcookie("pin",$password,time()+(60*60*24*7));
-                                 setcookie("serial",$username,time()+(60*60*24*7));
+								 setcookie("pin",$password,time()+(60*60*24*7), '/');
+                                 setcookie("serial",$username,time()+(60*60*24*7), '/');
 		                           echo "ok";								   		  
 						 }
   

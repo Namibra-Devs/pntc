@@ -300,7 +300,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<?php if (isset($_GET['ids'])) {
       $direction = 'summary.php';
   } else {
-      $direction = 'olevel.php';
+      $direction = 'highschool.php';
   } ?>		
 		</div>
 		<div class="form-group">			

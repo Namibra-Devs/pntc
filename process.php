@@ -721,8 +721,6 @@ try {
         $serial = $_POST['userserial'];
         $pin = $_POST['userpin'];
 
-
-
         $qued = "SELECT * FROM declared WHERE Serial='$serial' && Pin='$pin'  ";
         $resul = mysqli_query($db, $qued);
         $checks = mysqli_num_rows($resul);
@@ -735,16 +733,19 @@ try {
             if ($result) {
             $row = $result->fetch_assoc();
             $maxMatric = $row['maxMatric'];
-            $nextMatric = sprintf("%04d", intval($maxMatric) + 1000); 
+            $nextMatric = sprintf("%04d", intval($maxMatric) + 1 + 1000); 
             $application_no = 'NRS/24/' . $nextMatric;
             }
             $queryz = 'INSERT INTO declared (Serial,Pin,Status,Applno) ' .
                 "VALUES ('$serial','$pin','Yes','$application_no')";
 
             $db->query($queryz) or die('Errorr, query failed to upload');
+            echo $application_no;
         
+        }else{
+            echo '401';
         }
-        echo '201';
+        
     }
 
     if (isset($_POST['usernames']) && $_POST['password']) {

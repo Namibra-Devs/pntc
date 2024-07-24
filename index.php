@@ -1,11 +1,38 @@
 <?php
 include_once("db_connect.php");
+
 if (isset($_COOKIE['pin']) && $_COOKIE['serial']) {
 
 	$pin = $_COOKIE['pin'];
 	$serial = $_COOKIE['serial'];
 	if(isset( $_COOKIE['email'])){
-		header('location:biodata.php');
+		if (isset($_COOKIE['email'])) {
+			
+			$email = $_COOKIE['email']; 
+			$query = "SELECT serial, pin FROM email_verification WHERE email = '$email'";
+			
+			$result = mysqli_query($db, $query);
+			if ($result && mysqli_num_rows($result) > 0) {
+				
+				$row = mysqli_fetch_assoc($result);
+				$verify_serial = $row['serial'];
+				$verify_pin = $row['pin'];
+			
+	
+				if(($serial == $verify_serial) && ($pin == $verify_pin)){
+					header('location:biodata.php');
+				}else{
+					
+					setcookie("serial", "", time() - 3600, '/');
+					setcookie("pin", "", time() - 3600, '/');
+					setcookie("serial",$verify_serial,time()+(60*60*24*7),'/');
+					setcookie("pin",$verify_pin,time()+(60*60*24*7), '/');
+					header('location:biodata.php');
+				}
+			}
+	
+	
+		}
 	}else{
 		header('location:verify_email.php');
 	}
