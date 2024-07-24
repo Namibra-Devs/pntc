@@ -315,7 +315,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<i class="fa fa-info-circle"></i>&nbsp;This stage you Enter your O'Level results in the space provided
 							<ol>
 								<li>Enter your Highschool results in space provide below</li>
-								<li>Add, Delete and Save O'Level results using buttons below</li>
+								<li>Add, Delete and Save Highschool result using buttons below</li>
 							</ol>
 						</div>
 						<hr />
@@ -415,7 +415,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						$numSubjects = count($subjects);
 						?>
 
-						<?php for ($i = 0; $i < $numSubjects; $i++) : ?>
+						<?php for ($i = 0; $i < $numSubjects - 6; $i++) : ?>
 							<?php if ($i == 0) : ?>
 								<h3>First Sitting</h3>
 								<div class="input-group" style="margin-bottom:10px">
@@ -467,7 +467,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</div>
 						<?php endfor; ?>
 						<hr>
-						<?php for ($i = 0; $i < $numSubjects; $i++) : ?>
+						<?php for ($i = 0; $i < $numSubjects - 6; $i++) : ?>
 							<?php if ($i == 0) : ?>
 								<h3>Second Sitting (Please do not fill if not applicable)</h3>
 								<div class="input-group" style="margin-bottom:10px">
