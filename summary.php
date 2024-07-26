@@ -53,6 +53,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
   <link href="css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
   <link href="css/font-awesome.css" rel="stylesheet">
+  <link rel="icon" href="./images/logo.jpg" type="image/jpeg">
   <!-- gallery -->
   <link rel="stylesheet" href="css/smoothbox.css" type='text/css' media="all" />
   <link href="css/style.css?v=<?php echo filemtime('css/style.css'); ?>" rel="stylesheet" type="text/css" media="all" />
@@ -218,12 +219,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     <script>
       $('#imageModal').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget); // Button that triggered the modal
-        var src = button.data('src'); // Extract info from data-* attributes
-        var label = button.data('label'); // Extract label from data-* attributes
+        var button = $(event.relatedTarget);
+        var src = button.data('src'); 
+        var label = button.data('label');
         var modal = $(this);
         modal.find('#imagePreview').attr('src', src);
-        modal.find('.modal-title').text(label); // Set the modal title to the image label
+        modal.find('.modal-title').text(label); 
       });
     </script>
   </div>
@@ -510,7 +511,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <thead>
               <tr class="success">
                 <th>Serial Number</th>
-                <!-- <th>Applicant Name</th> -->
                 <th>First Choice</th>
                 <th>Second Choice</th>
               </tr>
@@ -1038,9 +1038,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <body>
     <div class="container printable-area" style="display: none;">
       <div id="printableArea">
-        <!-- <p><img src="images/unima.png" alt="" class="img-fluid" style="width:100px;height:100px" /></p> -->
+        
         <center>
-          <p style="color: black;">THE PREMIER NURSING COLLEGE, PNTC <br>Admission form for 2024-2025 Academic session</p>
+        <p><img src="images/logo.jpg" alt="" class="img-fluid" style="width:100px;height:100px" /></p>
+          <p style="color: black;">PREMIER NURSES' TRAINING COLLEGE, PNTC <br>Admission form for 2024-2025 Academic session</p>
         </center>
 
 
@@ -1301,7 +1302,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="form-group">
       <a class='btn btn-default' onclick="generateAndDownloadPDF()"><span class='glyphicon glyphicon-download'></span> &nbsp;Download PDF</a>
       <!-- Other buttons -->
-      <!-- <button id="sendPdf">Send PDF</button> -->
+      <button id="sendPdf">Send PDF</button>
     </div>
     </div>
 

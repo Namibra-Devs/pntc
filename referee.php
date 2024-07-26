@@ -20,6 +20,7 @@ if (isset($_COOKIE['pin']) && $_COOKIE['serial']) {
 	<meta charset="utf-8" />
 	<meta name="keywords" content="Attainment Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<link rel="icon" href="./images/logo.jpg" type="image/jpeg">
 	<script>
 		addEventListener("load", function() {
 			setTimeout(hideURLbar, 0);
@@ -235,31 +236,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 		});
 
-		// $(document).ready(function() {
 
-		// 	var pin = '<?php echo $pin ?>';
-		// 	var serial = '<?php echo $serial ?>';
-		// 	var optionValue = 'xuls';
-		// 	$.ajax({
-		// 		type: 'POST',
-		// 		url: "process.php",
-		// 		data: {
-		// 			loademployer: optionValue,
-		// 			userpin: pin,
-		// 			userserial: serial
-		// 		},
-		// 		success: function(result) {
-
-		// 			if (result == 'No') {
-
-		// 			} else {
-		// 				$("#errors1").html(result);
-		// 				$("#errors2").html("<a  class='btn btn-default' href='summary.php'><span class='glyphicon glyphicon-log-in'></span> &nbsp;Submit Employment</a>");
-
-		// 			}
-		// 		}
-		// 	});
-		// });
 	</script>
 
 	<script type="text/javascript">
@@ -360,25 +337,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 
-						// Initialize variables to store fetched data
 						$name = $contact = $date = $address = $ref = $signature = $signature_thumbnail = "";
-
-						// Check if 'pin' and 'serial' are set in GET parameters
-						// if (isset($_GET['ids']) && isset($_GET['ids'])) {
-
-						// Construct SQL query
 						$sql = "SELECT * FROM referees WHERE pin = '$pin' AND serial = '$serial'";
 
 						// Execute query
 						$result = $db->query($sql);
 
 						if ($result) {
-							// Check if data was found
 							if ($result->num_rows > 0) {
-								// Fetch data
 								$row = $result->fetch_assoc();
 
-								// Store fetched values in variables for form population
 								$name = htmlspecialchars($row['name']);
 								$contact = htmlspecialchars($row['contact']);
 								$date = htmlspecialchars($row['date']);
@@ -387,19 +355,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								$signature = explode("_", htmlspecialchars($row['signature']))[1];
 								$signature_thumbnail = 'images/applicants/' . htmlspecialchars($row['signature']);
 							} else {
-								// Handle case where no data was found
 								echo "No records found.";
 							}
 						} else {
-							// Handle query execution error
 							echo "Query failed: " . $db->error;
 						}
-						// } else {
-						// 	// Handle case where 'pin' or 'serial' is not set in GET parameters
-						// 	echo "PIN and/or Serial not provided.";
-						// }
-
-						// Close database connection
 						$db->close();
 						?>
 
