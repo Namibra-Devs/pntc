@@ -1306,7 +1306,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="form-group">
       <a class='btn btn-default' onclick="generateAndDownloadPDF()"><span class='glyphicon glyphicon-download'></span> &nbsp;Download PDF</a>
       <!-- Other buttons -->
-      <button id="sendPdf">Send PDF</button>
+      <!-- <button id="sendPdf">Send PDF</button> -->
     </div>
     </div>
 
