@@ -42,8 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $mail->Subject = 'Admission Application Successful';
             $mail->Body    = 'Dear Applicant,<br><br>Congratulations! Your admission application has been successfully submitted.<br><br>Please find attached your application form for your reference.<br><br>Best regards,<br>The Admission Team';
             $mail->AltBody = 'Dear Applicant,\n\nCongratulations! Your admission application has been successfully submitted.\n\nPlease find attached your application form for your reference.\n\nBest regards,\nThe Admission Team';
-
-            $mail->send();
+            
+            if($mail->send() == '1')
             echo 'Email has been sent successfully!';
         } catch (Exception $e) {
             echo "Email sending failed: {$mail->ErrorInfo}";

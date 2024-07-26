@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->AltBody = "Please click the link below to verify your email address:\n\n";
             $mail->AltBody .= "https://admission.pntc.edu.gh/mail_verify.php?token=$token";
 
-            $mail->send();
+            if($mail->send() == '1')
             echo 'ok';
         } catch (Exception $e) {
             echo "Failed to send verification email. Mailer Error: {$mail->ErrorInfo}";
