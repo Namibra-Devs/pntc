@@ -87,6 +87,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     .close {
       color: #999999;
     }
+
+    .header {
+      text-align: center;
+    }
   </style>
 </head>
 
@@ -220,11 +224,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script>
       $('#imageModal').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget);
-        var src = button.data('src'); 
+        var src = button.data('src');
         var label = button.data('label');
         var modal = $(this);
         modal.find('#imagePreview').attr('src', src);
-        modal.find('.modal-title').text(label); 
+        modal.find('.modal-title').text(label);
       });
     </script>
   </div>
@@ -1038,11 +1042,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <body>
     <div class="container printable-area" style="display: none;">
       <div id="printableArea">
-        
-        <center>
-        <p><img src="images/logo.jpg" alt="" class="img-fluid" style="width:100px;height:100px" /></p>
+
+        <div class="header">
+          <p><img src="images/logo.jpg" alt="" class="img-fluid" style="width:100px;height:100px" /></p>
           <p style="color: black;">PREMIER NURSES' TRAINING COLLEGE, PNTC <br>Admission form for 2024-2025 Academic session</p>
-        </center>
+        </div>
 
 
         <!-- Section 1: Biodata -->
@@ -1064,9 +1068,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
               }
               ?>
               <td id="application-cell" colspan="1" style="border: 1px solid #000;"><?php if (isset($application_no)) {
-                                                                echo $application_no;
-                                                              } ?></td>
-                                                                      
+                                                                                      echo $application_no;
+                                                                                    } ?></td>
+
               <td style="border: 1px solid #000;">PASSPORT</td>
               <td colspan="1" style="border: 1px solid #000;">
                 <?php
@@ -1101,11 +1105,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                                   } ?></td>
             </tr>
             <tr style="background-color: #f2f2f2;">
-                                                               <td style="border: 1px solid #000;">Applicant Phone</td>
+              <td style="border: 1px solid #000;">Applicant Phone</td>
               <td style="border: 1px solid #000;"><?php if (isset($appphone)) {
                                                     echo $appphone;
                                                   } ?></td>
-                                                                <td style="border: 1px solid #000;">Parent/Guardian Correspondence Address</td>
+              <td style="border: 1px solid #000;">Parent/Guardian Correspondence Address</td>
               <td style="border: 1px solid #000;"><?php if (isset($gaddres)) {
                                                     echo $gaddres;
                                                   } ?></td>
@@ -1145,7 +1149,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
               <td style="border: 1px solid #000;"><?php if (isset($gcountry)) {
                                                     echo $gcountry;
                                                   } ?></td>
-                                                                <td style="border: 1px solid #000;">Parent/Guardian Phone</td>
+              <td style="border: 1px solid #000;">Parent/Guardian Phone</td>
               <td style="border: 1px solid #000;"><?php if (isset($gmobile)) {
                                                     echo $gmobile;
                                                   } ?></td>
@@ -1383,7 +1387,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 confirmButtonColor: "green"
               });
             }
-          } else if(result.includes("401")) {
+          } else if (result.includes("401")) {
             swal({
               title: "Error!",
               text: 'Application Submitted already. Check your email for further details.',
@@ -1391,8 +1395,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
               button: "OK",
               confirmButtonColor: "green"
             });
-          }
-           else {
+          } else {
             swal({
               title: "Error!",
               text: 'An error occurred during the application process. Please try again.',
@@ -1447,7 +1450,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="js/bootstrap.js"></script>
-    
+
   </body>
 
 </html>
