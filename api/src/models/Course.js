@@ -29,6 +29,11 @@ const Course = sequelize.define('Course', {
         type: DataTypes.INTEGER, // 100, 200, 300, 400
         allowNull: false
     },
+    type: {
+        type: DataTypes.ENUM('Core', 'Elective'),
+        defaultValue: 'Core',
+        allowNull: false
+    },
     description: {
         type: DataTypes.TEXT,
         allowNull: true

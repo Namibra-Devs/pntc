@@ -1,3 +1,4 @@
+// Verified Update: Course Type Field and Layout Fixes
 import React, { useState, useEffect } from 'react';
 import api from '../utils/api';
 import { Search, Loader2, BookOpen, ChevronRight, Trash2, X, Edit2, Info } from 'lucide-react';
@@ -19,7 +20,7 @@ const RegistrarPrograms = () => {
     const [editingCourse, setEditingCourse] = useState(null);
     const [selectedCourseDetails, setSelectedCourseDetails] = useState(null);
     const [courseFormData, setCourseFormData] = useState({
-        name: '', code: '', creditHours: '', semester: '1', level: '100', description: '', instructorId: ''
+        name: '', code: '', creditHours: '', semester: '1', level: '100', type: 'Core', description: '', instructorId: ''
     });
     const [courseLoading, setCourseLoading] = useState(false);
     const [staff, setStaff] = useState([]);
@@ -154,7 +155,7 @@ const RegistrarPrograms = () => {
 
     const cancelEditingCourse = () => {
         setEditingCourse(null);
-        setCourseFormData({ name: '', code: '', creditHours: '', semester: '1', level: '100', description: '', instructorId: '' });
+        setCourseFormData({ name: '', code: '', creditHours: '', semester: '1', level: '100', type: 'Core', description: '', instructorId: '' });
     };
 
     const openEdit = (prog) => {
@@ -292,9 +293,9 @@ const RegistrarPrograms = () => {
                             </button>
                         </header>
 
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 flex-1 overflow-hidden">
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 flex-1 overflow-hidden min-h-0">
                             {/* Add/Edit Course Form */}
-                            <div className="lg:col-span-1 border-r border-border pr-0 lg:pr-8 overflow-y-auto">
+                            <div className="lg:col-span-1 border-r border-border pr-0 lg:pr-8 overflow-y-auto custom-scrollbar h-full">
                                 <h3 className="text-xs font-black uppercase tracking-widest text-text-muted mb-6">
                                     {editingCourse ? 'Update Course' : 'Add New Course'}
                                 </h3>
@@ -319,7 +320,7 @@ const RegistrarPrograms = () => {
                                             required
                                         />
                                     </div>
-                                    <div className="grid grid-cols-2 gap-4">
+                                    <div className="grid grid-cols-3 gap-4">
                                         <div>
                                             <label className="text-[10px] font-black uppercase tracking-widest text-text/40 mb-1 block">Credits</label>
                                             <input
@@ -345,6 +346,18 @@ const RegistrarPrograms = () => {
                                                 <option value="400">400</option>
                                                 <option value="500">500</option>
                                                 <option value="600">600</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label className="text-[10px] font-black uppercase tracking-widest text-text/40 mb-1 block">Type</label>
+                                            <select
+                                                className="w-full bg-background border border-border rounded-xl p-3 text-sm text-text outline-none focus:border-primary transition-colors"
+                                                value={courseFormData.type}
+                                                onChange={e => setCourseFormData({ ...courseFormData, type: e.target.value })}
+                                                required
+                                            >
+                                                <option value="Core">Core</option>
+                                                <option value="Elective">Elective</option>
                                             </select>
                                         </div>
                                     </div>
@@ -405,7 +418,7 @@ const RegistrarPrograms = () => {
                             </div>
 
                             {/* Course List */}
-                            <div className="lg:col-span-2 overflow-y-auto pr-2 custom-scrollbar">
+                            <div className="lg:col-span-2 overflow-y-auto pr-2 custom-scrollbar h-full">
                                 <div className="flex justify-between items-center mb-6">
                                     <h3 className="text-xs font-black uppercase tracking-widest text-text-muted">Existing Courses</h3>
                                     {selectedCourseDetails && (
@@ -447,6 +460,7 @@ const RegistrarPrograms = () => {
                                                                 <span className="text-[10px] font-black text-text-muted uppercase tracking-widest">Level {selectedCourseDetails.level}</span>
                                                                 <span className="text-[10px] font-black text-text-muted uppercase tracking-widest">{selectedCourseDetails.creditHours} Credits</span>
                                                                 <span className="text-[10px] font-black text-text-muted uppercase tracking-widest">Semester {selectedCourseDetails.semester}</span>
+                                                                <span className={`text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded ${selectedCourseDetails.type === 'Core' ? 'bg-primary/10 text-primary' : 'bg-yellow-500/10 text-yellow-500'}`}>{selectedCourseDetails.type || 'Core'}</span>
                                                             </div>
                                                         </div>
                                                         <div className="flex gap-2">
