@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import api from '../utils/api';
 import { Save, Loader2, ChevronRight, ChevronLeft, CheckCircle, User, GraduationCap, Users, FileCheck, Plus, Trash2, Printer, ExternalLink, FileText, ShieldCheck } from 'lucide-react';
 import { useSettings } from '../context/SettingsContext';
@@ -66,6 +67,7 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
     const [programs, setPrograms] = useState([]);
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
 
     useEffect(() => {
         const fetchPrograms = async () => {
@@ -164,7 +166,7 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
         if (currentStep === 1) {
             if (!formData.firstName) newErrors.firstName = "First name is required";
             if (!formData.lastName) newErrors.lastName = "Last name is required";
-            if (!formData.dateOfBirth) newErrors.dateOfBirth = "Date of birth is required";
+            if (!formData.dateOfBirth || formData.dateOfBirth.split('-').length !== 3 || formData.dateOfBirth.split('-').some(p => !p)) newErrors.dateOfBirth = "Date of birth is required";
             if (!formData.gender) newErrors.gender = "Gender is required";
             if (!formData.phoneNumber) newErrors.phoneNumber = "Phone number is required";
             if (!formData.ghanaPostGps) newErrors.ghanaPostGps = "GPS Address is required";
@@ -212,11 +214,14 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
 
 
         setErrors(newErrors);
+        if (Object.keys(newErrors).length > 0) {
+            console.warn(`Step ${currentStep} validation errors:`, newErrors);
+        }
         return Object.keys(newErrors).length === 0;
     };
 
 
-    const handleSubmit = async (e, forceStatus = null) => {
+    const handleSubmit = async (e, forceStatus = null, isConfirmed = false) => {
         if (e) e.preventDefault();
 
         const status = forceStatus || (step === 4 ? 'Submitted' : 'Draft');
@@ -228,17 +233,18 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
                 if (!validateStep(i)) {
                     setStep(i);
                     allValid = false;
+                    console.error("Validation failed at Step " + i);
+                    alert("Please fill all required fields in Step " + i + " before submitting.");
                     setTimeout(() => {
                         const firstError = document.querySelector('.text-red-500');
                         if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     }, 100);
                     break;
                 }
-
             }
             if (!allValid) return;
-
-            if (!window.confirm("Are you sure you want to submit your application? No further changes can be made once submitted.")) {
+            if (!isConfirmed) {
+                setShowConfirm(true);
                 return;
             }
         }
@@ -539,11 +545,47 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6">
 
-                                    <div className="form-group">
+                                    <div className="form-group md:col-span-2">
                                         <label className="label">Date of Birth</label>
-                                        <input type="date" name="dateOfBirth" value={formData.dateOfBirth} onChange={handleChange} className={`input-field ${errors.dateOfBirth ? 'border-red-500' : ''}`} rotate={0} />
+                                        <div className="flex gap-2">
+                                            <select
+                                                value={formData.dateOfBirth ? formData.dateOfBirth.split('-')[0] : ''}
+                                                onChange={(e) => {
+                                                    const parts = (formData.dateOfBirth || '--').split('-');
+                                                    setFormData(prev => ({ ...prev, dateOfBirth: `${e.target.value}-${parts[1] || ''}-${parts[2] || ''}` }));
+                                                }}
+                                                className={`input-field px-2 ${errors.dateOfBirth ? 'border-red-500' : ''}`}
+                                            >
+                                                <option value="">Year</option>
+                                                {Array.from({ length: 100 }, (_, i) => currentYear - i).map(y => <option key={y} value={y}>{y}</option>)}
+                                            </select>
+                                            <select
+                                                value={formData.dateOfBirth ? (formData.dateOfBirth.split('-')[1] || '') : ''}
+                                                onChange={(e) => {
+                                                    const parts = (formData.dateOfBirth || '--').split('-');
+                                                    setFormData(prev => ({ ...prev, dateOfBirth: `${parts[0] || ''}-${e.target.value}-${parts[2] || ''}` }));
+                                                }}
+                                                className={`input-field px-2 ${errors.dateOfBirth ? 'border-red-500' : ''}`}
+                                            >
+                                                <option value="">Month</option>
+                                                {['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'].map((m, i) => (
+                                                    <option key={m} value={m}>{['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][i]}</option>
+                                                ))}
+                                            </select>
+                                            <select
+                                                value={formData.dateOfBirth ? (formData.dateOfBirth.split('-')[2] || '') : ''}
+                                                onChange={(e) => {
+                                                    const parts = (formData.dateOfBirth || '--').split('-');
+                                                    setFormData(prev => ({ ...prev, dateOfBirth: `${parts[0] || ''}-${parts[1] || ''}-${e.target.value}` }));
+                                                }}
+                                                className={`input-field px-2 ${errors.dateOfBirth ? 'border-red-500' : ''}`}
+                                            >
+                                                <option value="">Day</option>
+                                                {Array.from({ length: 31 }, (_, i) => String(i + 1).padStart(2, '0')).map(d => <option key={d} value={d}>{d}</option>)}
+                                            </select>
+                                        </div>
                                         {errors.dateOfBirth && <p className="text-red-500 text-[10px] mt-1 font-bold uppercase">{errors.dateOfBirth}</p>}
                                     </div>
                                     <div className="form-group">
@@ -561,11 +603,20 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
                                         <select name="maritalStatus" value={formData.maritalStatus} onChange={handleChange} className="input-field">
                                             <option value="Single">Single</option>
                                             <option value="Married">Married</option>
+                                            <option value="Divorced">Divorced</option>
+                                            <option value="Separated">Separated</option>
+                                            <option value="Widowed">Widowed</option>
                                         </select>
                                     </div>
                                     <div className="form-group">
                                         <label className="label">Religion</label>
-                                        <input name="religion" value={formData.religion} onChange={handleChange} className="input-field" placeholder="Christianity" />
+                                        <select name="religion" value={formData.religion} onChange={handleChange} className="input-field">
+                                            <option value="">Select Religion</option>
+                                            <option value="Christianity">Christianity</option>
+                                            <option value="Islam">Islam</option>
+                                            <option value="Traditional">Traditional</option>
+                                            <option value="Other">Other</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -826,7 +877,7 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
                                         <label className="label uppercase tracking-widest text-[10px]">Second Choice</label>
                                         <select name="secondChoiceId" value={formData.secondChoiceId} onChange={handleChange} className={`input-field text-lg ${errors.secondChoiceId ? 'border-red-500' : ''}`}>
                                             <option value="">Select Secondary Program</option>
-                                            {programs.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
+                                            {programs.map(p => <option key={p.id} value={p.id}>{p.name}({p.level})</option>)}
                                         </select>
                                         {errors.secondChoiceId && <p className="text-red-500 text-[10px] mt-1 font-bold uppercase">{errors.secondChoiceId}</p>}
                                     </div>
@@ -834,7 +885,7 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
                                         <label className="label uppercase tracking-widest text-[10px]">Third Choice</label>
                                         <select name="thirdChoiceId" value={formData.thirdChoiceId} onChange={handleChange} className={`input-field text-lg ${errors.thirdChoiceId ? 'border-red-500' : ''}`}>
                                             <option value="">Select Third Option</option>
-                                            {programs.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
+                                            {programs.map(p => <option key={p.id} value={p.id}>{p.name}({p.level})</option>)}
                                         </select>
                                         {errors.thirdChoiceId && <p className="text-red-500 text-[10px] mt-1 font-bold uppercase">{errors.thirdChoiceId}</p>}
                                     </div>
@@ -928,6 +979,57 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
 
                 </form>
             </div>
+
+            {/* Custom Confirmation Modal */}
+            {typeof document !== 'undefined' && createPortal(
+                <AnimatePresence>
+                    {showConfirm && (
+                        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
+                            <motion.div 
+                                initial={{ opacity: 0, scale: 0.95 }} 
+                                animate={{ opacity: 1, scale: 1 }} 
+                                exit={{ opacity: 0, scale: 0.95 }}
+                                className="bg-white rounded-2xl shadow-2xl p-6 max-w-md w-full border border-slate-100"
+                            >
+                                <div className="flex flex-col items-center text-center space-y-4">
+                                    <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center">
+                                        <ShieldCheck size={32} />
+                                    </div>
+                                    <h3 className="text-xl font-black uppercase tracking-tighter text-slate-900">Final Submission</h3>
+                                    <p className="text-sm text-slate-500">
+                                        Are you sure you want to submit your application? 
+                                        <br /><br />
+                                        <span className="font-bold text-red-500">No further changes can be made once submitted.</span>
+                                    </p>
+                                    
+                                    <div className="flex gap-3 w-full pt-4">
+                                        <button 
+                                            type="button" 
+                                            onClick={() => setShowConfirm(false)} 
+                                            className="btn flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold"
+                                            disabled={loading}
+                                        >
+                                            Cancel
+                                        </button>
+                                        <button 
+                                            type="button" 
+                                            onClick={(e) => {
+                                                setShowConfirm(false);
+                                                handleSubmit(e, 'Submitted', true);
+                                            }} 
+                                            className="btn flex-1 btn-primary bg-green-600 hover:bg-green-500 border-green-600 shadow-xl shadow-green-500/20 font-bold flex items-center justify-center gap-2"
+                                            disabled={loading}
+                                        >
+                                            {loading ? <Loader2 className="animate-spin" /> : 'Yes, Submit'}
+                                        </button>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </div>
+                    )}
+                </AnimatePresence>,
+                document.body
+            )}
 
             <p className="text-center text-text-muted text-xs mt-8">
                 © {currentYear} {settings.schoolName || 'Ghana University Management System'}. Secure Digital Application Portal.
