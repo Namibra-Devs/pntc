@@ -13,6 +13,9 @@ export default {
                 text: "var(--text)",
                 "text-muted": "var(--text-muted)",
                 border: "var(--border)",
+                success: "var(--success)",
+                warning: "var(--warning)",
+                error: "var(--error)",
             },
 
             fontFamily: {

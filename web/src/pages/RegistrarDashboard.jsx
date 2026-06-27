@@ -143,6 +143,7 @@ const RegistrarApplicationsContent = ({ user }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [actionLoading, setActionLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(false);
 
     // New states for modals
     const [showAdmitModal, setShowAdmitModal] = useState(false);
@@ -185,9 +186,10 @@ const RegistrarApplicationsContent = ({ user }) => {
             fetchApplications();
             setShowAdmitModal(false);
             setShowDetail(false);
-            alert("Application approved and student admitted!");
+            setSuccess("Application approved and student admitted!");
+            setTimeout(() => setSuccess(false), 5000);
         } catch (err) {
-            alert("Action failed: " + (err.response?.data?.message || err.message));
+            setError("Action failed: " + (err.response?.data?.message || err.message));
         } finally {
             setActionLoading(false);
         }
@@ -201,9 +203,10 @@ const RegistrarApplicationsContent = ({ user }) => {
             await api.patch(`/registrar/applications/${selectedApp.id}/status`, { status: 'Rejected' });
             fetchApplications();
             setShowDetail(false);
-            alert("Application rejected.");
+            setSuccess("Application rejected.");
+            setTimeout(() => setSuccess(false), 5000);
         } catch (err) {
-            alert("Action failed: " + (err.response?.data?.message || err.message));
+            setError("Action failed: " + (err.response?.data?.message || err.message));
         } finally {
             setActionLoading(false);
         }
@@ -248,6 +251,12 @@ const RegistrarApplicationsContent = ({ user }) => {
             {error && (
                 <div className="bg-red-500/10 border border-red-500 text-red-500 p-4 rounded-xl mb-8 flex items-center gap-2">
                     <XCircle size={20} /> {error}
+                </div>
+            )}
+            
+            {success && (
+                <div className="bg-green-500/10 border border-green-500 text-green-500 p-4 rounded-xl mb-8 flex items-center justify-center gap-2 text-sm font-bold uppercase tracking-wide">
+                    <CheckCircle size={20} /> {success}
                 </div>
             )}
 
@@ -388,7 +397,7 @@ const RegistrarApplicationsContent = ({ user }) => {
                         <motion.div
                             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                             className="absolute inset-0 bg-black/90 "
-                            onClick={() => setShowAdmitModal(false)}
+                            onClick={() => !actionLoading && setShowAdmitModal(false)}
                         />
                         <motion.div
                             initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
@@ -406,11 +415,12 @@ const RegistrarApplicationsContent = ({ user }) => {
                                 ].map((choice, i) => choice.id && (
                                     <button
                                         key={i}
+                                        disabled={actionLoading}
                                         onClick={() => setSelectedAdmittedProgramId(choice.id)}
                                         className={`w-full p-4 rounded-xl border flex flex-col items-start gap-1 transition-all ${selectedAdmittedProgramId === choice.id
                                             ? 'border-primary bg-primary/10'
                                             : 'border-border bg-background hover:border-text-muted/50'
-                                            }`}
+                                            } disabled:opacity-50 disabled:cursor-not-allowed`}
                                     >
                                         <span className="text-[9px] font-black uppercase tracking-widest text-text-muted">{choice.label}</span>
                                         <span className={`text-sm font-bold text-left ${selectedAdmittedProgramId === choice.id ? 'text-primary' : 'text-text'}`}>
@@ -423,8 +433,9 @@ const RegistrarApplicationsContent = ({ user }) => {
 
                             <div className="flex gap-3">
                                 <button
+                                    disabled={actionLoading}
                                     onClick={() => setShowAdmitModal(false)}
-                                    className="flex-1 py-3 px-6 rounded-xl bg-surface-hover text-text font-black uppercase text-xs tracking-widest hover:bg-border transition-colors border border-border"
+                                    className="flex-1 py-3 px-6 rounded-xl bg-surface-hover text-text font-black uppercase text-xs tracking-widest hover:bg-border transition-colors border border-border disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     Cancel
                                 </button>
