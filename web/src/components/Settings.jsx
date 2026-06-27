@@ -84,7 +84,7 @@ const Settings = () => {
             <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {/* Left Column: Logo & Branding */}
                 <div className="lg:col-span-1 space-y-6">
-                    <div className="glass-card p-6 border-border bg-surface/50 text-center">
+                    <div className="glass-card p-6 border-border bg-surface text-center">
                         <h4 className="text-[10px] font-black uppercase tracking-widest text-text-muted mb-6">Institution Logo</h4>
                         <div className="relative w-32 h-32 mx-auto mb-6 group">
                             <div className="w-full h-full rounded-2xl border-2 border-dashed border-border flex items-center justify-center overflow-hidden bg-background group-hover:border-primary/50 transition-all">
@@ -99,7 +99,7 @@ const Settings = () => {
                                 <input type="file" className="hidden" onChange={handleLogoUpload} accept="image/*" />
                             </label>
                             {uploading && (
-                                <div className="absolute inset-0 flex items-center justify-center bg-background/80 rounded-2xl">
+                                <div className="absolute inset-0 flex items-center justify-center bg-background rounded-2xl">
                                     <Loader2 className="animate-spin text-primary" size={24} />
                                 </div>
                             )}
@@ -107,7 +107,7 @@ const Settings = () => {
                         <p className="text-[10px] text-text-muted font-bold px-4">Recommended size: 512x512px. Supports PNG, JPG.</p>
                     </div>
 
-                    <div className="glass-card p-6 border-border bg-surface/50">
+                    <div className="glass-card p-6 border-border bg-surface">
                         <label className="text-[10px] font-black uppercase tracking-widest text-text-muted mb-2 block ml-1">Short Name / Abbreviation</label>
                         <div className="flex items-center gap-3 bg-background border border-border p-3 rounded-xl focus-within:border-primary transition-colors">
                             <Hash size={18} className="text-text-muted" />
@@ -124,7 +124,7 @@ const Settings = () => {
 
                 {/* Right Column: General Info */}
                 <div className="lg:col-span-2 space-y-6">
-                    <div className="glass-card p-8 border-border bg-surface/50 space-y-6">
+                    <div className="glass-card p-8 border-border bg-surface space-y-6">
                         <h4 className="text-[10px] font-black uppercase tracking-widest text-text-muted mb-4">Official Information</h4>
 
                         <div className="space-y-2">
@@ -189,7 +189,7 @@ const Settings = () => {
                             <button
                                 type="submit"
                                 disabled={loading}
-                                className="btn btn-primary px-10 py-4 font-black uppercase tracking-widest flex items-center gap-3 shadow-xl shadow-primary/20"
+                                className="btn btn-primary px-10 py-4 font-black uppercase tracking-widest flex items-center gap-3 shadow-md shadow-primary/20"
                             >
                                 {loading ? <Loader2 className="animate-spin" /> : <Save size={20} />}
                                 Save Changes

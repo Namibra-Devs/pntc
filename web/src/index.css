@@ -17,8 +17,8 @@
   --surface-hover: #f1f5f9;
   --text: #0f172a;
   --text-muted: #64748b;
-  --glass: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(0, 0, 0, 0.05);
+  --glass: #ffffff;
+  --glass-border: #e2e8f0;
   --success: #10b981;
   --warning: #f59e0b;
   --error: #ef4444;
@@ -36,8 +36,8 @@
   --surface-hover: #1e293b;
   --text: #f8fafc;
   --text-muted: #94a3b8;
-  --glass: rgba(15, 23, 42, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass: #0f172a;
+  --glass-border: #1e293b;
   --border: #1e293b;
 }
 
@@ -75,12 +75,10 @@ h4,
 }
 
 .glass-card {
-  background: var(--glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 1rem;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
 }
 
 .btn {

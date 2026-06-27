@@ -94,7 +94,7 @@ const CourseRegistration = ({ studentData, setStudentData }) => {
                     <div
                         key={course.id}
                         onClick={() => toggleCourse(course.id)}
-                        className={`cursor-pointer p-6 glass-card transition-all duration-300 border-border bg-surface/30 hover:bg-surface/50 group ${selectedCourses.includes(course.id) ? 'border-primary ring-2 ring-primary/20 bg-primary/5' : 'hover:border-primary/50'}`}
+                        className={`cursor-pointer p-6 glass-card transition-all duration-300 border-border bg-surface hover:bg-surface group ${selectedCourses.includes(course.id) ? 'border-primary ring-2 ring-primary/20 bg-primary/5' : 'hover:border-primary/50'}`}
                     >
                         <div className="flex justify-between items-start mb-4">
                             <div className="px-2 py-1 bg-surface-hover rounded text-[10px] font-black uppercase tracking-widest text-text-muted border border-border group-hover:border-primary/20">{course.code}</div>

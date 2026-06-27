@@ -110,7 +110,7 @@ const PurchaseVoucher = () => {
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="glass-card p-10 border border-border bg-surface/50"
+                    className="glass-card p-10 border border-border bg-surface"
                 >
                     <h3 className="text-2xl font-bold mb-8">Voucher Order Form</h3>
 
@@ -161,7 +161,7 @@ const PurchaseVoucher = () => {
                                         key={opt.type}
                                         className={`block p-4 rounded-xl border-2 cursor-pointer transition-all ${voucherType === opt.type
                                             ? 'border-primary bg-primary/5 ring-1 ring-primary'
-                                            : 'border-border bg-surface/50 hover:border-text-muted'
+                                            : 'border-border bg-surface hover:border-text-muted'
                                             }`}
                                     >
                                         <input
@@ -186,7 +186,7 @@ const PurchaseVoucher = () => {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="btn btn-primary w-full py-4 text-lg mt-4 shadow-xl shadow-primary/20"
+                            className="btn btn-primary w-full py-4 text-lg mt-4 shadow-md shadow-primary/20"
                         >
                             {loading ? <Loader2 className="animate-spin" /> : <>Complete Selection <ArrowRight size={20} /></>}
                         </button>

@@ -186,7 +186,7 @@ const RegistrarPrograms = () => {
                 </div>
 
                 <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
-                    <div className="glass-card flex items-center gap-3 px-4 py-2 border-border bg-surface/50 w-full md:w-auto">
+                    <div className="glass-card flex items-center gap-3 px-4 py-2 border-border bg-surface w-full md:w-auto">
                         <Search className="text-text-muted" size={18} />
                         <input
                             className="bg-transparent outline-none text-sm w-full md:w-64"
@@ -219,7 +219,7 @@ const RegistrarPrograms = () => {
                             key={prog.id}
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="glass-card p-6 border-border bg-surface/50 hover:border-primary/50 transition-all group relative flex flex-col h-full"
+                            className="glass-card p-6 border-border bg-surface hover:border-primary/50 transition-all group relative flex flex-col h-full"
                         >
                             <div className="flex items-center gap-4 mb-4">
                                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
@@ -262,7 +262,7 @@ const RegistrarPrograms = () => {
                             </div>
                         </motion.div>
                     )) : (
-                        <div className="col-span-full text-center py-20 bg-surface/20 rounded-2xl border border-dashed border-border">
+                        <div className="col-span-full text-center py-20 bg-surface rounded-2xl border border-dashed border-border">
                             <p className="text-text-muted font-bold uppercase tracking-widest text-sm">No programs found</p>
                         </div>
                     )}
@@ -272,8 +272,8 @@ const RegistrarPrograms = () => {
             {/* Course Manager Modal */}
             {showCourseModal && selectedProgram && (
                 <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
-                    <div className="absolute inset-0 bg-black/90 backdrop-blur-md" onClick={() => setShowCourseModal(false)}></div>
-                    <div className="bg-surface border border-border w-full max-w-4xl rounded-3xl p-8 z-10 shadow-2xl relative max-h-[90vh] overflow-hidden flex flex-col">
+                    <div className="absolute inset-0 bg-black/90 " onClick={() => setShowCourseModal(false)}></div>
+                    <div className="bg-surface border border-border w-full max-w-4xl rounded-3xl p-8 z-10 shadow-md relative max-h-[90vh] overflow-hidden flex flex-col">
                         <header className="flex justify-between items-start mb-8">
                             <div>
                                 <h2 className="text-3xl font-black uppercase tracking-tight text-text">
@@ -510,7 +510,7 @@ const RegistrarPrograms = () => {
                                                     {courses.length > 0 ? courses.map(course => (
                                                         <div
                                                             key={course.id}
-                                                            className="glass-card p-4 border-border bg-background/50 flex justify-between items-center group hover:border-primary/50 transition-all cursor-pointer"
+                                                            className="glass-card p-4 border-border bg-background flex justify-between items-center group hover:border-primary/50 transition-all cursor-pointer"
                                                             onClick={() => setSelectedCourseDetails(course)}
                                                         >
                                                             <div className="flex-1">
@@ -567,8 +567,8 @@ const RegistrarPrograms = () => {
             {/* Modal */}
             {showModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-                    <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setShowModal(false)}></div>
-                    <div className="bg-surface border border-border w-full max-w-lg rounded-2xl p-6 z-10 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+                    <div className="absolute inset-0 bg-black/80 " onClick={() => setShowModal(false)}></div>
+                    <div className="bg-surface border border-border w-full max-w-lg rounded-2xl p-6 z-10 shadow-md relative max-h-[90vh] overflow-y-auto">
                         <h2 className="text-2xl font-black uppercase tracking-tight mb-6 text-text">{editingProgram ? 'Edit Program' : 'New Program'}</h2>
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <div>

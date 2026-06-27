@@ -329,7 +329,7 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
                     </div>
                 )}
 
-                <div className="mb-8 flex justify-between items-center print:hidden">
+                <div className="mb-8 flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4 print:hidden">
                     {!readonly ? (
                         <button onClick={() => setShowPreview(false)} className="btn bg-slate-800 text-white flex items-center gap-2">
                             <ChevronLeft size={20} /> Back to Editor
@@ -342,17 +342,17 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
                     </button>
                 </div>
 
-                <div className="bg-white text-slate-900 p-12 rounded-2xl shadow-2xl print:shadow-none print:p-0 min-h-[297mm]">
-                    <div className="flex justify-between items-start border-b-4 border-slate-900 pb-8 mb-8">
-                        <div>
-                            <h1 className="text-4xl font-black uppercase tracking-tighter leading-none mb-2">{settings.schoolName || 'University Application'}</h1>
+                <div className="bg-white text-slate-900 p-4 sm:p-12 rounded-2xl shadow-md print:shadow-none print:p-0 min-h-[297mm]">
+                    <div className="flex flex-col md:flex-row justify-between items-start border-b-4 border-slate-900 pb-8 mb-8 gap-6">
+                        <div className="w-full md:w-auto">
+                            <h1 className="text-2xl sm:text-4xl font-black uppercase tracking-tighter leading-none mb-2">{settings.schoolName || 'University Application'}</h1>
                             <div className="flex flex-col gap-1">
                                 <p className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">Academic Year {currentYear}/{currentYear + 1}</p>
                                 <p className="text-slate-400 font-medium text-[9px]">Date Applied: {application?.createdAt ? new Date(application.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Draft'}</p>
                                 <p className="text-slate-400 font-medium text-[9px]">Date Downloaded: {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
                             </div>
                         </div>
-                        <div className="text-right flex items-start gap-4">
+                        <div className="flex items-start gap-4 w-full md:w-auto justify-start md:justify-end">
                             {settings.schoolLogo && (
                                 <div className="w-32 h-32 rounded-xl border-2 border-slate-200 flex items-center justify-center overflow-hidden p-2">
                                     <img src={`http://localhost:5000${settings.schoolLogo}`} alt="School Logo" className="w-full h-full object-contain" />
@@ -544,7 +544,7 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
                 </div>
             )}
 
-            <div className="glass-card p-4 sm:p-10 border-border bg-surface/50 overflow-hidden relative">
+            <div className="glass-card p-4 sm:p-10 border-border bg-surface overflow-hidden relative">
 
 
                 <form onSubmit={handleSubmit}>
@@ -804,7 +804,7 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
 
 
                                 {formData.results.sittings.map((sit, sIdx) => (
-                                    <div key={sIdx} className="p-6 bg-surface/50 rounded-2xl border border-border space-y-6 relative group">
+                                    <div key={sIdx} className="p-6 bg-surface rounded-2xl border border-border space-y-6 relative group">
 
                                         {formData.results.sittings.length > 1 && (
                                             <button
@@ -993,11 +993,11 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
                                 </button>
 
                                 {step < 4 ? (
-                                    <button type="button" onClick={nextStep} className="btn btn-primary w-full sm:w-auto justify-center px-8 flex items-center gap-2 shadow-xl shadow-primary/20">
+                                    <button type="button" onClick={nextStep} className="btn btn-primary w-full sm:w-auto justify-center px-8 flex items-center gap-2 shadow-md shadow-primary/20">
                                         Next Step <ChevronRight size={20} />
                                     </button>
                                 ) : (
-                                    <button type="button" onClick={(e) => handleSubmit(e, 'Submitted')} disabled={loading} className="btn btn-primary w-full sm:w-auto justify-center px-10 flex items-center gap-2 bg-green-600 hover:bg-green-500 border-green-600 shadow-xl shadow-green-500/20">
+                                    <button type="button" onClick={(e) => handleSubmit(e, 'Submitted')} disabled={loading} className="btn btn-primary w-full sm:w-auto justify-center px-10 flex items-center gap-2 bg-green-600 hover:bg-green-500 border-green-600 shadow-md shadow-green-500/20">
                                         {loading ? <Loader2 className="animate-spin" /> : <>Final Submission <CheckCircle size={20} /></>}
                                     </button>
                                 )}
@@ -1012,12 +1012,12 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
             {typeof document !== 'undefined' && createPortal(
                 <AnimatePresence>
                     {showConfirm && (
-                        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
+                        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-900/50 ">
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.95 }}
-                                className="bg-white rounded-2xl shadow-2xl p-6 max-w-md w-full border border-slate-100"
+                                className="bg-white rounded-2xl shadow-md p-6 max-w-md w-full border border-slate-100"
                             >
                                 <div className="flex flex-col items-center text-center space-y-4">
                                     <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center">
@@ -1045,7 +1045,7 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
                                                 setShowConfirm(false);
                                                 handleSubmit(e, 'Submitted', true);
                                             }}
-                                            className="btn flex-1 btn-primary bg-green-600 hover:bg-green-500 border-green-600 shadow-xl shadow-green-500/20 font-bold flex items-center justify-center gap-2"
+                                            className="btn flex-1 btn-primary bg-green-600 hover:bg-green-500 border-green-600 shadow-md shadow-green-500/20 font-bold flex items-center justify-center gap-2"
                                             disabled={loading}
                                         >
                                             {loading ? <Loader2 className="animate-spin" /> : 'Yes, Submit'}

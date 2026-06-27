@@ -40,7 +40,7 @@ const RegistrarDashboard = () => {
     return (
         <div className="bg-background min-h-screen text-text flex font-sans transition-colors duration-300">
             {/* Mobile Header */}
-            <header className="md:hidden fixed top-0 left-0 right-0 bg-surface/80 backdrop-blur-lg border-b border-border z-40 p-4 flex justify-between items-center transition-colors duration-300">
+            <header className="md:hidden fixed top-0 left-0 right-0 bg-surface  border-b border-border z-40 p-4 flex justify-between items-center transition-colors duration-300">
                 <div className="flex items-center gap-2">
                     {settings.schoolLogo ? (
                         <img src={`http://localhost:5000${settings.schoolLogo}`} alt="Logo" className="w-8 h-8 object-contain" />
@@ -67,14 +67,14 @@ const RegistrarDashboard = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+                        className="fixed inset-0 bg-black/50  z-40 md:hidden"
                     />
                 )}
             </AnimatePresence>
 
             {/* Sidebar */}
             <aside className={`
-                fixed inset-y-0 left-0 z-50 w-64 border-r border-border p-6 flex flex-col gap-10 bg-surface/90 backdrop-blur-xl 
+                fixed inset-y-0 left-0 z-50 w-64 border-r border-border p-6 flex flex-col gap-10 bg-surface  
                 transition-transform duration-300 transform md:translate-x-0
                 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
             `}>
@@ -229,7 +229,7 @@ const RegistrarApplicationsContent = ({ user }) => {
                 </div>
 
                 <div className="flex flex-col md:flex-row gap-4 w-full md:w-auto">
-                    <div className="glass-card flex items-center gap-3 px-4 py-2 border-border bg-surface/50 w-full md:w-auto relative">
+                    <div className="glass-card flex items-center gap-3 px-4 py-2 border-border bg-surface w-full md:w-auto relative">
                         <Search className="text-text-muted" size={18} />
                         <input
                             className="bg-transparent outline-none text-sm w-full md:w-64"
@@ -265,7 +265,7 @@ const RegistrarApplicationsContent = ({ user }) => {
                             key={app.id}
                             layoutId={app.id}
                             onClick={() => { setSelectedApp(app); setShowDetail(true); }}
-                            className="glass-card p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between group cursor-pointer hover:border-primary/50 transition-all border-border bg-surface/50 gap-4"
+                            className="glass-card p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between group cursor-pointer hover:border-primary/50 transition-all border-border bg-surface gap-4"
                         >
                             <div className="flex items-center gap-4 sm:gap-6">
 
@@ -306,7 +306,7 @@ const RegistrarApplicationsContent = ({ user }) => {
 
                         </motion.div>
                     )) : (
-                        <div className="text-center py-20 bg-surface/20 rounded-2xl border border-dashed border-border">
+                        <div className="text-center py-20 bg-surface rounded-2xl border border-dashed border-border">
                             <p className="text-text-muted font-bold uppercase tracking-widest text-sm">No applications found</p>
                         </div>
                     )}
@@ -322,15 +322,15 @@ const RegistrarApplicationsContent = ({ user }) => {
                         exit={{ opacity: 0 }}
                         className="fixed inset-0 z-50 flex items-center justify-end"
                     >
-                        <div className="absolute inset-0 bg-black/80 backdrop-blur-md" onClick={() => setShowDetail(false)}></div>
+                        <div className="absolute inset-0 bg-black/80 " onClick={() => setShowDetail(false)}></div>
                         <motion.div
                             initial={{ x: '100%' }}
                             animate={{ x: 0 }}
                             exit={{ x: '100%' }}
                             transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-                            className="w-full max-w-5xl h-full bg-background border-l border-border z-10 flex flex-col shadow-2xl"
+                            className="w-full max-w-5xl h-full bg-background border-l border-border z-10 flex flex-col shadow-md"
                         >
-                            <header className="p-4 sm:p-6 border-b border-border flex flex-col sm:flex-row justify-between items-center bg-surface/50 backdrop-blur-md gap-4">
+                            <header className="p-4 sm:p-6 border-b border-border flex flex-col sm:flex-row justify-between items-center bg-surface  gap-4">
                                 <button onClick={() => setShowDetail(false)} className="text-text-muted hover:text-text flex items-center gap-2 font-black uppercase text-[10px] tracking-widest transition-colors w-full sm:w-auto">
                                     <X size={20} /> Close Profile
                                 </button>
@@ -387,12 +387,12 @@ const RegistrarApplicationsContent = ({ user }) => {
                     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
                         <motion.div
                             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                            className="absolute inset-0 bg-black/90 backdrop-blur-sm"
+                            className="absolute inset-0 bg-black/90 "
                             onClick={() => setShowAdmitModal(false)}
                         />
                         <motion.div
                             initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
-                            className="bg-surface border border-border w-full max-w-md rounded-2xl p-8 z-10 shadow-2xl"
+                            className="bg-surface border border-border w-full max-w-md rounded-2xl p-8 z-10 shadow-md"
                         >
                             <h2 className="text-2xl font-black uppercase tracking-tight mb-2 text-text">Finalize Admission</h2>
                             <p className="text-text-muted text-sm mb-6 font-medium">Please select the program this applicant is being officially admitted into:</p>
@@ -409,7 +409,7 @@ const RegistrarApplicationsContent = ({ user }) => {
                                         onClick={() => setSelectedAdmittedProgramId(choice.id)}
                                         className={`w-full p-4 rounded-xl border flex flex-col items-start gap-1 transition-all ${selectedAdmittedProgramId === choice.id
                                             ? 'border-primary bg-primary/10'
-                                            : 'border-border bg-background/50 hover:border-text-muted/50'
+                                            : 'border-border bg-background hover:border-text-muted/50'
                                             }`}
                                     >
                                         <span className="text-[9px] font-black uppercase tracking-widest text-text-muted">{choice.label}</span>
@@ -449,14 +449,14 @@ const RegistrarApplicationsContent = ({ user }) => {
                     <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-12">
                         <motion.div
                             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                            className="absolute inset-0 bg-black/95 backdrop-blur-md"
+                            className="absolute inset-0 bg-black/95 "
                             onClick={() => setDocViewer({ ...docViewer, show: false })}
                         />
                         <motion.div
                             initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}
-                            className="bg-surface border border-border w-full max-w-6xl h-full max-h-[90vh] rounded-3xl overflow-hidden z-10 flex flex-col shadow-2xl"
+                            className="bg-surface border border-border w-full max-w-6xl h-full max-h-[90vh] rounded-3xl overflow-hidden z-10 flex flex-col shadow-md"
                         >
-                            <header className="p-4 md:p-6 border-b border-border flex justify-between items-center bg-background/50 backdrop-blur-md">
+                            <header className="p-4 md:p-6 border-b border-border flex justify-between items-center bg-background ">
                                 <div>
                                     <h3 className="font-black uppercase tracking-tighter text-xl text-text">{docViewer.label}</h3>
                                     <p className="text-[10px] text-text-muted font-bold uppercase tracking-widest">Applicant Credential Verification</p>
@@ -490,7 +490,7 @@ const RegistrarApplicationsContent = ({ user }) => {
                                 ) : (
                                     <img
                                         src={getDocUrl(docViewer.path)}
-                                        className="max-w-full max-h-full object-contain rounded-xl shadow-2xl"
+                                        className="max-w-full max-h-full object-contain rounded-xl shadow-md"
                                         alt="Document Preview"
                                     />
                                 )}

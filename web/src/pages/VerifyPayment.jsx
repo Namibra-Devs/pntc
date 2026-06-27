@@ -61,7 +61,7 @@ const VerifyPayment = () => {
             <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="max-w-md w-full glass-card p-8 border border-border text-center shadow-xl shadow-primary/5"
+                className="max-w-md w-full glass-card p-8 border border-border text-center shadow-md shadow-primary/5"
             >
                 {status === 'loading' && (
                     <div className="space-y-6 py-10">
@@ -99,7 +99,7 @@ const VerifyPayment = () => {
 
                                 <div className="mb-4 relative z-10">
                                     <p className="text-[10px] uppercase font-black tracking-widest text-text-muted mb-1">Voucher Serial</p>
-                                    <div className="flex justify-between items-center bg-background/50 p-3 rounded-lg border border-border">
+                                    <div className="flex justify-between items-center bg-background p-3 rounded-lg border border-border">
                                         <span className="font-mono text-lg font-bold text-primary">{voucher.serialNumber}</span>
                                         <button onClick={() => handleCopy(voucher.serialNumber)} className="text-text-muted hover:text-primary transition-colors">
                                             <Copy size={16} />
@@ -109,7 +109,7 @@ const VerifyPayment = () => {
 
                                 <div className="relative z-10">
                                     <p className="text-[10px] uppercase font-black tracking-widest text-text-muted mb-1">Voucher PIN</p>
-                                    <div className="flex justify-between items-center bg-background/50 p-3 rounded-lg border border-border">
+                                    <div className="flex justify-between items-center bg-background p-3 rounded-lg border border-border">
                                         <span className="font-mono text-lg font-bold text-primary">{voucher.pin}</span>
                                         <button onClick={() => handleCopy(voucher.pin)} className="text-text-muted hover:text-primary transition-colors">
                                             <Copy size={16} />

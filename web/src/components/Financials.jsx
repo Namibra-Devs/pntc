@@ -43,7 +43,7 @@ const Financials = () => {
                     <CreditCard size={120} className="absolute -bottom-10 -right-10 text-primary/5 rotate-12" />
                 </div>
 
-                <div className="glass-card p-8 border-border bg-surface/50">
+                <div className="glass-card p-8 border-border bg-surface">
                     <h4 className="font-bold flex items-center gap-2 mb-6 text-text uppercase tracking-tight"><History size={20} className="text-primary" /> Transaction History</h4>
 
                     <div className="space-y-4">
@@ -73,7 +73,7 @@ const Financials = () => {
                 </div>
             </div>
 
-            <div className="glass-card overflow-hidden border-border bg-surface/50">
+            <div className="glass-card overflow-hidden border-border bg-surface">
                 <table className="w-full text-left">
                     <thead className="bg-surface border-b border-border">
                         <tr>
@@ -87,7 +87,7 @@ const Financials = () => {
                     <tbody className="divide-y divide-border">
 
                         {invoices.map((inv) => (
-                            <tr key={inv.id} className="hover:bg-surface/50 transition-colors">
+                            <tr key={inv.id} className="hover:bg-surface transition-colors">
                                 <td className="p-4 text-xs font-mono text-text-muted">#{inv.id.substring(0, 8)}</td>
                                 <td className="p-4 text-sm font-bold text-text">{inv.title}</td>
                                 <td className="p-4 text-sm font-black text-text">GHS {inv.amount}</td>

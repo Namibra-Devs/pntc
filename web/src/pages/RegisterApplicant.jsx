@@ -134,7 +134,7 @@ const RegisterApplicant = () => {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="btn btn-primary w-full py-4 text-lg shadow-xl shadow-primary/20"
+                            className="btn btn-primary w-full py-4 text-lg shadow-md shadow-primary/20"
                         >
                             {loading ? <Loader2 className="animate-spin" /> : 'Initialize Application'}
                         </button>

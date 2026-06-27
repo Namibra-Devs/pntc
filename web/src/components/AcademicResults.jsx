@@ -25,7 +25,7 @@ const AcademicResults = () => {
                 </div>
 
 
-                <div className="glass-card p-6 border-border bg-surface/50">
+                <div className="glass-card p-6 border-border bg-surface">
                     <div className="flex justify-between items-start mb-4">
                         <TrendingUp className="text-primary" size={24} />
                         <span className="text-[10px] font-black px-3 py-1 bg-primary/10 text-primary rounded-full border border-primary/20 tracking-widest uppercase">Verified</span>
@@ -35,7 +35,7 @@ const AcademicResults = () => {
                 </div>
 
 
-                <div className="glass-card p-6 border-border bg-surface/50">
+                <div className="glass-card p-6 border-border bg-surface">
                     <div className="flex justify-between items-start mb-4">
                         <BarChart3 className="text-purple-500" size={24} />
                     </div>
@@ -45,7 +45,7 @@ const AcademicResults = () => {
 
             </div>
 
-            <div className="glass-card p-8 border-border bg-surface/50 shadow-none">
+            <div className="glass-card p-8 border-border bg-surface shadow-none">
                 <div className="flex justify-between items-center mb-8">
                     <h4 className="font-bold text-xl text-text uppercase tracking-tight">Semester Results (2025/2026 Sem 1)</h4>
                     <button className="btn btn-primary text-xs px-6 py-3 font-bold uppercase tracking-widest"><Download size={14} /> Download Transcript</button>
@@ -54,7 +54,7 @@ const AcademicResults = () => {
 
                 <div className="space-y-4">
                     {results.map((res, i) => (
-                        <div key={i} className="flex items-center justify-between p-5 bg-background/50 rounded-2xl border border-border hover:border-primary/30 transition-all group">
+                        <div key={i} className="flex items-center justify-between p-5 bg-background rounded-2xl border border-border hover:border-primary/30 transition-all group">
                             <div className="flex items-center gap-5">
                                 <div className="w-14 h-14 bg-surface flex items-center justify-center rounded-2xl text-[10px] font-black tracking-tighter text-primary border border-border group-hover:border-primary/20">{res.code}</div>
                                 <div>

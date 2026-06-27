@@ -66,7 +66,7 @@ const ApplicantDashboard = () => {
     return (
         <div className="bg-background min-h-screen text-text flex font-sans transition-colors duration-300">
             {/* Mobile Header */}
-            <header className="md:hidden fixed top-0 left-0 right-0 bg-surface/80 backdrop-blur-lg border-b border-border z-40 p-4 flex justify-between items-center transition-colors duration-300">
+            <header className="md:hidden fixed top-0 left-0 right-0 bg-surface  border-b border-border z-40 p-4 flex justify-between items-center transition-colors duration-300">
                 <div className="flex items-center gap-2">
                     {settings.schoolLogo ? (
                         <img src={`http://localhost:5000${settings.schoolLogo}`} alt="Logo" className="w-8 h-8 object-contain" />
@@ -93,14 +93,14 @@ const ApplicantDashboard = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+                        className="fixed inset-0 bg-black/50  z-40 md:hidden"
                     />
                 )}
             </AnimatePresence>
 
             {/* Sidebar */}
             <aside className={`
-                fixed inset-y-0 left-0 z-50 w-64 border-r border-border p-6 flex flex-col gap-10 bg-surface/90 backdrop-blur-xl 
+                fixed inset-y-0 left-0 z-50 w-64 border-r border-border p-6 flex flex-col gap-10 bg-surface  
                 transition-transform duration-300 transform md:translate-x-0
                 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
             `}>
@@ -182,7 +182,7 @@ const ApplicantDashboard = () => {
                                     initial={{ opacity: 0, y: 10, scale: 0.95 }}
                                     animate={{ opacity: 1, y: 0, scale: 1 }}
                                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                                    className="absolute right-0 top-full mt-2 w-80 glass-card bg-surface z-50 overflow-hidden shadow-2xl border-border"
+                                    className="absolute right-0 top-full mt-2 w-80 glass-card bg-surface z-50 overflow-hidden shadow-md border-border"
                                 >
                                     <div className="p-4 border-b border-border bg-primary/5">
                                         <h3 className="font-bold text-sm">Notifications</h3>
@@ -216,7 +216,7 @@ const ApplicantDashboard = () => {
                             exit={{ opacity: 0, y: -10 }}
                             className="space-y-8"
                         >
-                            <div className="glass-card p-8 border-border bg-surface/50 flex flex-col md:flex-row items-center justify-between gap-6">
+                            <div className="glass-card p-8 border-border bg-surface flex flex-col md:flex-row items-center justify-between gap-6">
                                 <div>
                                     <h3 className="text-xl font-bold mb-2 text-text">Application Status</h3>
                                     <p className="text-text-muted text-sm">Track the progress of your admission request.</p>
@@ -228,7 +228,7 @@ const ApplicantDashboard = () => {
                             </div>
 
                             <div className="grid md:grid-cols-2 gap-8">
-                                <div className="glass-card p-8 border-border bg-surface/50">
+                                <div className="glass-card p-8 border-border bg-surface">
                                     <h4 className="font-bold text-lg mb-6 uppercase tracking-tight text-text">Program Choices</h4>
                                     <div className="space-y-4">
                                         {[
@@ -236,7 +236,7 @@ const ApplicantDashboard = () => {
                                             { label: 'Second Choice', name: application?.secondChoice?.name, color: 'text-text-muted' },
                                             { label: 'Third Choice', name: application?.thirdChoice?.name, color: 'text-text-muted' }
                                         ].map((choice, i) => (
-                                            <div key={i} className="p-4 bg-background/50 rounded-xl border border-border group hover:border-primary/30 transition-colors">
+                                            <div key={i} className="p-4 bg-background rounded-xl border border-border group hover:border-primary/30 transition-colors">
                                                 <p className={`text-[10px] font-black uppercase tracking-widest mb-1 ${choice.color}`}>{choice.label}</p>
                                                 <p className="font-bold text-text">{choice.name || 'Not Selected'}</p>
                                             </div>
@@ -267,7 +267,7 @@ const ApplicantDashboard = () => {
                                             href={`http://localhost:5000${application.admissionLetter}`}
                                             target="_blank"
                                             rel="noreferrer"
-                                            className="btn btn-primary w-full py-4 flex items-center justify-center gap-3 text-lg font-black uppercase tracking-widest shadow-xl shadow-primary/30"
+                                            className="btn btn-primary w-full py-4 flex items-center justify-center gap-3 text-lg font-black uppercase tracking-widest shadow-md shadow-primary/30"
                                         >
                                             <FileText size={20} /> Download Admission Letter
                                         </a>

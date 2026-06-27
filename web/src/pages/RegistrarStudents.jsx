@@ -41,7 +41,7 @@ const RegistrarStudents = () => {
                     <p className="text-text-muted font-medium">Directory of admitted students.</p>
                 </div>
 
-                <div className="glass-card flex items-center gap-3 px-4 py-2 border-border bg-surface/50 w-full md:w-auto">
+                <div className="glass-card flex items-center gap-3 px-4 py-2 border-border bg-surface w-full md:w-auto">
                     <Search className="text-text-muted" size={18} />
                     <input
                         className="bg-transparent outline-none text-sm w-full md:w-64"
@@ -63,7 +63,7 @@ const RegistrarStudents = () => {
                             key={student.id}
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="glass-card p-6 border-border bg-surface/50 hover:border-primary/50 transition-all group"
+                            className="glass-card p-6 border-border bg-surface hover:border-primary/50 transition-all group"
                         >
                             <div className="flex items-center gap-4 mb-4">
                                 <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
@@ -83,7 +83,7 @@ const RegistrarStudents = () => {
                             </div>
                         </motion.div>
                     )) : (
-                        <div className="col-span-full text-center py-20 bg-surface/20 rounded-2xl border border-dashed border-border">
+                        <div className="col-span-full text-center py-20 bg-surface rounded-2xl border border-dashed border-border">
                             <p className="text-text-muted font-bold uppercase tracking-widest text-sm">No students found</p>
                         </div>
                     )}

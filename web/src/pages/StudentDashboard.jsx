@@ -49,7 +49,7 @@ const StudentDashboard = () => {
     return (
         <div className="bg-background min-h-screen text-text flex font-sans transition-colors duration-300">
             {/* Mobile Header */}
-            <header className="md:hidden fixed top-0 left-0 right-0 bg-surface/80 backdrop-blur-lg border-b border-border z-40 p-4 flex justify-between items-center transition-colors duration-300">
+            <header className="md:hidden fixed top-0 left-0 right-0 bg-surface  border-b border-border z-40 p-4 flex justify-between items-center transition-colors duration-300">
                 <div className="flex items-center gap-2">
                     {settings.schoolLogo ? (
                         <img src={`http://localhost:5000${settings.schoolLogo}`} alt="Logo" className="w-8 h-8 object-contain" />
@@ -76,14 +76,14 @@ const StudentDashboard = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+                        className="fixed inset-0 bg-black/50  z-40 md:hidden"
                     />
                 )}
             </AnimatePresence>
 
             {/* Sidebar */}
             <aside className={`
-                fixed inset-y-0 left-0 z-50 w-64 border-r border-border p-6 flex flex-col gap-10 bg-surface/90 backdrop-blur-xl 
+                fixed inset-y-0 left-0 z-50 w-64 border-r border-border p-6 flex flex-col gap-10 bg-surface  
                 transition-transform duration-300 transform md:translate-x-0
                 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
             `}>
@@ -128,7 +128,7 @@ const StudentDashboard = () => {
                 </nav>
 
                 <div className="mt-auto space-y-4">
-                    <div className="flex items-center gap-3 mb-2 p-2 bg-surface/50 border border-border rounded-xl">
+                    <div className="flex items-center gap-3 mb-2 p-2 bg-surface border border-border rounded-xl">
                         <div className="w-10 h-10 bg-surface-hover rounded-full flex items-center justify-center border border-border">
                             <UserIcon size={20} className="text-text-muted" />
                         </div>
@@ -218,7 +218,7 @@ const StudentDashboard = () => {
                                     <div className="space-y-4">
                                         {studentData?.Enrollments?.length > 0 ? (
                                             studentData.Enrollments.map((en, i) => (
-                                                <div key={i} className="flex items-center justify-between p-4 bg-surface/50 rounded-xl border border-border">
+                                                <div key={i} className="flex items-center justify-between p-4 bg-surface rounded-xl border border-border">
                                                     <div className="flex items-center gap-4">
                                                         <div className="w-10 h-10 bg-surface-hover flex items-center justify-center rounded-lg text-xs font-bold font-heading">{en.Course.code}</div>
                                                         <div>
@@ -241,7 +241,7 @@ const StudentDashboard = () => {
                                 <div className="glass-card p-6">
                                     <h4 className="font-bold mb-6">Upcoming Deadlines</h4>
                                     <div className="space-y-4">
-                                        <div className="p-4 bg-surface/50 rounded-xl border border-border flex gap-4">
+                                        <div className="p-4 bg-surface rounded-xl border border-border flex gap-4">
                                             <div className="w-12 h-12 bg-accent/10 text-accent flex flex-col items-center justify-center rounded-xl">
                                                 <span className="text-xs font-bold">JAN</span>
                                                 <span className="text-lg font-bold">20</span>

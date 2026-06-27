@@ -30,7 +30,7 @@ const GradeEntry = ({ enrollment, onUpdate }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-4 bg-surface/30 p-4 rounded-xl border border-border">
+        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-4 bg-surface p-4 rounded-xl border border-border">
             <div className="flex-1 flex gap-4">
                 <div className="flex-1">
                     <label className="text-[10px] font-black text-text-muted uppercase ml-1 tracking-widest">CA (30/40)</label>

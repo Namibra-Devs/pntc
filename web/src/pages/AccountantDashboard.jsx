@@ -55,7 +55,7 @@ const AccountantDashboard = () => {
     return (
         <div className="bg-background min-h-screen text-text flex font-sans transition-colors duration-300">
             {/* Mobile Header */}
-            <header className="md:hidden fixed top-0 left-0 right-0 bg-surface/80 backdrop-blur-lg border-b border-border z-40 p-4 flex justify-between items-center transition-colors duration-300">
+            <header className="md:hidden fixed top-0 left-0 right-0 bg-surface  border-b border-border z-40 p-4 flex justify-between items-center transition-colors duration-300">
                 <div className="flex items-center gap-2">
                     {settings.schoolLogo ? (
                         <img src={`http://localhost:5000${settings.schoolLogo}`} alt="Logo" className="w-8 h-8 object-contain" />
@@ -82,14 +82,14 @@ const AccountantDashboard = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+                        className="fixed inset-0 bg-black/50  z-40 md:hidden"
                     />
                 )}
             </AnimatePresence>
 
             {/* Sidebar */}
             <aside className={`
-                fixed inset-y-0 left-0 z-50 w-64 border-r border-border p-6 flex flex-col gap-10 bg-surface/90 backdrop-blur-xl 
+                fixed inset-y-0 left-0 z-50 w-64 border-r border-border p-6 flex flex-col gap-10 bg-surface  
                 transition-transform duration-300 transform md:translate-x-0
                 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
             `}>
@@ -132,7 +132,7 @@ const AccountantDashboard = () => {
                 </nav>
 
                 <div className="mt-auto space-y-4">
-                    <div className="flex items-center gap-3 mb-2 p-2 bg-surface/50 border border-border rounded-xl">
+                    <div className="flex items-center gap-3 mb-2 p-2 bg-surface border border-border rounded-xl">
                         <div className="w-10 h-10 bg-surface-hover rounded-full flex items-center justify-center border border-border text-text-muted">
                             <UserIcon size={20} />
                         </div>
@@ -165,7 +165,7 @@ const AccountantDashboard = () => {
                         <p className="text-text-muted mt-1 px-3 py-1 bg-surface border border-border rounded-full inline-block text-[10px] font-bold uppercase tracking-widest">GUMS Centralized Finance Portal</p>
                     </div>
                     <div className="flex gap-4">
-                        <div className="glass-card flex items-center gap-3 px-4 py-2 border-border bg-surface/50 shadow-none">
+                        <div className="glass-card flex items-center gap-3 px-4 py-2 border-border bg-surface shadow-none">
                             <Search size={18} className="text-text-muted" />
                             <input className="bg-transparent outline-none text-sm w-48 text-text" placeholder="Search records..." />
                         </div>
@@ -183,7 +183,7 @@ const AccountantDashboard = () => {
                         { label: 'Voucher Sales', value: `GH¢ ${vouchers.reduce((acc, v) => acc + parseFloat(v.price), 0).toLocaleString()}`, icon: <Plus size={24} />, trend: `${vouchers.length} Units`, color: 'text-yellow-500', bg: 'bg-yellow-500/10' },
                         { label: 'Payroll Due', value: 'GH¢ 0', icon: <DollarSign size={24} />, trend: 'Pending', color: 'text-purple-500', bg: 'bg-purple-500/10' },
                     ].map((stat, i) => (
-                        <div key={i} className="glass-card p-6 border-border bg-surface/50 group hover:border-primary/30 transition-all">
+                        <div key={i} className="glass-card p-6 border-border bg-surface group hover:border-primary/30 transition-all">
                             <div className="flex justify-between items-start mb-4">
                                 <div className={`w-12 h-12 ${stat.bg} ${stat.color} rounded-2xl flex items-center justify-center transition-transform group-hover:scale-110`}>
                                     {stat.icon}
@@ -206,7 +206,7 @@ const AccountantDashboard = () => {
                             animate={{ opacity: 1, y: 0 }}
                             className="grid grid-cols-1 lg:grid-cols-2 gap-8"
                         >
-                            <div className="glass-card p-8 border-border bg-surface/50">
+                            <div className="glass-card p-8 border-border bg-surface">
                                 <div className="flex justify-between items-center mb-8">
                                     <h3 className="font-bold text-lg uppercase tracking-wider font-heading text-text">Recent Payments</h3>
                                     <button className="text-xs text-primary font-bold hover:underline">View All</button>
@@ -234,7 +234,7 @@ const AccountantDashboard = () => {
                                 </div>
                             </div>
 
-                            <div className="glass-card p-8 border-border bg-surface/50">
+                            <div className="glass-card p-8 border-border bg-surface">
                                 <div className="flex justify-between items-center mb-8">
                                     <h3 className="font-bold text-lg uppercase tracking-wider font-heading text-text">Expense Overview</h3>
                                     <Download size={18} className="text-text-muted cursor-pointer hover:text-primary transition-colors" />
@@ -271,8 +271,8 @@ const AccountantDashboard = () => {
                             className="glass-card overflow-hidden"
                         >
                             <div className="overflow-x-auto">
-                                <table className="w-full text-left bg-surface/30">
-                                    <thead className="bg-surface/50 border-b border-border">
+                                <table className="w-full text-left bg-surface">
+                                    <thead className="bg-surface border-b border-border">
                                         <tr>
                                             <th className="p-4 text-[10px] font-bold text-text-muted uppercase tracking-widest text-center">#</th>
                                             <th className="p-4 text-[10px] font-bold text-text-muted uppercase tracking-widest">Serial Number</th>

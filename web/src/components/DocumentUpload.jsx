@@ -103,7 +103,7 @@ const DocumentUpload = ({ application, setApplication }) => {
     };
 
     return (
-        <div className="glass-card p-8 animate-fade-in max-w-3xl border-border bg-surface/50">
+        <div className="glass-card p-8 animate-fade-in max-w-3xl border-border bg-surface">
             <h2 className="text-2xl font-bold mb-6">Document Upload</h2>
             <p className="text-text-muted mb-8">Please upload clear scans of your academic and personal documents. Supported formats: PDF, JPG, PNG (Max 5MB each).</p>
 
@@ -139,7 +139,7 @@ const DocumentUpload = ({ application, setApplication }) => {
                 ].map((field, idx) => {
                     const isReadOnly = application?.status === 'Admitted';
                     return (
-                        <div key={idx} className="p-4 bg-surface/80 border border-border rounded-2xl space-y-4">
+                        <div key={idx} className="p-4 bg-surface border border-border rounded-2xl space-y-4">
 
 
                             <div className="flex items-center justify-between">
@@ -192,7 +192,7 @@ const DocumentUpload = ({ application, setApplication }) => {
                             </div>
 
                             {files[field.name] && (
-                                <div className="flex items-center gap-3 p-2 bg-background/50 rounded-lg border border-border/50">
+                                <div className="flex items-center gap-3 p-2 bg-background rounded-lg border border-border/50">
                                     <div className="text-[10px] font-mono text-text-muted truncate flex-1">{files[field.name].name}</div>
                                     <button type="button" onClick={() => {
                                         setFiles({ ...files, [field.name]: null });
@@ -207,15 +207,15 @@ const DocumentUpload = ({ application, setApplication }) => {
                 })}
 
                 {showPreviewModal && (
-                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/90 backdrop-blur-sm animate-fade-in">
-                        <div className="relative bg-surface border border-border rounded-3xl max-w-2xl w-full max-h-[80vh] overflow-hidden flex flex-col pt-12 shadow-2xl">
-                            <button onClick={() => setShowPreviewModal(null)} className="absolute top-4 right-4 w-10 h-10 bg-background/50 rounded-full flex items-center justify-center hover:bg-background transition-colors">
+                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background  animate-fade-in">
+                        <div className="relative bg-surface border border-border rounded-3xl max-w-2xl w-full max-h-[80vh] overflow-hidden flex flex-col pt-12 shadow-md">
+                            <button onClick={() => setShowPreviewModal(null)} className="absolute top-4 right-4 w-10 h-10 bg-background rounded-full flex items-center justify-center hover:bg-background transition-colors">
                                 <X size={20} />
                             </button>
-                            <div className="flex-1 overflow-auto p-8 flex items-center justify-center bg-background/20">
+                            <div className="flex-1 overflow-auto p-8 flex items-center justify-center bg-background">
 
                                 {files[showPreviewModal]?.type.startsWith('image/') ? (
-                                    <img src={previews[showPreviewModal]} alt="Preview" className="max-w-full h-auto rounded-lg shadow-2xl" />
+                                    <img src={previews[showPreviewModal]} alt="Preview" className="max-w-full h-auto rounded-lg shadow-md" />
                                 ) : (
                                     <div className="w-full h-full min-h-[500px] flex flex-col">
                                         <iframe

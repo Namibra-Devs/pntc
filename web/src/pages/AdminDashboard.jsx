@@ -244,7 +244,7 @@ const AdminDashboard = () => {
 
 
             {/* Mobile Header */}
-            <header className="md:hidden fixed top-0 left-0 right-0 bg-surface/80 backdrop-blur-lg border-b border-border z-40 p-4 flex justify-between items-center transition-colors duration-300">
+            <header className="md:hidden fixed top-0 left-0 right-0 bg-surface  border-b border-border z-40 p-4 flex justify-between items-center transition-colors duration-300">
                 <div className="flex items-center gap-2">
                     {settings.schoolLogo ? (
                         <img src={`http://localhost:5000${settings.schoolLogo}`} alt="Logo" className="w-8 h-8 object-contain" />
@@ -271,14 +271,14 @@ const AdminDashboard = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+                        className="fixed inset-0 bg-black/50  z-40 md:hidden"
                     />
                 )}
             </AnimatePresence >
 
             {/* Sidebar */}
             < aside className={`
-                fixed inset-y-0 left-0 z-50 w-64 border-r border-border p-6 flex flex-col gap-10 bg-surface/90 backdrop-blur-xl
+                fixed inset-y-0 left-0 z-50 w-64 border-r border-border p-6 flex flex-col gap-10 bg-surface 
                 transition-transform duration-300 transform md:translate-x-0
                 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
             `}>
@@ -340,7 +340,7 @@ const AdminDashboard = () => {
                     </div>
 
                     <div className="flex gap-4">
-                        <div className="glass-card flex items-center gap-3 px-4 py-2 border-border bg-surface/50">
+                        <div className="glass-card flex items-center gap-3 px-4 py-2 border-border bg-surface">
                             <Search size={18} className="text-text-muted" />
                             <input className="bg-transparent outline-none text-sm w-48 text-text" placeholder="Search entries..." />
                         </div>
@@ -369,7 +369,7 @@ const AdminDashboard = () => {
                                     </thead>
                                     <tbody className="divide-y divide-border">
                                         {applications.map((app) => (
-                                            <tr key={app.id} className="border-b border-border hover:bg-surface/50 transition-colors">
+                                            <tr key={app.id} className="border-b border-border hover:bg-surface transition-colors">
                                                 <td className="p-4">
                                                     <p className="font-bold text-text">{app.User?.firstName} {app.User?.lastName}</p>
                                                     <p className="text-xs text-text-muted">{app.User?.email}</p>
@@ -608,12 +608,12 @@ const AdminDashboard = () => {
                         <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
                             <motion.div
                                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                                className="absolute inset-0 bg-black/90 backdrop-blur-md"
+                                className="absolute inset-0 bg-black/90 "
                                 onClick={() => setShowCourseModal(false)}
                             />
                             <motion.div
                                 initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
-                                className="bg-surface border border-border w-full max-w-4xl rounded-3xl p-8 z-10 shadow-2xl relative max-h-[90vh] overflow-hidden flex flex-col"
+                                className="bg-surface border border-border w-full max-w-4xl rounded-3xl p-8 z-10 shadow-md relative max-h-[90vh] overflow-hidden flex flex-col"
                             >
                                 <header className="flex justify-between items-start mb-8">
                                     <div>
@@ -851,7 +851,7 @@ const AdminDashboard = () => {
                                                             {courses.length > 0 ? courses.map(course => (
                                                                 <div
                                                                     key={course.id}
-                                                                    className="glass-card p-4 border-border bg-background/50 flex justify-between items-center group hover:border-primary/50 transition-all cursor-pointer"
+                                                                    className="glass-card p-4 border-border bg-background flex justify-between items-center group hover:border-primary/50 transition-all cursor-pointer"
                                                                     onClick={() => setSelectedCourseDetails(course)}
                                                                 >
                                                                     <div className="flex-1">
@@ -909,7 +909,7 @@ const AdminDashboard = () => {
                 {/* Grading Modal */}
                 < AnimatePresence >
                     {showGradingModal && (
-                        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm">
+                        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-background ">
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 animate={{ opacity: 1, scale: 1 }}
@@ -1032,12 +1032,12 @@ const AdminDashboard = () => {
                     <div className="fixed inset-0 z-[70] flex items-center justify-center p-4">
                         <motion.div
                             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                            className="absolute inset-0 bg-black/90 backdrop-blur-sm"
+                            className="absolute inset-0 bg-black/90 "
                             onClick={() => setShowUserModal(false)}
                         />
                         <motion.div
                             initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
-                            className="bg-surface border border-border w-full max-w-md rounded-2xl p-8 z-10 shadow-2xl relative"
+                            className="bg-surface border border-border w-full max-w-md rounded-2xl p-8 z-10 shadow-md relative"
                         >
                             <h2 className="text-2xl font-black uppercase tracking-tight mb-6 text-text">Add New Staff</h2>
                             <form onSubmit={handleCreateUser} className="space-y-4">
@@ -1131,12 +1131,12 @@ const AdminDashboard = () => {
                     <div className="fixed inset-0 z-[70] flex items-center justify-center p-4">
                         <motion.div
                             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                            className="absolute inset-0 bg-black/90 backdrop-blur-sm"
+                            className="absolute inset-0 bg-black/90 "
                             onClick={() => setShowUserDetailModal(false)}
                         />
                         <motion.div
                             initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
-                            className="bg-surface border border-border w-full max-w-2xl rounded-2xl p-8 z-10 shadow-2xl relative overflow-y-auto max-h-[90vh]"
+                            className="bg-surface border border-border w-full max-w-2xl rounded-2xl p-8 z-10 shadow-md relative overflow-y-auto max-h-[90vh]"
                         >
                             <div className="flex justify-between items-start mb-6">
                                 <div>
