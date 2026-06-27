@@ -65,6 +65,7 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
     });
 
     const [programs, setPrograms] = useState([]);
+    const [gradingSchemes, setGradingSchemes] = useState([]);
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
@@ -79,6 +80,16 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
             }
         };
         fetchPrograms();
+        
+        const fetchGradingSchemes = async () => {
+            try {
+                const { data } = await api.get('/admission/gradings');
+                setGradingSchemes(data);
+            } catch (err) {
+                console.error("Error fetching grading schemes:", err);
+            }
+        };
+        fetchGradingSchemes();
 
 
         if (application) {
@@ -520,7 +531,7 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
                         <div className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all ${step >= s.id ? 'bg-primary border-primary text-white shadow-lg shadow-primary/20' : 'bg-surface border-border text-text-muted'}`}>
                             {step > s.id ? <CheckCircle size={20} /> : s.icon}
                         </div>
-                        <span className={`text-[8px] sm:text-xs font-bold uppercase tracking-widest text-center max-w-[60px] sm:max-w-none ${step >= s.id ? 'text-primary' : 'text-text-muted hidden sm:block'}`}>{s.label}</span>
+                        <span className={`text-[8px] sm:text-[10px] font-bold uppercase tracking-widest text-center mt-1 ${step === s.id ? 'text-primary block' : 'text-text-muted hidden sm:block'}`}>{s.label}</span>
                     </div>
                 ))}
             </div>
@@ -566,7 +577,7 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
 
                                     <div className="form-group md:col-span-2">
                                         <label className="label">Date of Birth</label>
-                                        <div className="flex gap-2">
+                                        <div className="grid grid-cols-3 gap-2">
                                             <select
                                                 value={formData.dateOfBirth ? formData.dateOfBirth.split('-')[0] : ''}
                                                 onChange={(e) => {
@@ -735,16 +746,18 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
                                         <ShieldCheck size={12} /> WASSCE Grading Scale Reference
                                     </p>
                                     <div className="flex flex-wrap gap-2">
-                                        {[
-                                            { g: 'A1', r: '75-100%' }, { g: 'B2', r: '70-74%' }, { g: 'B3', r: '65-69%' },
-                                            { g: 'C4', r: '60-64%' }, { g: 'C5', r: '55-59%' }, { g: 'C6', r: '50-54%' },
-                                            { g: 'D7', r: '45-49%' }, { g: 'E8', r: '40-44%' }, { g: 'F9', r: '0-39%' },
-                                        ].map(item => (
-                                            <div key={item.g} className="px-2 py-1 bg-background border border-border rounded flex flex-col items-center min-w-[50px]">
-                                                <span className="text-xs font-bold text-primary">{item.g}</span>
-                                                <span className="text-[8px] text-text-muted font-mono">{item.r}</span>
+                                        {gradingSchemes.map(item => (
+                                            <div key={item.id} className="px-2 py-1 bg-background border border-border rounded flex flex-col items-center min-w-[50px]">
+                                                <span className="text-xs font-bold text-primary">{item.grade}</span>
+                                                <span className="text-[8px] text-text-muted font-mono">{Number(item.minScore)}-{Number(item.maxScore)}%</span>
+                                                {item.description && (
+                                                    <span className="text-[8px] text-primary/70 font-semibold mt-0.5 uppercase tracking-wider">{item.description}</span>
+                                                )}
                                             </div>
                                         ))}
+                                        {gradingSchemes.length === 0 && (
+                                            <p className="text-xs text-text-muted italic">Loading grading scale...</p>
+                                        )}
                                     </div>
                                 </div>
 
@@ -960,38 +973,36 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
 
                     {/* Navigation Buttons */}
                     {!readonly && (
-                        <div className="flex justify-between items-center mt-12 pt-8 border-t border-border">
+                        <div className="flex flex-col-reverse md:flex-row justify-between items-stretch md:items-center gap-6 mt-12 pt-8 border-t border-border">
                             <button
                                 type="button"
                                 onClick={prevStep}
                                 disabled={step === 1 || loading}
-                                className={`btn flex items-center gap-2 ${step === 1 ? 'opacity-0 pointer-events-none' : 'bg-surface hover:bg-surface-hover text-text border border-border'}`}
+                                className={`btn flex justify-center items-center gap-2 w-full md:w-auto ${step === 1 ? 'hidden md:flex opacity-0 pointer-events-none' : 'bg-surface hover:bg-surface-hover text-text border border-border'}`}
                             >
                                 <ChevronLeft size={20} /> Previous
                             </button>
 
-                            <div className="flex gap-4">
-                                <button type="button" onClick={(e) => handleSubmit(e, 'Draft')} disabled={loading} className="btn bg-surface hover:bg-primary/10 text-primary border border-primary/20 flex items-center gap-2">
+                            <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+                                <button type="button" onClick={(e) => handleSubmit(e, 'Draft')} disabled={loading} className="btn w-full sm:w-auto justify-center bg-surface hover:bg-primary/10 text-primary border border-primary/20 flex items-center gap-2">
                                     {loading ? <Loader2 className="animate-spin" /> : <><Save size={18} /> Save Progress</>}
                                 </button>
 
-                                <button type="button" onClick={() => setShowPreview(true)} className="btn bg-surface hover:bg-surface-hover text-text border border-border px-4 flex items-center gap-2">
+                                <button type="button" onClick={() => setShowPreview(true)} className="btn w-full sm:w-auto justify-center bg-surface hover:bg-surface-hover text-text border border-border px-4 flex items-center gap-2">
                                     <FileCheck size={18} /> Preview
                                 </button>
 
-
                                 {step < 4 ? (
-                                    <button type="button" onClick={nextStep} className="btn btn-primary px-8 flex items-center gap-2 shadow-xl shadow-primary/20">
+                                    <button type="button" onClick={nextStep} className="btn btn-primary w-full sm:w-auto justify-center px-8 flex items-center gap-2 shadow-xl shadow-primary/20">
                                         Next Step <ChevronRight size={20} />
                                     </button>
                                 ) : (
-                                    <button type="button" onClick={(e) => handleSubmit(e, 'Submitted')} disabled={loading} className="btn btn-primary px-10 flex items-center gap-2 bg-green-600 hover:bg-green-500 border-green-600 shadow-xl shadow-green-500/20">
+                                    <button type="button" onClick={(e) => handleSubmit(e, 'Submitted')} disabled={loading} className="btn btn-primary w-full sm:w-auto justify-center px-10 flex items-center gap-2 bg-green-600 hover:bg-green-500 border-green-600 shadow-xl shadow-green-500/20">
                                         {loading ? <Loader2 className="animate-spin" /> : <>Final Submission <CheckCircle size={20} /></>}
                                     </button>
                                 )}
                             </div>
                         </div>
-
                     )}
 
                 </form>

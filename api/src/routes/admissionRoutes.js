@@ -2,10 +2,13 @@ const express = require('express');
 const router = express.Router();
 const { protect, authorize } = require('../middleware/authMiddleware');
 const upload = require('../middleware/uploadMiddleware');
-const { getPrograms, submitApplication, uploadDocuments, getMyApplication } = require('../controllers/admissionController');
+const { getPrograms, submitApplication, uploadDocuments, getMyApplication, getGradingSchemes } = require('../controllers/admissionController');
 
 // Public route to see programs
 router.get('/programs', getPrograms);
+
+// Public route to see grading schemes
+router.get('/gradings', getGradingSchemes);
 
 // Protected routes for applicants
 router.get('/my-application', protect, authorize('applicant', 'student'), getMyApplication);

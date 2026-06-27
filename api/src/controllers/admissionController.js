@@ -1,4 +1,4 @@
-const { Application, Program, User } = require('../models');
+const { Application, Program, User, GradingScheme } = require('../models');
 const fs = require('fs');
 const path = require('path');
 
@@ -10,6 +10,18 @@ const getPrograms = async (req, res) => {
     try {
         const programs = await Program.findAll();
         res.json(programs);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// @desc    Get grading schemes
+// @route   GET /api/admission/gradings
+// @access  Public
+const getGradingSchemes = async (req, res) => {
+    try {
+        const schemes = await GradingScheme.findAll({ order: [['minScore', 'DESC']] });
+        res.json(schemes);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -180,6 +192,7 @@ module.exports = {
     getPrograms,
     submitApplication,
     uploadDocuments,
-    getMyApplication
+    getMyApplication,
+    getGradingSchemes
 };
 
