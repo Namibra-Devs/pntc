@@ -182,7 +182,7 @@ const ApplicantDashboard = () => {
                                     initial={{ opacity: 0, y: 10, scale: 0.95 }}
                                     animate={{ opacity: 1, y: 0, scale: 1 }}
                                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                                    className="absolute right-0 top-full mt-2 w-80 glass-card bg-surface z-50 overflow-hidden shadow-md border-border"
+                                    className="absolute left-0 sm:right-0 sm:left-auto top-full mt-2 w-80 max-w-[calc(100vw-2rem)] glass-card bg-surface z-50 overflow-hidden shadow-md border-border"
                                 >
                                     <div className="p-4 border-b border-border bg-primary/5">
                                         <h3 className="font-bold text-sm">Notifications</h3>
