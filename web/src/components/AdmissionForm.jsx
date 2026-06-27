@@ -302,17 +302,34 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
     if (showPreview) {
         return (
             <div className="max-w-5xl mx-auto py-10 px-4">
-                {!readonly && (
-                    <div className="mb-8 flex justify-between items-center print:hidden">
-                        <button onClick={() => setShowPreview(false)} className="btn bg-slate-800 text-white flex items-center gap-2">
-                            <ChevronLeft size={20} /> Back to Editor
-                        </button>
-                        <button onClick={() => window.print()} className="btn btn-primary flex items-center gap-2">
-                            <Printer size={20} /> Print / Save as PDF
-                        </button>
+                {window.location.pathname.includes('applicant') && application?.status === 'Submitted' && (
+                    <div className="mb-6 bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg shadow-sm print:hidden">
+                        <div className="flex items-start gap-3">
+                            <div className="text-amber-500 mt-0.5">
+                                <FileText size={20} />
+                            </div>
+                            <div>
+                                <h3 className="text-sm font-bold text-amber-800 uppercase tracking-wide">Action Required: Document Upload</h3>
+                                <p className="text-sm text-amber-700 mt-1">
+                                    Please proceed to the <strong>Document Upload</strong> section from the sidebar to upload your required documents if you have not already done so. Your application will not be processed without the necessary documents.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 )}
 
+                <div className="mb-8 flex justify-between items-center print:hidden">
+                    {!readonly ? (
+                        <button onClick={() => setShowPreview(false)} className="btn bg-slate-800 text-white flex items-center gap-2">
+                            <ChevronLeft size={20} /> Back to Editor
+                        </button>
+                    ) : (
+                        <div></div>
+                    )}
+                    <button onClick={() => window.print()} className="btn btn-primary flex items-center gap-2">
+                        <Printer size={20} /> Print / Save as PDF
+                    </button>
+                </div>
 
                 <div className="bg-white text-slate-900 p-12 rounded-2xl shadow-2xl print:shadow-none print:p-0 min-h-[297mm]">
                     <div className="flex justify-between items-start border-b-4 border-slate-900 pb-8 mb-8">
@@ -985,9 +1002,9 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
                 <AnimatePresence>
                     {showConfirm && (
                         <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
-                            <motion.div 
-                                initial={{ opacity: 0, scale: 0.95 }} 
-                                animate={{ opacity: 1, scale: 1 }} 
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.95 }}
                                 className="bg-white rounded-2xl shadow-2xl p-6 max-w-md w-full border border-slate-100"
                             >
@@ -997,26 +1014,26 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
                                     </div>
                                     <h3 className="text-xl font-black uppercase tracking-tighter text-slate-900">Final Submission</h3>
                                     <p className="text-sm text-slate-500">
-                                        Are you sure you want to submit your application? 
+                                        Are you sure you want to submit your application?
                                         <br /><br />
                                         <span className="font-bold text-red-500">No further changes can be made once submitted.</span>
                                     </p>
-                                    
+
                                     <div className="flex gap-3 w-full pt-4">
-                                        <button 
-                                            type="button" 
-                                            onClick={() => setShowConfirm(false)} 
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowConfirm(false)}
                                             className="btn flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold"
                                             disabled={loading}
                                         >
                                             Cancel
                                         </button>
-                                        <button 
-                                            type="button" 
+                                        <button
+                                            type="button"
                                             onClick={(e) => {
                                                 setShowConfirm(false);
                                                 handleSubmit(e, 'Submitted', true);
-                                            }} 
+                                            }}
                                             className="btn flex-1 btn-primary bg-green-600 hover:bg-green-500 border-green-600 shadow-xl shadow-green-500/20 font-bold flex items-center justify-center gap-2"
                                             disabled={loading}
                                         >

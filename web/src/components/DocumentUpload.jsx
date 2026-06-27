@@ -137,7 +137,7 @@ const DocumentUpload = ({ application, setApplication }) => {
                     { label: 'Academic Transcript (Optional)', name: 'transcript', current: application?.transcript, required: false },
                     { label: 'Passport Size Picture', name: 'passportPhoto', current: application?.passportPhoto, required: true }
                 ].map((field, idx) => {
-                    const isReadOnly = application?.status === 'Admitted' || application?.status === 'Submitted';
+                    const isReadOnly = application?.status === 'Admitted';
                     return (
                         <div key={idx} className="p-4 bg-surface/80 border border-border rounded-2xl space-y-4">
 
@@ -239,8 +239,7 @@ const DocumentUpload = ({ application, setApplication }) => {
                     </div>
                 )}
 
-
-                {!(application?.status === 'Admitted' || application?.status === 'Submitted') && (
+                {!(application?.status === 'Admitted') && (
                     <button type="submit" disabled={loading} className="btn btn-primary w-full py-4 mt-4">
                         {loading ? <Loader2 className="animate-spin" /> : <><Upload size={20} /> Upload All Documents</>}
                     </button>
