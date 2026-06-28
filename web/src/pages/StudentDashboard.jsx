@@ -15,6 +15,7 @@ import CourseRegistration from '../components/CourseRegistration';
 import Financials from '../components/Financials';
 import AcademicResults from '../components/AcademicResults';
 import { API_BASE_URL } from '../utils/api';
+import UserProfile from '../components/UserProfile';
 
 
 const StudentDashboard = () => {
@@ -46,6 +47,7 @@ const StudentDashboard = () => {
         { id: 'registration', label: 'Course Registration', icon: <BookOpen size={20} /> },
         { id: 'financials', label: 'Fees & Payments', icon: <CreditCard size={20} /> },
         { id: 'results', label: 'Academic Results', icon: <GraduationCap size={20} /> },
+        { id: 'profile', label: 'My Profile', icon: <UserIcon size={20} /> },
     ];
 
     return (
@@ -262,6 +264,15 @@ const StudentDashboard = () => {
                     {activeTab === 'registration' && <CourseRegistration studentData={studentData} setStudentData={setStudentData} />}
                     {activeTab === 'financials' && <Financials />}
                     {activeTab === 'results' && <AcademicResults />}
+                    {activeTab === 'profile' && (
+                        <motion.div
+                            key="profile"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                        >
+                            <UserProfile />
+                        </motion.div>
+                    )}
                 </AnimatePresence>
             </main>
         </div>

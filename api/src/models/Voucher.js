@@ -21,8 +21,8 @@ const Voucher = sequelize.define('Voucher', {
         defaultValue: 'Unsold'
     },
     type: {
-        type: DataTypes.ENUM('Undergraduate', 'Postgraduate', 'International'),
-        defaultValue: 'Undergraduate'
+        type: DataTypes.STRING,
+        allowNull: false
     },
     price: {
         type: DataTypes.DECIMAL(10, 2),

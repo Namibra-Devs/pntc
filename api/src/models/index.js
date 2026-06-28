@@ -2,6 +2,7 @@ const { sequelize } = require('../config/database');
 const User = require('./User');
 const Role = require('./Role');
 const Program = require('./Program');
+const VoucherOption = require('./VoucherOption');
 const Voucher = require('./Voucher');
 const Application = require('./Application');
 const Course = require('./Course');
@@ -78,6 +79,7 @@ module.exports = {
     User,
     Role,
     Program,
+    VoucherOption,
     Voucher,
     Application,
     Course,

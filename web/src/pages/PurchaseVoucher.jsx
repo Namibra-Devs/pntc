@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import { CreditCard, Mail, ArrowRight, Loader2, ShieldCheck, Smartphone } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 import ThemeToggle from '../components/ThemeToggle';
 import { useSettings } from '../context/SettingsContext';
 import { API_BASE_URL } from '../utils/api';
+import api from '../utils/api';
 
 
 
@@ -17,13 +17,22 @@ const PurchaseVoucher = () => {
     const [voucherType, setVoucherType] = useState('Undergraduate');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+    const [voucherOptions, setVoucherOptions] = useState([]);
 
-    const voucherOptions = [
-        { type: 'Undergraduate', price: 100, desc: 'For WASSCE/SSCE applicants' },
-        { type: 'Postgraduate', price: 250, desc: 'For Masters/PhD applicants' },
-        { type: 'Mature/Diploma', price: 150, desc: 'For non-traditional applicants' },
-    ];
-
+    useEffect(() => {
+        const fetchOptions = async () => {
+            try {
+                const { data } = await api.get('/finance/voucher-options');
+                setVoucherOptions(data);
+                if (data.length > 0) {
+                    setVoucherType(data[0].type);
+                }
+            } catch (err) {
+                console.error("Failed to load voucher options", err);
+            }
+        };
+        fetchOptions();
+    }, []);
     const handlePurchase = async (e) => {
         e.preventDefault();
 
@@ -47,7 +56,7 @@ const PurchaseVoucher = () => {
         const selectedVoucher = voucherOptions.find(v => v.type === voucherType);
 
         try {
-            const { data } = await axios.post(`${API_BASE_URL}/api/payments/initialize-voucher`, {
+            const { data } = await api.post('/payments/initialize-voucher', {
                 email,
                 phoneNumber,
                 voucherType,
@@ -176,7 +185,7 @@ const PurchaseVoucher = () => {
                                         <div className="flex justify-between items-center">
                                             <div>
                                                 <p className={`font-bold transition-colors ${voucherType === opt.type ? 'text-primary' : 'text-text'}`}>{opt.type}</p>
-                                                <p className="text-xs text-text-muted">{opt.desc}</p>
+                                                <p className="text-xs text-text-muted">{opt.description}</p>
                                             </div>
                                             <p className={`text-lg font-black transition-colors ${voucherType === opt.type ? 'text-primary' : 'text-text-muted'}`}>GHS {opt.price}</p>
                                         </div>

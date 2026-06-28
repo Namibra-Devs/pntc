@@ -22,8 +22,9 @@ const startDB = async () => {
         await seedUsers();
         await seedPrograms();
         await seedSettings();
-        const { seedGradingSchemes } = require('./utils/seed');
+        const { seedGradingSchemes, seedVoucherOptions } = require('./utils/seed');
         await seedGradingSchemes();
+        await seedVoucherOptions();
     }
 };
 
@@ -38,6 +39,7 @@ const financeRoutes = require('./routes/financeRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const registrarRoutes = require('./routes/registrarRoutes');
 const settingRoutes = require('./routes/settingRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 
 
@@ -76,6 +78,8 @@ console.log('Registering /api/registrar');
 app.use('/api/registrar', registrarRoutes);
 console.log('Registering /api/settings');
 app.use('/api/settings', settingRoutes);
+console.log('Registering /api/user');
+app.use('/api/user', userRoutes);
 
 
 

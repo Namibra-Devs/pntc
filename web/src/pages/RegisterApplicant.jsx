@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import ThemeToggle from '../components/ThemeToggle';
 import { useSettings } from '../context/SettingsContext';
 import { API_BASE_URL } from '../utils/api';
+import SEO from '../components/SEO';
 
 
 
@@ -40,15 +41,21 @@ const RegisterApplicant = () => {
             await registerApplicant(formData);
             navigate('/applicant/dashboard');
         } catch (err) {
-            setError(err.response?.data?.message || 'Registration failed. Check your voucher details.');
+            setError(err.response?.data?.message || 'Registration failed');
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="bg-background min-h-screen flex items-center justify-center p-6 py-12 transition-colors duration-300">
-            <div className="absolute top-6 right-6">
+        <div className="bg-background min-h-screen flex items-center justify-center p-6 transition-colors duration-300 relative overflow-hidden">
+            <SEO title="Complete Registration" description="Register your applicant account using your voucher" />
+            
+            {/* Background blobs */}
+            <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/20 rounded-full blur-[120px] pointer-events-none"></div>
+            <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-secondary/20 rounded-full blur-[120px] pointer-events-none"></div>
+
+            <div className="absolute top-6 right-6 z-50">
                 <ThemeToggle />
             </div>
 

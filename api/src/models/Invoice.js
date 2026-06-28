@@ -3,9 +3,14 @@ const { sequelize } = require('../config/database');
 
 const Invoice = sequelize.define('Invoice', {
     id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    uuid: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
-        primaryKey: true
+        unique: true
     },
     title: {
         type: DataTypes.STRING,

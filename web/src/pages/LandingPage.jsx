@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import ThemeToggle from '../components/ThemeToggle';
 import { useSettings } from '../context/SettingsContext';
 import { API_BASE_URL } from '../utils/api';
+import SEO from '../components/SEO';
 
 
 const LandingPage = () => {
@@ -11,6 +12,7 @@ const LandingPage = () => {
 
     return (
         <div className="bg-background min-h-screen text-text overflow-x-hidden transition-colors duration-300">
+            <SEO title="Home" description="The Future of Learning in Ghana. A comprehensive, digital-first University Management System designed for the modern Ghanaian student and staff." />
             {/* Navigation */}
             <nav className="p-6 flex justify-between items-center max-w-7xl mx-auto">
                 <div className="flex items-center gap-2 overflow-hidden">

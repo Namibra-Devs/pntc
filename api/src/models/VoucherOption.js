@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../config/database');
 
-const Setting = sequelize.define('Setting', {
+const VoucherOption = sequelize.define('VoucherOption', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -12,21 +12,25 @@ const Setting = sequelize.define('Setting', {
         defaultValue: DataTypes.UUIDV4,
         unique: true
     },
-    key: {
+    type: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
     },
-    value: {
+    description: {
         type: DataTypes.TEXT,
         allowNull: true
     },
-    type: {
-        type: DataTypes.ENUM('text', 'image', 'number', 'boolean'),
-        defaultValue: 'text'
+    price: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false
+    },
+    isActive: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
     }
 }, {
-    timestamps: true
+    timestamps: true // This adds createdAt and updatedAt fields
 });
 
-module.exports = Setting;
+module.exports = VoucherOption;

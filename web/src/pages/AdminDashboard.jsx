@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import api from '../utils/api';
 import {
     Users, BookOpen, GraduationCap, DollarSign, Settings, Search,
-    Plus, Edit2, Trash2, Loader2, ChevronRight, X, Info, LogOut, Check, ShieldCheck, Menu, Eye
+    Plus, Edit2, Trash2, Loader2, ChevronRight, X, Info, LogOut, Check, ShieldCheck, Menu, Eye, User
 } from 'lucide-react';
 
 import { motion, AnimatePresence } from 'framer-motion';
@@ -12,6 +12,7 @@ import ThemeToggle from '../components/ThemeToggle';
 import SettingsPortal from '../components/Settings';
 import { useSettings } from '../context/SettingsContext';
 import { API_BASE_URL } from '../utils/api';
+import UserProfile from '../components/UserProfile';
 
 
 
@@ -99,8 +100,9 @@ const AdminDashboard = () => {
         { id: 'admissions', label: 'Admissions', icon: <GraduationCap size={20} /> },
         { id: 'curriculum', label: 'Curriculum', icon: <BookOpen size={20} /> },
         { id: 'users', label: 'User Management', icon: <Users size={20} /> },
-        { id: 'gradings', label: 'Grading Schemes', icon: <ShieldCheck size={20} /> },
+        { id: 'finance', label: 'Finance', icon: <DollarSign size={20} /> },
         { id: 'settings', label: 'System Settings', icon: <Settings size={20} /> },
+        { id: 'profile', label: 'My Profile', icon: <User size={20} /> },
     ];
 
     const handleSaveGrade = async (e) => {
@@ -599,6 +601,16 @@ const AdminDashboard = () => {
                             animate={{ opacity: 1, scale: 1 }}
                         >
                             <SettingsPortal />
+                        </motion.div>
+                    )}
+
+                    {activeTab === 'profile' && (
+                        <motion.div
+                            key="profile"
+                            initial={{ opacity: 0, scale: 0.98 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                        >
+                            <UserProfile />
                         </motion.div>
                     )}
 

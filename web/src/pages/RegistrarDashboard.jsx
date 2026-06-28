@@ -19,6 +19,9 @@ import { useSettings } from '../context/SettingsContext';
 import RegistrarStudents from './RegistrarStudents';
 import RegistrarPrograms from './RegistrarPrograms';
 import { API_BASE_URL } from '../utils/api';
+import UserProfile from '../components/UserProfile';
+import AdmissionLetterTemplate from '../components/AdmissionLetterTemplate';
+import { User } from 'lucide-react';
 
 
 const RegistrarDashboard = () => {
@@ -113,9 +116,28 @@ const RegistrarDashboard = () => {
                             <BookOpen size={20} /> Programs
                         </div>
                     </Link>
+                    <Link to="/registrar/template" onClick={() => setIsMobileMenuOpen(false)}>
+                        <div className={`flex items-center gap-3 p-3 rounded-xl transition-all ${isActive('/registrar/template') ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-text/60 hover:bg-surface hover:text-text'}`}>
+                            <FileText size={20} /> Letter Template
+                        </div>
+                    </Link>
+                    <Link to="/registrar/profile" onClick={() => setIsMobileMenuOpen(false)}>
+                        <div className={`flex items-center gap-3 p-3 rounded-xl transition-all ${isActive('/registrar/profile') ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-text/60 hover:bg-surface hover:text-text'}`}>
+                            <User size={20} /> My Profile
+                        </div>
+                    </Link>
                 </nav>
 
                 <div className="mt-auto space-y-4">
+                    <div className="flex items-center gap-3 mb-2 p-2 bg-surface border border-border rounded-xl">
+                        <div className="w-10 h-10 bg-surface-hover rounded-full flex items-center justify-center border border-border text-text-muted">
+                            <User size={20} />
+                        </div>
+                        <div className="overflow-hidden">
+                            <p className="text-sm font-bold truncate text-text">{user?.firstName} {user?.lastName}</p>
+                            <p className="text-[10px] text-text-muted truncate uppercase tracking-widest font-bold">Registrar Portal</p>
+                        </div>
+                    </div>
                     <ThemeToggle />
                     <button onClick={logout} className="flex items-center gap-3 p-3 w-full text-red-500 hover:bg-red-500/10 rounded-xl transition-colors font-medium">
                         <LogOut size={20} /> Logout
@@ -129,6 +151,8 @@ const RegistrarDashboard = () => {
                     <Route index element={<RegistrarApplicationsContent user={user} />} />
                     <Route path="students" element={<RegistrarStudents />} />
                     <Route path="programs" element={<RegistrarPrograms />} />
+                    <Route path="template" element={<AdmissionLetterTemplate />} />
+                    <Route path="profile" element={<UserProfile />} />
                 </Routes>
             </main>
         </div>
