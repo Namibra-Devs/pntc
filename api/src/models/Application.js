@@ -3,9 +3,14 @@ const { sequelize } = require('../config/database');
 
 const Application = sequelize.define('Application', {
     id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    uuid: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
-        primaryKey: true
+        unique: true
     },
     status: {
         type: DataTypes.ENUM('Draft', 'Submitted', 'Pending', 'Admitted', 'Rejected'),

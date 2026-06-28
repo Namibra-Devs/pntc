@@ -1,4 +1,62 @@
-const { Invoice, Payment, User, Voucher } = require('../models');
+const { Invoice, Payment, User, Voucher, VoucherOption } = require('../models');
+
+// @desc    Get all active voucher options
+// @route   GET /api/finance/voucher-options
+// @access  Public
+const getVoucherOptions = async (req, res) => {
+    try {
+        const options = await VoucherOption.findAll({ where: { isActive: true } });
+        res.json(options);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// @desc    Create a voucher option
+// @route   POST /api/finance/voucher-options
+// @access  Private/Accountant
+const createVoucherOption = async (req, res) => {
+    const { type, description, price, isActive } = req.body;
+    try {
+        const option = await VoucherOption.create({ type, description, price, isActive });
+        res.status(201).json(option);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// @desc    Update a voucher option
+// @route   PUT /api/finance/voucher-options/:id
+// @access  Private/Accountant
+const updateVoucherOption = async (req, res) => {
+    const { type, description, price, isActive } = req.body;
+    try {
+        const option = await VoucherOption.findByPk(req.params.id);
+        if (!option) {
+            return res.status(404).json({ message: 'Voucher option not found' });
+        }
+        await option.update({ type, description, price, isActive });
+        res.json(option);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// @desc    Delete a voucher option
+// @route   DELETE /api/finance/voucher-options/:id
+// @access  Private/Accountant
+const deleteVoucherOption = async (req, res) => {
+    try {
+        const option = await VoucherOption.findByPk(req.params.id);
+        if (!option) {
+            return res.status(404).json({ message: 'Voucher option not found' });
+        }
+        await option.destroy();
+        res.json({ message: 'Voucher option removed' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
 
 // @desc    Get all invoices
 // @route   GET /api/finance/invoices
@@ -78,5 +136,9 @@ module.exports = {
     getAllInvoices,
     createInvoice,
     recordManualPayment,
-    getPurchasedVouchers
+    getPurchasedVouchers,
+    getVoucherOptions,
+    createVoucherOption,
+    updateVoucherOption,
+    deleteVoucherOption
 };

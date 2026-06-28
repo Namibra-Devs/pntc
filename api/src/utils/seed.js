@@ -1,4 +1,4 @@
-const { Role, Course, User, Program, Setting, GradingScheme } = require('../models');
+const { Role, Course, User, Program, Setting, GradingScheme, VoucherOption } = require('../models');
 
 
 
@@ -183,7 +183,27 @@ const seedGradingSchemes = async () => {
     }
 };
 
-module.exports = { seedRoles, seedCourses, seedUsers, seedPrograms, seedSettings, seedGradingSchemes };
+const seedVoucherOptions = async () => {
+    try {
+        const options = [
+            { type: 'Undergraduate', price: 100, description: 'For WASSCE/SSCE applicants', isActive: true },
+            { type: 'Postgraduate', price: 250, description: 'For Masters/PhD applicants', isActive: true },
+            { type: 'Mature/Diploma', price: 150, description: 'For non-traditional applicants', isActive: true }
+        ];
+
+        for (const opt of options) {
+            await VoucherOption.findOrCreate({
+                where: { type: opt.type },
+                defaults: opt
+            });
+        }
+        console.log('Voucher options seeded successfully.');
+    } catch (error) {
+        console.error('Error seeding voucher options:', error);
+    }
+};
+
+module.exports = { seedRoles, seedCourses, seedUsers, seedPrograms, seedSettings, seedGradingSchemes, seedVoucherOptions };
 
 
 

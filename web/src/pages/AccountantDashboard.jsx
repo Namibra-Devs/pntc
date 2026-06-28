@@ -12,6 +12,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ThemeToggle from '../components/ThemeToggle';
 import { useSettings } from '../context/SettingsContext';
 import { API_BASE_URL } from '../utils/api';
+import VoucherOptionsManager from '../components/VoucherOptionsManager';
 
 
 
@@ -272,6 +273,10 @@ const AccountantDashboard = () => {
                             animate={{ opacity: 1, y: 0 }}
                             className="glass-card overflow-hidden"
                         >
+                            <div className="mb-8">
+                                <VoucherOptionsManager />
+                            </div>
+                            
                             <div className="overflow-x-auto">
                                 <table className="w-full text-left bg-surface">
                                     <thead className="bg-surface border-b border-border">

@@ -4,9 +4,14 @@ const bcrypt = require('bcryptjs');
 
 const User = sequelize.define('User', {
     id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    uuid: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
-        primaryKey: true
+        unique: true
     },
     username: {
         type: DataTypes.STRING,
@@ -107,7 +112,7 @@ const User = sequelize.define('User', {
         allowNull: true
     },
     voucherId: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         allowNull: true
     },
     isActive: {
@@ -132,23 +137,6 @@ const User = sequelize.define('User', {
 
 }, {
     timestamps: true,
-    indexes: [
-        {
-            unique: true,
-            fields: ['username'],
-            name: 'users_username_unique'
-        },
-        {
-            unique: true,
-            fields: ['email'],
-            name: 'users_email_unique'
-        },
-        {
-            unique: true,
-            fields: ['systemId'],
-            name: 'users_systemId_unique'
-        }
-    ],
     hooks: {
         beforeCreate: async (user) => {
             if (user.password) {

@@ -22,8 +22,9 @@ const startDB = async () => {
         await seedUsers();
         await seedPrograms();
         await seedSettings();
-        const { seedGradingSchemes } = require('./utils/seed');
+        const { seedGradingSchemes, seedVoucherOptions } = require('./utils/seed');
         await seedGradingSchemes();
+        await seedVoucherOptions();
     }
 };
 
