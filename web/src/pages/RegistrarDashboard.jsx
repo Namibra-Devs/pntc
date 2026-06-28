@@ -20,6 +20,7 @@ import RegistrarStudents from './RegistrarStudents';
 import RegistrarPrograms from './RegistrarPrograms';
 import { API_BASE_URL } from '../utils/api';
 import UserProfile from '../components/UserProfile';
+import AdmissionLetterTemplate from '../components/AdmissionLetterTemplate';
 import { User } from 'lucide-react';
 
 
@@ -115,6 +116,11 @@ const RegistrarDashboard = () => {
                             <BookOpen size={20} /> Programs
                         </div>
                     </Link>
+                    <Link to="/registrar/template" onClick={() => setIsMobileMenuOpen(false)}>
+                        <div className={`flex items-center gap-3 p-3 rounded-xl transition-all ${isActive('/registrar/template') ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-text/60 hover:bg-surface hover:text-text'}`}>
+                            <FileText size={20} /> Letter Template
+                        </div>
+                    </Link>
                     <Link to="/registrar/profile" onClick={() => setIsMobileMenuOpen(false)}>
                         <div className={`flex items-center gap-3 p-3 rounded-xl transition-all ${isActive('/registrar/profile') ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-text/60 hover:bg-surface hover:text-text'}`}>
                             <User size={20} /> My Profile
@@ -145,6 +151,7 @@ const RegistrarDashboard = () => {
                     <Route index element={<RegistrarApplicationsContent user={user} />} />
                     <Route path="students" element={<RegistrarStudents />} />
                     <Route path="programs" element={<RegistrarPrograms />} />
+                    <Route path="template" element={<AdmissionLetterTemplate />} />
                     <Route path="profile" element={<UserProfile />} />
                 </Routes>
             </main>

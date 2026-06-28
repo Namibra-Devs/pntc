@@ -142,7 +142,28 @@ const seedSettings = async () => {
             { key: 'schoolAddress', value: '123 University Avenue, Accra, Ghana', type: 'text' },
             { key: 'schoolLogo', value: '', type: 'image' },
             { key: 'schoolEmail', value: 'info@gums.edu.gh', type: 'text' },
-            { key: 'schoolPhone', value: '+233 123 456 789', type: 'text' }
+            { key: 'schoolPhone', value: '+233 123 456 789', type: 'text' },
+            { 
+                key: 'admissionLetterTemplate', 
+                value: `We are pleased to inform you that the Academic Board of the University has offered you admission to pursue a {{PROGRAM_DURATION}}-Year programme leading to the award of {{PROGRAM_NAME}}.
+
+You are required to indicate acceptance of this offer of admission immediately via the student portal.
+
+Your University Identification Number is {{STUDENT_ID}}. Use this number in addition to your full name to pay your fees and for all official communication.
+
+You are encouraged to pay the full fees for the {{ACADEMIC_YEAR}} Academic Year before registration.
+Total Academic Facility User Fees: {{CURRENCY}} {{FEE_AMOUNT}}
+Payment can be made via the student portal or at any designated bank branch.
+
+The University reserves the right to review its fees and other schedules without notice.
+
+Please note that if it is discovered subsequently that you do not have the required qualifications by virtue of which the admission was offered, you will be withdrawn from the University.
+
+The University does not assist students financially. You are required to arrange for your own sponsorship and funding during the period of study.
+
+You are required to register online when the university re-opens for the academic year.`,
+                type: 'textarea'
+            }
         ];
 
         for (const setting of settings) {
