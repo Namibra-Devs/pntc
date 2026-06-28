@@ -14,7 +14,9 @@ const app = express();
 const startDB = async () => {
     await connectDB();
     if (process.env.NODE_ENV === 'development') {
-        await sequelize.sync({ alter: true }); // Use alter in dev to update schema without dropping data
+        // Use an env variable to control alter/force if needed to fix deployment issues
+        const syncOptions = process.env.DB_FORCE === 'true' ? { force: true } : (process.env.DB_ALTER === 'false' ? {} : { alter: true });
+        await sequelize.sync(syncOptions); 
         await seedRoles();
         await seedCourses();
         await seedUsers();
@@ -23,13 +25,9 @@ const startDB = async () => {
         const { seedGradingSchemes } = require('./utils/seed');
         await seedGradingSchemes();
     }
-
 };
 
-
-
-startDB();
-
+app.startDB = startDB;
 
 const authRoutes = require('./routes/authRoutes');
 const adminRoutes = require('./routes/adminRoutes');
