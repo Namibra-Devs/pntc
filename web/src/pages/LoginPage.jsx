@@ -6,6 +6,8 @@ import { motion } from 'framer-motion';
 
 import ThemeToggle from '../components/ThemeToggle';
 import { useSettings } from '../context/SettingsContext';
+import { API_BASE_URL } from '../utils/api';
+
 
 
 const LoginPage = () => {
@@ -63,7 +65,7 @@ const LoginPage = () => {
                     <div className="flex justify-center mb-4">
                         {settings.schoolLogo ? (
                             <div className="w-16 h-16 rounded-2xl overflow-hidden border border-border bg-white flex items-center justify-center p-2">
-                                <img src={`http://localhost:5000${settings.schoolLogo}`} alt="School Logo" className="w-full h-full object-contain" />
+                                <img src={`${API_BASE_URL}${settings.schoolLogo}`} alt="School Logo" className="w-full h-full object-contain" />
                             </div>
                         ) : (
                             <GraduationCap size={48} className="text-primary" />

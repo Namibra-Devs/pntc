@@ -3,6 +3,8 @@ import { GraduationCap, BookOpen, ShieldCheck, CreditCard, ArrowRight } from 'lu
 import { motion } from 'framer-motion';
 import ThemeToggle from '../components/ThemeToggle';
 import { useSettings } from '../context/SettingsContext';
+import { API_BASE_URL } from '../utils/api';
+
 
 const LandingPage = () => {
     const { settings } = useSettings();
@@ -13,7 +15,7 @@ const LandingPage = () => {
             <nav className="p-6 flex justify-between items-center max-w-7xl mx-auto">
                 <div className="flex items-center gap-2 overflow-hidden">
                     {settings.schoolLogo ? (
-                        <img src={`http://localhost:5000${settings.schoolLogo}`} alt="Logo" className="w-8 h-8 object-contain shrink-0" />
+                        <img src={`${API_BASE_URL}${settings.schoolLogo}`} alt="Logo" className="w-8 h-8 object-contain shrink-0" />
                     ) : (
                         <GraduationCap className="text-primary shrink-0" size={28} />
                     )}

@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 
 import ThemeToggle from '../components/ThemeToggle';
 import { useSettings } from '../context/SettingsContext';
+import { API_BASE_URL } from '../utils/api';
+
 
 
 const PurchaseVoucher = () => {
@@ -45,7 +47,7 @@ const PurchaseVoucher = () => {
         const selectedVoucher = voucherOptions.find(v => v.type === voucherType);
 
         try {
-            const { data } = await axios.post('http://localhost:5000/api/payments/initialize-voucher', {
+            const { data } = await axios.post(`${API_BASE_URL}/api/payments/initialize-voucher`, {
                 email,
                 phoneNumber,
                 voucherType,

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useSettings } from '../context/SettingsContext';
 import api from '../utils/api';
 import { Save, Upload, Loader2, CheckCircle2, AlertCircle, Building, Mail, Phone, MapPin, Hash } from 'lucide-react';
+import { API_BASE_URL } from '../utils/api';
+
 
 const Settings = () => {
     const { settings, fetchSettings, updateSettingsState } = useSettings();
@@ -89,7 +91,7 @@ const Settings = () => {
                         <div className="relative w-32 h-32 mx-auto mb-6 group">
                             <div className="w-full h-full rounded-2xl border-2 border-dashed border-border flex items-center justify-center overflow-hidden bg-background group-hover:border-primary/50 transition-all">
                                 {preview ? (
-                                    <img src={preview.startsWith('data') ? preview : `http://localhost:5000${preview}`} alt="Logo Preview" className="w-full h-full object-contain p-2" />
+                                    <img src={preview.startsWith('data') ? preview : `${API_BASE_URL}${preview}`} alt="Logo Preview" className="w-full h-full object-contain p-2" />
                                 ) : (
                                     <Building size={48} className="text-text-muted" />
                                 )}

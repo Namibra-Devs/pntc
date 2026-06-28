@@ -8,6 +8,8 @@ import { useSettings } from '../context/SettingsContext';
 
 
 import { motion, AnimatePresence } from 'framer-motion';
+import { API_BASE_URL } from '../utils/api';
+
 
 const AdmissionForm = ({ application, setApplication, readonly = false, onDocClick = null }) => {
     const { settings } = useSettings();
@@ -355,13 +357,13 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
                         <div className="flex items-start gap-4 w-full md:w-auto justify-start md:justify-end">
                             {settings.schoolLogo && (
                                 <div className="w-32 h-32 rounded-xl border-2 border-slate-200 flex items-center justify-center overflow-hidden p-2">
-                                    <img src={`http://localhost:5000${settings.schoolLogo}`} alt="School Logo" className="w-full h-full object-contain" />
+                                    <img src={`${API_BASE_URL}${settings.schoolLogo}`} alt="School Logo" className="w-full h-full object-contain" />
                                 </div>
                             )}
                             <div className="w-32 h-32 bg-slate-100 rounded-xl border-2 border-slate-200 flex items-center justify-center overflow-hidden">
 
                                 {application?.passportPhoto ? (
-                                    <img src={application.passportPhoto.startsWith('http') ? application.passportPhoto : `http://localhost:5000${application.passportPhoto.startsWith('/') ? '' : '/'}${application.passportPhoto}`} alt="Passport" className="w-full h-full object-cover" />
+                                    <img src={application.passportPhoto.startsWith('http') ? application.passportPhoto : `${API_BASE_URL}${application.passportPhoto.startsWith('/') ? '' : '/'}${application.passportPhoto}`} alt="Passport" className="w-full h-full object-cover" />
                                 ) : (
                                     <span className="text-[10px] text-slate-400 font-bold uppercase">No Photo</span>
                                 )}
@@ -479,7 +481,7 @@ const AdmissionForm = ({ application, setApplication, readonly = false, onDocCli
                             ].map((doc, idx) => doc.path ? (
                                 <a
                                     key={idx}
-                                    href={onDocClick ? '#' : (doc.path.startsWith('http') ? doc.path : `http://localhost:5000${doc.path.startsWith('/') ? '' : '/'}${doc.path}`)}
+                                    href={onDocClick ? '#' : (doc.path.startsWith('http') ? doc.path : `${API_BASE_URL}${doc.path.startsWith('/') ? '' : '/'}${doc.path}`)}
                                     onClick={(e) => {
                                         if (onDocClick) {
                                             e.preventDefault();
