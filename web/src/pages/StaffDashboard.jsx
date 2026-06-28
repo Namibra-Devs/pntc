@@ -12,6 +12,7 @@ import ThemeToggle from '../components/ThemeToggle';
 import GradeEntry from '../components/GradeEntry';
 import { useSettings } from '../context/SettingsContext';
 import { API_BASE_URL } from '../utils/api';
+import UserProfile from '../components/UserProfile';
 
 
 
@@ -52,6 +53,7 @@ const StaffDashboard = () => {
         { id: 'students', label: 'Student Management', icon: <Users size={20} /> },
         { id: 'attendance', label: 'Attendance', icon: <ClipboardCheck size={20} /> },
         { id: 'resources', label: 'Upload Materials', icon: <PlusCircle size={20} /> },
+        { id: 'profile', label: 'My Profile', icon: <UserIcon size={20} /> },
     ];
 
     return (
@@ -269,8 +271,18 @@ const StaffDashboard = () => {
                         </motion.div>
                     )}
 
+                    {activeTab === 'profile' && (
+                        <motion.div
+                            key="profile"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                        >
+                            <UserProfile />
+                        </motion.div>
+                    )}
+
                     {/* Add more tabs components here if needed */}
-                    {activeTab !== 'courses' && (
+                    {activeTab !== 'courses' && activeTab !== 'profile' && (
                         <div className="flex flex-col items-center justify-center py-40 opacity-20">
                             <Layout size={80} />
                             <p className="text-xl font-bold mt-4">Feature under development</p>

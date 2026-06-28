@@ -10,6 +10,8 @@ import DocumentUpload from '../components/DocumentUpload';
 import ThemeToggle from '../components/ThemeToggle';
 import { useSettings } from '../context/SettingsContext';
 import { API_BASE_URL } from '../utils/api';
+import UserProfile from '../components/UserProfile';
+import { User } from 'lucide-react';
 
 
 
@@ -55,6 +57,7 @@ const ApplicantDashboard = () => {
         { id: 'status', icon: Layout, label: 'Application Status' },
         { id: 'form', icon: FileText, label: 'Admission Form' },
         { id: 'upload', icon: Upload, label: 'Document Upload' },
+        { id: 'profile', icon: User, label: 'My Profile' },
     ];
 
     if (loading) {
@@ -311,6 +314,17 @@ const ApplicantDashboard = () => {
                             exit={{ opacity: 0, x: -20 }}
                         >
                             <DocumentUpload application={application} setApplication={setApplication} />
+                        </motion.div>
+                    )}
+
+                    {activeTab === 'profile' && (
+                        <motion.div
+                            key="profile"
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: -20 }}
+                        >
+                            <UserProfile />
                         </motion.div>
                     )}
                 </AnimatePresence>

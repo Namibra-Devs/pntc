@@ -19,6 +19,8 @@ import { useSettings } from '../context/SettingsContext';
 import RegistrarStudents from './RegistrarStudents';
 import RegistrarPrograms from './RegistrarPrograms';
 import { API_BASE_URL } from '../utils/api';
+import UserProfile from '../components/UserProfile';
+import { User } from 'lucide-react';
 
 
 const RegistrarDashboard = () => {
@@ -113,6 +115,11 @@ const RegistrarDashboard = () => {
                             <BookOpen size={20} /> Programs
                         </div>
                     </Link>
+                    <Link to="/registrar/profile" onClick={() => setIsMobileMenuOpen(false)}>
+                        <div className={`flex items-center gap-3 p-3 rounded-xl transition-all ${isActive('/registrar/profile') ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-text/60 hover:bg-surface hover:text-text'}`}>
+                            <User size={20} /> My Profile
+                        </div>
+                    </Link>
                 </nav>
 
                 <div className="mt-auto space-y-4">
@@ -129,6 +136,7 @@ const RegistrarDashboard = () => {
                     <Route index element={<RegistrarApplicationsContent user={user} />} />
                     <Route path="students" element={<RegistrarStudents />} />
                     <Route path="programs" element={<RegistrarPrograms />} />
+                    <Route path="profile" element={<UserProfile />} />
                 </Routes>
             </main>
         </div>

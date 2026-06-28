@@ -13,6 +13,7 @@ import ThemeToggle from '../components/ThemeToggle';
 import { useSettings } from '../context/SettingsContext';
 import { API_BASE_URL } from '../utils/api';
 import VoucherOptionsManager from '../components/VoucherOptionsManager';
+import UserProfile from '../components/UserProfile';
 
 
 
@@ -53,6 +54,7 @@ const AccountantDashboard = () => {
         { id: 'payments', label: 'Payments', icon: <CreditCard size={20} /> },
         { id: 'payroll', label: 'Payroll', icon: <DollarSign size={20} /> },
         { id: 'reports', label: 'Reports', icon: <PieChart size={20} /> },
+        { id: 'profile', label: 'My Profile', icon: <UserIcon size={20} /> },
     ];
 
     return (
@@ -317,6 +319,16 @@ const AccountantDashboard = () => {
                                     </div>
                                 )}
                             </div>
+                        </motion.div>
+                    )}
+
+                    {activeTab === 'profile' && (
+                        <motion.div
+                            key="profile"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                        >
+                            <UserProfile />
                         </motion.div>
                     )}
 
