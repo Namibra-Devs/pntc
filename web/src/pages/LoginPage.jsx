@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import ThemeToggle from '../components/ThemeToggle';
 import { useSettings } from '../context/SettingsContext';
 import { API_BASE_URL } from '../utils/api';
+import SEO from '../components/SEO';
 
 
 
@@ -52,6 +53,7 @@ const LoginPage = () => {
 
     return (
         <div className="bg-background min-h-screen flex items-center justify-center p-6 transition-colors duration-300">
+            <SEO title="Login" description="Login to your account" />
             <div className="absolute top-6 right-6">
                 <ThemeToggle />
             </div>

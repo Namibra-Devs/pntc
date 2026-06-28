@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSettings } from '../context/SettingsContext';
 import api from '../utils/api';
-import { Save, Upload, Loader2, CheckCircle2, AlertCircle, Building, Mail, Phone, MapPin, Hash } from 'lucide-react';
+import { Save, Upload, Loader2, CheckCircle2, AlertCircle, Building, Mail, Phone, MapPin, Hash, Image as ImageIcon } from 'lucide-react';
 import { API_BASE_URL } from '../utils/api';
 
 
@@ -10,12 +10,15 @@ const Settings = () => {
     const [formData, setFormData] = useState({ ...settings });
     const [loading, setLoading] = useState(false);
     const [uploading, setUploading] = useState(false);
+    const [uploadingFavicon, setUploadingFavicon] = useState(false);
     const [message, setMessage] = useState(null);
     const [preview, setPreview] = useState(settings.schoolLogo);
+    const [faviconPreview, setFaviconPreview] = useState(settings.schoolFavicon);
 
     useEffect(() => {
         setFormData({ ...settings });
         setPreview(settings.schoolLogo);
+        setFaviconPreview(settings.schoolFavicon);
     }, [settings]);
 
     const handleChange = (e) => {
@@ -43,6 +46,30 @@ const Settings = () => {
             setMessage({ type: 'error', text: 'Logo upload failed' });
         } finally {
             setUploading(false);
+        }
+    };
+
+    const handleFaviconUpload = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        // Preview
+        const reader = new FileReader();
+        reader.onloadend = () => setFaviconPreview(reader.result);
+        reader.readAsDataURL(file);
+
+        setUploadingFavicon(true);
+        const faviconData = new FormData();
+        faviconData.append('favicon', file);
+
+        try {
+            const { data } = await api.post('/settings/favicon', faviconData);
+            updateSettingsState({ schoolFavicon: data.faviconUrl });
+            setMessage({ type: 'success', text: 'Favicon uploaded successfully' });
+        } catch (err) {
+            setMessage({ type: 'error', text: 'Favicon upload failed' });
+        } finally {
+            setUploadingFavicon(false);
         }
     };
 
@@ -106,7 +133,28 @@ const Settings = () => {
                                 </div>
                             )}
                         </div>
-                        <p className="text-[10px] text-text-muted font-bold px-4">Recommended size: 512x512px. Supports PNG, JPG.</p>
+                        <p className="text-[10px] text-text-muted font-bold px-4 mb-8">Recommended size: 512x512px. Supports PNG, JPG.</p>
+
+                        <h4 className="text-[10px] font-black uppercase tracking-widest text-text-muted mb-6 border-t border-border pt-6">Browser Favicon</h4>
+                        <div className="relative w-16 h-16 mx-auto mb-6 group">
+                            <div className="w-full h-full rounded-xl border-2 border-dashed border-border flex items-center justify-center overflow-hidden bg-background group-hover:border-primary/50 transition-all">
+                                {faviconPreview ? (
+                                    <img src={faviconPreview.startsWith('data') ? faviconPreview : `${API_BASE_URL}${faviconPreview}`} alt="Favicon Preview" className="w-full h-full object-contain p-1" />
+                                ) : (
+                                    <ImageIcon size={24} className="text-text-muted" />
+                                )}
+                            </div>
+                            <label className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer rounded-xl">
+                                <Upload size={16} className="text-white" />
+                                <input type="file" className="hidden" onChange={handleFaviconUpload} accept="image/*,.ico" />
+                            </label>
+                            {uploadingFavicon && (
+                                <div className="absolute inset-0 flex items-center justify-center bg-background rounded-xl">
+                                    <Loader2 className="animate-spin text-primary" size={16} />
+                                </div>
+                            )}
+                        </div>
+                        <p className="text-[10px] text-text-muted font-bold px-4">Recommended size: 32x32px or 64x64px. Supports ICO, PNG.</p>
                     </div>
 
                     <div className="glass-card p-6 border-border bg-surface">

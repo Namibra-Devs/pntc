@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import { SettingsProvider } from './context/SettingsContext';
+import SEO from './components/SEO';
 
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
@@ -19,6 +20,7 @@ function App() {
   return (
     <ThemeProvider>
       <SettingsProvider>
+        <SEO />
         <Router>
           <div className="min-h-screen bg-background text-text transition-colors duration-300">
             <Routes>

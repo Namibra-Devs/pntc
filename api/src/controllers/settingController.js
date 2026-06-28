@@ -50,3 +50,19 @@ exports.uploadLogo = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+
+// Handle Favicon Upload
+exports.uploadFavicon = async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ message: 'No file uploaded' });
+        }
+
+        const faviconUrl = `/uploads/${req.file.filename}`;
+        await Setting.upsert({ key: 'schoolFavicon', value: faviconUrl, type: 'image' });
+
+        res.json({ message: 'Favicon uploaded successfully', faviconUrl });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
