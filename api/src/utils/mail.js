@@ -39,7 +39,7 @@ const sendVoucherEmail = async (to, voucher, settings) => {
                 <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;" />
                 
                 <p style="font-size: 14px; color: #64748b;">
-                    You can use these credentials to register and log in to the <a href="http://localhost:5173/register" style="color: #0066ff; text-decoration: none;">Applicant Portal</a> and start your application.
+                    You can use these credentials to register and log in to the <a href="${process.env.FRONTEND_URL}/register" style="color: #0066ff; text-decoration: none;">Applicant Portal</a> and start your application.
                 </p>
                 
                 <p style="font-size: 12px; color: #94a3b8; text-align: center; margin-top: 40px;">
@@ -81,7 +81,7 @@ const sendAdmissionEmail = async (to, user, programName, filePath, settings) => 
 				<p>Please find your official <strong>Admission Letter</strong> attached to this email. You are required to print it out and present it during registration.</p>
 				
 				<p style="margin-top: 30px;">
-					<a href="http://localhost:5173/student" style="background: #10b981; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block;">Go to Student Portal</a>
+					<a href="${process.env.FRONTEND_URL}/student" style="background: #10b981; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block;">Go to Student Portal</a>
 				</p>
 				
 				<p style="font-size: 12px; color: #94a3b8; text-align: center; margin-top: 40px;">
