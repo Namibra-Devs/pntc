@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { CreditCard, Mail, ArrowRight, Loader2, ShieldCheck, Smartphone } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 import ThemeToggle from '../components/ThemeToggle';
 import { useSettings } from '../context/SettingsContext';
 import { API_BASE_URL } from '../utils/api';
+import api from '../utils/api';
 
 
 
@@ -22,7 +22,7 @@ const PurchaseVoucher = () => {
     useEffect(() => {
         const fetchOptions = async () => {
             try {
-                const { data } = await axios.get(`${API_BASE_URL}/api/finance/voucher-options`);
+                const { data } = await api.get('/finance/voucher-options');
                 setVoucherOptions(data);
                 if (data.length > 0) {
                     setVoucherType(data[0].type);
@@ -56,7 +56,7 @@ const PurchaseVoucher = () => {
         const selectedVoucher = voucherOptions.find(v => v.type === voucherType);
 
         try {
-            const { data } = await axios.post(`${API_BASE_URL}/api/payments/initialize-voucher`, {
+            const { data } = await api.post('/payments/initialize-voucher', {
                 email,
                 phoneNumber,
                 voucherType,

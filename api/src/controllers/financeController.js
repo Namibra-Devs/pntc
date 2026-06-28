@@ -5,7 +5,8 @@ const { Invoice, Payment, User, Voucher, VoucherOption } = require('../models');
 // @access  Public
 const getVoucherOptions = async (req, res) => {
     try {
-        const options = await VoucherOption.findAll({ where: { isActive: true } });
+        const whereClause = req.query.all === 'true' ? {} : { isActive: true };
+        const options = await VoucherOption.findAll({ where: whereClause });
         res.json(options);
     } catch (error) {
         res.status(500).json({ message: error.message });

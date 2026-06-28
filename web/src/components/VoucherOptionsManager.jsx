@@ -11,6 +11,7 @@ const VoucherOptionsManager = () => {
     const [error, setError] = useState('');
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({ id: null, type: '', description: '', price: '', isActive: true });
+    const [optionToDelete, setOptionToDelete] = useState(null);
 
     useEffect(() => {
         fetchOptions();
@@ -19,7 +20,7 @@ const VoucherOptionsManager = () => {
     const fetchOptions = async () => {
         try {
             setLoading(true);
-            const { data } = await api.get('/finance/voucher-options'); // Using internal api (protected) or public
+            const { data } = await api.get('/finance/voucher-options?all=true'); // Using internal api (protected) or public
             setOptions(data);
         } catch (err) {
             setError('Failed to fetch voucher options');
@@ -50,14 +51,19 @@ const VoucherOptionsManager = () => {
         setIsEditing(true);
     };
 
-    const handleDelete = async (id) => {
-        if (window.confirm('Are you sure you want to delete this option?')) {
-            try {
-                await api.delete(`/finance/voucher-options/${id}`);
-                fetchOptions();
-            } catch (err) {
-                setError('Failed to delete option');
-            }
+    const handleDeleteClick = (opt) => {
+        setOptionToDelete(opt);
+    };
+
+    const handleDeleteConfirm = async () => {
+        if (!optionToDelete) return;
+        try {
+            await api.delete(`/finance/voucher-options/${optionToDelete.id}`);
+            fetchOptions();
+        } catch (err) {
+            setError('Failed to delete option');
+        } finally {
+            setOptionToDelete(null);
         }
     };
 
@@ -143,7 +149,7 @@ const VoucherOptionsManager = () => {
                                             </td>
                                             <td className="p-4 text-right space-x-2">
                                                 <button onClick={() => handleEdit(opt)} className="p-1.5 text-text-muted hover:text-primary hover:bg-primary/10 rounded-lg transition-colors"><Edit2 size={16} /></button>
-                                                <button onClick={() => handleDelete(opt.id)} className="p-1.5 text-text-muted hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-colors"><Trash2 size={16} /></button>
+                                                <button onClick={() => handleDeleteClick(opt)} className="p-1.5 text-text-muted hover:text-red-500 hover:bg-red-500/10 rounded-lg transition-colors"><Trash2 size={16} /></button>
                                             </td>
                                         </tr>
                                     ))}
@@ -153,6 +159,48 @@ const VoucherOptionsManager = () => {
                                 </tbody>
                             </table>
                         </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Delete Confirmation Modal */}
+            <AnimatePresence>
+                {optionToDelete && (
+                    <motion.div 
+                        initial={{ opacity: 0 }} 
+                        animate={{ opacity: 1 }} 
+                        exit={{ opacity: 0 }} 
+                        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm"
+                    >
+                        <motion.div 
+                            initial={{ scale: 0.95, opacity: 0 }} 
+                            animate={{ scale: 1, opacity: 1 }} 
+                            exit={{ scale: 0.95, opacity: 0 }}
+                            className="glass-card p-8 border border-border bg-surface max-w-md w-full shadow-2xl"
+                        >
+                            <div className="w-16 h-16 bg-red-500/10 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                                <Trash2 size={32} />
+                            </div>
+                            <h3 className="text-xl font-bold text-center mb-2">Delete Category</h3>
+                            <p className="text-sm text-text-muted text-center mb-8">
+                                Are you absolutely sure you want to delete the <span className="font-bold text-text">{optionToDelete.type}</span> category? This action cannot be undone.
+                            </p>
+                            
+                            <div className="flex gap-4">
+                                <button 
+                                    onClick={() => setOptionToDelete(null)} 
+                                    className="btn bg-surface border border-border py-3 flex-1 font-bold text-text hover:bg-surface-hover transition-colors"
+                                >
+                                    Cancel
+                                </button>
+                                <button 
+                                    onClick={handleDeleteConfirm} 
+                                    className="btn bg-red-500 hover:bg-red-600 text-white py-3 flex-1 font-bold shadow-lg shadow-red-500/20 transition-all"
+                                >
+                                    Yes, Delete
+                                </button>
+                            </div>
+                        </motion.div>
                     </motion.div>
                 )}
             </AnimatePresence>
