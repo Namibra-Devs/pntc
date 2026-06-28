@@ -34,8 +34,8 @@ You are required to register online when the university re-opens for the academi
         setLoading(true);
         try {
             const { data } = await api.get('/settings');
-            const templateSetting = data.find(s => s.key === 'admissionLetterTemplate');
-            setTemplate(templateSetting ? templateSetting.value : defaultTemplate);
+            // data is an object mapping keys to values (e.g. { admissionLetterTemplate: "..." })
+            setTemplate(data.admissionLetterTemplate ? data.admissionLetterTemplate : defaultTemplate);
         } catch (error) {
             toast.error('Failed to load template settings.');
             console.error('Error fetching settings:', error);
@@ -76,7 +76,7 @@ You are required to register online when the university re-opens for the academi
     }
 
     return (
-        <div className="max-w-4xl space-y-6">
+        <div className="w-full space-y-6">
             <div>
                 <h2 className="text-3xl font-bold font-heading mb-2">Admission Letter Template</h2>
                 <p className="text-text-muted">Customize the body paragraphs of the admission letter. The header and footer will be generated automatically.</p>

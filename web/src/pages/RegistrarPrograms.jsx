@@ -178,7 +178,7 @@ const RegistrarPrograms = () => {
     );
 
     return (
-        <div className="p-4 md:p-8 pt-20 md:pt-8 w-full max-w-7xl mx-auto">
+        <div className="p-4 md:p-8 pt-20 md:pt-8 w-full">
             <header className="mb-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
                     <h1 className="text-3xl font-black font-heading text-text">Programs</h1>
