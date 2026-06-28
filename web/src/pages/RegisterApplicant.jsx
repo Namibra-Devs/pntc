@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { GraduationCap, User, Mail, Lock, CreditCard, Key, Loader2, ShieldCheck } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { motion } from 'framer-motion';
@@ -147,6 +147,15 @@ const RegisterApplicant = () => {
                         >
                             {loading ? <Loader2 className="animate-spin" /> : 'Initialize Application'}
                         </button>
+
+                        <div className="mt-6 pt-6 border-t border-border text-center">
+                            <p className="text-sm text-text-muted">
+                                Don't have a voucher yet?{' '}
+                                <Link to="/purchase-voucher" className="font-bold text-primary hover:underline transition-all">
+                                    Purchase a Voucher
+                                </Link>
+                            </p>
+                        </div>
                     </div>
                 </form>
             </motion.div>

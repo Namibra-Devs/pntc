@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CreditCard, Mail, ArrowRight, Loader2, ShieldCheck, Smartphone } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 import ThemeToggle from '../components/ThemeToggle';
 import { useSettings } from '../context/SettingsContext';
@@ -201,6 +202,15 @@ const PurchaseVoucher = () => {
                         >
                             {loading ? <Loader2 className="animate-spin" /> : <>Complete Selection <ArrowRight size={20} /></>}
                         </button>
+
+                        <div className="mt-6 pt-6 border-t border-border text-center">
+                            <p className="text-sm text-text-muted">
+                                Already have a voucher?{' '}
+                                <Link to="/register" className="font-bold text-primary hover:underline transition-all">
+                                    Start Application
+                                </Link>
+                            </p>
+                        </div>
                     </form>
                 </motion.div>
             </div>
