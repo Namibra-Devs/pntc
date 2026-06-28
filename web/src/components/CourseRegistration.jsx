@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { BookPlus, CheckCircle2, Loader2, Info } from 'lucide-react';
+import { API_BASE_URL } from '../utils/api';
+
 
 const CourseRegistration = ({ studentData, setStudentData }) => {
     const [courses, setCourses] = useState([]);
@@ -12,7 +14,7 @@ const CourseRegistration = ({ studentData, setStudentData }) => {
     useEffect(() => {
         const fetchCourses = async () => {
             try {
-                const { data } = await axios.get('http://localhost:5000/api/student/available-courses');
+                const { data } = await axios.get(`${API_BASE_URL}/api/student/available-courses`);
                 setCourses(data);
                 // Pre-select already registered courses
                 if (studentData?.Enrollments) {
@@ -39,14 +41,14 @@ const CourseRegistration = ({ studentData, setStudentData }) => {
         setSubmitting(true);
         setMessage(null);
         try {
-            await axios.post('http://localhost:5000/api/student/register-courses', {
+            await axios.post(`${API_BASE_URL}/api/student/register-courses`, {
                 courseIds: selectedCourses,
                 academicYear: '2025/2026',
                 semester: 1
             });
             setMessage({ type: 'success', text: 'Registration successful!' });
             // Refresh dashboard data
-            const { data } = await axios.get('http://localhost:5000/api/student/dashboard');
+            const { data } = await axios.get(`${API_BASE_URL}/api/student/dashboard`);
             setStudentData(data);
         } catch (err) {
             setMessage({ type: 'error', text: err.response?.data?.message || 'Registration failed' });

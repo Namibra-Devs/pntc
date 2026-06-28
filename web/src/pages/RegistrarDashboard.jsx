@@ -18,6 +18,8 @@ import { useSettings } from '../context/SettingsContext';
 
 import RegistrarStudents from './RegistrarStudents';
 import RegistrarPrograms from './RegistrarPrograms';
+import { API_BASE_URL } from '../utils/api';
+
 
 const RegistrarDashboard = () => {
     const { user, logout } = useAuth();
@@ -43,7 +45,7 @@ const RegistrarDashboard = () => {
             <header className="md:hidden fixed top-0 left-0 right-0 bg-surface  border-b border-border z-40 p-4 flex justify-between items-center transition-colors duration-300">
                 <div className="flex items-center gap-2">
                     {settings.schoolLogo ? (
-                        <img src={`http://localhost:5000${settings.schoolLogo}`} alt="Logo" className="w-8 h-8 object-contain" />
+                        <img src={`${API_BASE_URL}${settings.schoolLogo}`} alt="Logo" className="w-8 h-8 object-contain" />
                     ) : (
                         <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center font-bold text-white">
                             {settings.schoolAbbreviation?.charAt(0) || 'R'}
@@ -82,7 +84,7 @@ const RegistrarDashboard = () => {
                 <div className="flex items-center gap-3 text-text">
                     {settings.schoolLogo ? (
                         <div className="w-10 h-10 rounded-xl overflow-hidden border border-border bg-white flex items-center justify-center p-1">
-                            <img src={`http://localhost:5000${settings.schoolLogo}`} alt="School Logo" className="w-full h-full object-contain" />
+                            <img src={`${API_BASE_URL}${settings.schoolLogo}`} alt="School Logo" className="w-full h-full object-contain" />
                         </div>
                     ) : (
                         <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center font-bold text-xl text-white shadow-lg shadow-primary/20">
@@ -220,7 +222,7 @@ const RegistrarApplicationsContent = ({ user }) => {
     // Helpers for document links
     const getDocUrl = (path) => {
         if (!path) return '';
-        return path.startsWith('http') ? path : `http://localhost:5000${path.startsWith('/') ? '' : '/'}${path}`;
+        return path.startsWith('http') ? path : `${API_BASE_URL}${path.startsWith('/') ? '' : '/'}${path}`;
     };
 
     return (
@@ -280,7 +282,7 @@ const RegistrarApplicationsContent = ({ user }) => {
 
                                 {app.passportPhoto ? (
                                     <div className="w-14 h-14 rounded-2xl overflow-hidden border border-primary/20 shadow-inner">
-                                        <img src={`http://localhost:5000${app.passportPhoto}`} alt="Passport" className="w-full h-full object-cover" />
+                                        <img src={`${API_BASE_URL}${app.passportPhoto}`} alt="Passport" className="w-full h-full object-cover" />
                                     </div>
                                 ) : (
                                     <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20 text-primary font-black text-xl shadow-inner">

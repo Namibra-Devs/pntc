@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Save, AlertCircle, CheckCircle2, Loader2 } from 'lucide-react';
+import { API_BASE_URL } from '../utils/api';
+
 
 const GradeEntry = ({ enrollment, onUpdate }) => {
     const [ca, setCa] = useState(enrollment.caScore || '');
@@ -16,7 +18,7 @@ const GradeEntry = ({ enrollment, onUpdate }) => {
         setSuccess(false);
 
         try {
-            await axios.patch(`http://localhost:5000/api/staff/grades/${enrollment.id}`, {
+            await axios.patch(`${API_BASE_URL}/api/staff/grades/${enrollment.id}`, {
                 caScore: ca,
                 examScore: exam
             });

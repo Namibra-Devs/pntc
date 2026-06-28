@@ -9,6 +9,8 @@ import AdmissionForm from '../components/AdmissionForm';
 import DocumentUpload from '../components/DocumentUpload';
 import ThemeToggle from '../components/ThemeToggle';
 import { useSettings } from '../context/SettingsContext';
+import { API_BASE_URL } from '../utils/api';
+
 
 
 const ApplicantDashboard = () => {
@@ -69,7 +71,7 @@ const ApplicantDashboard = () => {
             <header className="md:hidden fixed top-0 left-0 right-0 bg-surface  border-b border-border z-40 p-4 flex justify-between items-center transition-colors duration-300">
                 <div className="flex items-center gap-2">
                     {settings.schoolLogo ? (
-                        <img src={`http://localhost:5000${settings.schoolLogo}`} alt="Logo" className="w-8 h-8 object-contain" />
+                        <img src={`${API_BASE_URL}${settings.schoolLogo}`} alt="Logo" className="w-8 h-8 object-contain" />
                     ) : (
                         <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center font-bold text-white">
                             {settings.schoolAbbreviation?.charAt(0) || 'A'}
@@ -108,7 +110,7 @@ const ApplicantDashboard = () => {
                 <div className="flex items-center gap-3">
                     {settings.schoolLogo ? (
                         <div className="w-10 h-10 rounded-xl overflow-hidden border border-border bg-white flex items-center justify-center p-1">
-                            <img src={`http://localhost:5000${settings.schoolLogo}`} alt="School Logo" className="w-full h-full object-contain" />
+                            <img src={`${API_BASE_URL}${settings.schoolLogo}`} alt="School Logo" className="w-full h-full object-contain" />
                         </div>
                     ) : (
                         <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center font-bold text-xl text-white shadow-lg shadow-primary/20">
@@ -264,7 +266,7 @@ const ApplicantDashboard = () => {
                                         <p className="text-text-muted mb-8 leading-relaxed">You have been offered admission to {settings.schoolName || 'Ghana University Management System'}. Your journey towards academic excellence begins now. Download your official admission letter below.</p>
 
                                         <a
-                                            href={`http://localhost:5000${application.admissionLetter}`}
+                                            href={`${API_BASE_URL}${application.admissionLetter}`}
                                             target="_blank"
                                             rel="noreferrer"
                                             className="btn btn-primary w-full py-4 flex items-center justify-center gap-3 text-lg font-black uppercase tracking-widest shadow-md shadow-primary/30"

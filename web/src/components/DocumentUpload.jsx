@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import api from '../utils/api';
 import { Upload, File, CheckCircle, Loader2, Eye, X, Image as ImageIcon, AlertCircle } from 'lucide-react';
+import { API_BASE_URL } from '../utils/api';
+
 
 
 
@@ -163,7 +165,7 @@ const DocumentUpload = ({ application, setApplication }) => {
                                                 if (files[field.name]) {
                                                     setShowPreviewModal(field.name);
                                                 } else {
-                                                    window.open(field.current.startsWith('http') ? field.current : `http://localhost:5000${field.current.startsWith('/') ? '' : '/'}${field.current}`, '_blank');
+                                                    window.open(field.current.startsWith('http') ? field.current : `${API_BASE_URL}${field.current.startsWith('/') ? '' : '/'}${field.current}`, '_blank');
                                                 }
                                             }}
                                             className="w-8 h-8 rounded-lg bg-surface border border-border flex items-center justify-center hover:bg-surface-hover transition-colors"

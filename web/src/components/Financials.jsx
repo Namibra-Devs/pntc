@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { CreditCard, History, Loader2, Download, AlertTriangle } from 'lucide-react';
+import { API_BASE_URL } from '../utils/api';
+
 
 const Financials = () => {
     const [invoices, setInvoices] = useState([]);
@@ -9,7 +11,7 @@ const Financials = () => {
     useEffect(() => {
         const fetchFinancials = async () => {
             try {
-                const { data } = await axios.get('http://localhost:5000/api/student/financials');
+                const { data } = await axios.get(`${API_BASE_URL}/api/student/financials`);
                 setInvoices(data);
             } catch (err) {
                 console.error("Failed to fetch financials");
