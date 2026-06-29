@@ -50,8 +50,11 @@ const submitApplication = async (req, res) => {
     try {
         // 1. Update User Profile
         await User.update({
-            firstName, lastName, otherNames, phoneNumber, gender, dateOfBirth,
-            placeOfBirth, religion, hometown, district, region, maritalStatus,
+            firstName, lastName, otherNames, phoneNumber, 
+            gender: gender || null, 
+            dateOfBirth: dateOfBirth || null,
+            placeOfBirth, religion, hometown, district, region, 
+            maritalStatus: maritalStatus || null,
             languagesSpoken, homeAddress, postalAddress, guardianName, guardianAddress, guardianOccupation,
             guardianContact, ghanaPostGps
 

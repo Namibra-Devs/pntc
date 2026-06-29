@@ -62,7 +62,7 @@ const LoginPage = () => {
             </div>
 
             <div className="absolute top-4 left-4 md:top-6 md:left-6 z-50">
-                <button 
+                <button
                     onClick={() => navigate(-1)}
                     className="p-2 rounded-full bg-black/10 hover:bg-black/20 text-white transition-colors flex items-center gap-2 text-sm font-medium backdrop-blur-none"
                     title="Go Back"
@@ -71,7 +71,7 @@ const LoginPage = () => {
                     <span className="hidden md:inline">Back</span>
                 </button>
             </div>
-            
+
             <div className="absolute top-4 right-4 md:top-6 md:right-6 z-50 text-white">
                 <ThemeToggle />
             </div>
@@ -105,14 +105,14 @@ const LoginPage = () => {
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
-                        <label className="block text-xs font-bold uppercase tracking-widest text-text-muted mb-2">Email Address or Student ID</label>
+                        <label className="block text-xs font-bold uppercase tracking-widest text-text-muted mb-2">Email Address or ID</label>
                         <div className="relative group">
                             <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted group-focus-within:text-primary transition-colors" size={20} />
                             <input
                                 type="text"
                                 required
                                 className="input-field !pl-12 !py-4 !rounded-xl !bg-background hover:!bg-surface-hover !border-transparent focus:!border-primary/30 focus:!ring-4 focus:!ring-primary/10 transition-all font-medium text-text outline-none"
-                                placeholder="Email or Student ID"
+                                placeholder="Email or ID"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />

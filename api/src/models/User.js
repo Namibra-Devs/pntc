@@ -75,7 +75,7 @@ const User = sequelize.define('User', {
         allowNull: true
     },
     maritalStatus: {
-        type: DataTypes.ENUM('Single', 'Married', 'Other'),
+        type: DataTypes.ENUM('Single', 'Married', 'Divorced', 'Separated', 'Widowed', 'Other'),
         allowNull: true
     },
     languagesSpoken: {
