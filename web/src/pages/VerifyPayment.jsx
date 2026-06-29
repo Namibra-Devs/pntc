@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 import api from '../utils/api';
-import { CheckCircle, XCircle, Loader2, Copy, FileText, Home, AlertCircle, ArrowRight } from 'lucide-react';
+import { CheckCircle, XCircle, Loader2, Copy, FileText, Home, AlertCircle, ArrowRight, ArrowLeft } from 'lucide-react';
 
 import { motion } from 'framer-motion';
 
@@ -53,15 +53,33 @@ const VerifyPayment = () => {
     };
 
     return (
-        <div className="bg-background min-h-screen text-text flex items-center justify-center p-6 transition-colors duration-300">
-            <div className="absolute top-6 right-6">
+        <div className="min-h-screen flex items-center justify-center p-4 md:p-6 relative overflow-hidden bg-background transition-colors duration-300">
+            {/* Split Solid Background */}
+            <div className="absolute top-0 left-0 w-full h-[45vh] bg-primary transition-colors duration-300">
+                {/* Subtle Dot Pattern overlay */}
+                <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
+            </div>
+
+            <div className="absolute top-4 left-4 md:top-6 md:left-6 z-50">
+                <button 
+                    onClick={() => navigate(-1)}
+                    className="p-2 rounded-full bg-black/10 hover:bg-black/20 text-white transition-colors flex items-center gap-2 text-sm font-medium backdrop-blur-none"
+                    title="Go Back"
+                >
+                    <ArrowLeft size={20} />
+                    <span className="hidden md:inline">Back</span>
+                </button>
+            </div>
+
+            <div className="absolute top-4 right-4 md:top-6 md:right-6 z-50 text-white">
                 <ThemeToggle />
             </div>
 
             <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="max-w-md w-full glass-card p-8 border border-border text-center shadow-md shadow-primary/5"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="bg-surface w-full max-w-lg p-8 sm:p-10 md:p-12 mt-12 md:mt-0 rounded-[2.5rem] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.2)] border border-border relative z-10 transition-colors duration-300 text-center"
             >
                 {status === 'loading' && (
                     <div className="space-y-6 py-10">
@@ -79,7 +97,7 @@ const VerifyPayment = () => {
                         <h2 className="text-2xl font-bold font-heading text-red-500">Oops! Something went wrong</h2>
                         <p className="text-text-muted">{error}</p>
                         <div className="pt-6">
-                            <Link to="/purchase-voucher" className="btn btn-primary w-full">Try Again</Link>
+                            <Link to="/purchase-voucher" className="w-full bg-primary hover:bg-primary-hover text-white font-bold py-4 rounded-2xl text-lg shadow-[0_10px_20px_-10px_rgba(0,119,190,0.5)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center">Try Again</Link>
                         </div>
                     </div>
                 )}
@@ -130,8 +148,8 @@ const VerifyPayment = () => {
                         </div>
 
                         <div className="space-y-4 pt-6">
-                            <Link to="/register" className="btn btn-primary w-full py-4 shadow-lg shadow-primary/20">
-                                Start Application Form <ArrowRight size={18} />
+                            <Link to="/register" className="w-full bg-primary hover:bg-primary-hover text-white font-bold py-5 rounded-2xl text-xl shadow-[0_10px_20px_-10px_rgba(0,119,190,0.5)] hover:shadow-[0_15px_25px_-10px_rgba(0,119,190,0.6)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+                                Start Application Form <ArrowRight size={20} />
                             </Link>
                             <Link to="/" className="flex items-center justify-center gap-2 text-text-muted hover:text-primary text-sm font-medium transition-colors">
                                 <Home size={14} /> Back to Home
