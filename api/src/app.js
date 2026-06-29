@@ -59,6 +59,40 @@ app.get('/', (req, res) => {
     res.json({ message: 'Welcome to UMS Ghana API' });
 });
 
+// Temporary route to fix indexes in production without terminal access
+app.get('/fix-indexes-temp', async (req, res) => {
+    try {
+        const queryInterface = sequelize.getQueryInterface();
+        const tables = await queryInterface.showAllTables();
+        const log = [];
+        
+        for (const tableName of tables) {
+            const [results] = await sequelize.query(`SHOW INDEX FROM \`${tableName}\``);
+            const indexesToDrop = [];
+            results.forEach(row => {
+                const name = row.Key_name;
+                if (name.match(/_\d+$/)) {
+                    if (!indexesToDrop.includes(name)) indexesToDrop.push(name);
+                }
+            });
+
+            if (indexesToDrop.length > 0) {
+                for (const indexName of indexesToDrop) {
+                    try {
+                        await sequelize.query(`DROP INDEX \`${indexName}\` ON \`${tableName}\``);
+                        log.push(`Dropped index: ${indexName} from ${tableName}`);
+                    } catch (e) {
+                        log.push(`Failed to drop ${indexName} from ${tableName}: ${e.message}`);
+                    }
+                }
+            }
+        }
+        res.json({ message: 'Index fix completed', log });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 // Routes
 console.log('Registering /api/auth');
 app.use('/api/auth', authRoutes);
