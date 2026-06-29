@@ -36,7 +36,11 @@ const updateProfile = async (req, res) => {
 
         updatableFields.forEach(field => {
             if (req.body[field] !== undefined) {
-                user[field] = req.body[field];
+                if (['gender', 'maritalStatus', 'dateOfBirth'].includes(field) && req.body[field] === '') {
+                    user[field] = null;
+                } else {
+                    user[field] = req.body[field];
+                }
             }
         });
 
