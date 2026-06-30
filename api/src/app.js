@@ -16,7 +16,7 @@ const startDB = async () => {
     if (process.env.NODE_ENV === 'development') {
         // Use an env variable to control alter/force if needed to fix deployment issues
         const syncOptions = process.env.DB_FORCE === 'true' ? { force: true } : (process.env.DB_ALTER === 'false' ? {} : { alter: true });
-        await sequelize.sync(syncOptions); 
+        await sequelize.sync(syncOptions);
         await seedRoles();
         await seedCourses();
         await seedUsers();
@@ -56,7 +56,7 @@ app.use('/uploads', express.static('uploads'));
 
 // Basic route
 app.get('/', (req, res) => {
-    res.json({ message: 'Welcome to UMS Ghana API' });
+    res.json({ message: 'Welcome to TMS Ghana API' });
 });
 
 // Temporary route to fix indexes in production without terminal access
@@ -65,7 +65,7 @@ app.get('/fix-indexes-temp', async (req, res) => {
         const queryInterface = sequelize.getQueryInterface();
         const tables = await queryInterface.showAllTables();
         const log = [];
-        
+
         for (const tableName of tables) {
             const [results] = await sequelize.query(`SHOW INDEX FROM \`${tableName}\``);
             const indexesToDrop = [];

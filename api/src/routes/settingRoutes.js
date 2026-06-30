@@ -8,7 +8,7 @@ const { getPublicSettings, updateSettings, uploadLogo, uploadFavicon } = require
 router.get('/', getPublicSettings);
 
 // Admin routes
-router.post('/', protect, authorize('admin'), updateSettings);
+router.post('/', protect, authorize('admin', 'registrar'), updateSettings);
 router.post('/logo', protect, authorize('admin'), upload.single('logo'), uploadLogo);
 router.post('/favicon', protect, authorize('admin'), upload.single('favicon'), uploadFavicon);
 
