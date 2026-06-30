@@ -51,7 +51,7 @@ You are required to register online when the university re-opens for the academi
                 admissionLetterTemplate: template
             };
 
-            await api.put('/settings', payload);
+            await api.post('/settings', payload);
             toast.success('Admission Letter Template saved successfully!');
         } catch (error) {
             toast.error(error.response?.data?.message || 'Failed to save template.');
