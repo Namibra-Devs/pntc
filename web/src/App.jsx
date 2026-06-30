@@ -26,7 +26,8 @@ function App() {
         <Router>
           <div className="min-h-screen bg-background text-text transition-colors duration-300">
             <Routes>
-              <Route path="/" element={<LandingPage />} />
+              {/*  <Route path="/" element={<LandingPage />} /> */}
+              <Route path="/" element={<Navigate to="/login" />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterApplicant />} />
               <Route path="/purchase-voucher" element={<PurchaseVoucher />} />
