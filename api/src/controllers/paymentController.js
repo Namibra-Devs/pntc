@@ -19,6 +19,39 @@ const handleWebhook = async (req, res) => {
 
     const event = req.body;
 
+    // Forwarding logic for PNTC
+    const ref = event.data?.reference || '';
+    const isPNTC = ref.startsWith('PNTC-') || ref.startsWith('PSTK-');
+    if (isPNTC) {
+        // Forward the raw body + signature to PNTC's webhook
+        const https = require('https');
+        const rawBody = JSON.stringify(event);
+        const signature = crypto
+            .createHmac('sha512', process.env.PAYSTACK_SECRET_KEY)
+            .update(rawBody)
+            .digest('hex');
+            
+        const forwardReq = https.request({
+            hostname: 'portal.pntc.edu.gh',
+            path: '/api/payment-webhook.php',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-paystack-signature': signature,
+            },
+        });
+        
+        forwardReq.on('error', (error) => {
+            console.error('Error forwarding webhook to PNTC:', error);
+        });
+        
+        forwardReq.write(rawBody);
+        forwardReq.end();
+        
+        return res.status(200).send('forwarded'); // don't process further
+    }
+    // otherwise, MERN handles the event as normal
+
     if (event.event === 'charge.success') {
         const { reference, metadata, amount, customer } = event.data;
 
